@@ -3,10 +3,13 @@ Superball VR is a new and unique take on the classic games of tennis and
 volleyball. It combines the two in a virtual reality environment accessible by
 anyone with a PCVR system.
 
-## Getting Started
-This project uses Unity Hub to develop in the Unity3D environment.
+## Capstone Info
+Project documents are tracked in [this Google Drive folder](https://drive.google.com/drive/folders/18jeZMgjLvT-QLkRAkY97e1_U2WnQU-8i?usp=sharing).
 
-To start developing for the first time, follow these steps:
+For the developers: don't forget to use Issues, and track how much time you spend!
+
+## Getting Started
+This project uses Unity Hub to develop in the Unity3D environment. To set up your workspace for the first time, follow these steps:
 
 ### Register License
 1. Log in to Unity or create an account at https://id.unity.com/. Feel free to use
