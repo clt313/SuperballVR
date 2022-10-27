@@ -52,4 +52,10 @@ for the first time due to installing packages. This should take around 5 minutes
 11. You're good to go! Use your favorite IDE to code and use Unity to connect
 everything together.
 
+### IDE Setup
+Here are some guides on how to setup [VSCode](https://code.visualstudio.com/docs/other/unity)
+or [Visual Studio](https://learn.microsoft.com/en-us/visualstudio/gamedev/unity/get-started/getting-started-with-visual-studio-tools-for-unity)
+for Unity development, including intellisense and other useful features.
+
+### Final Note
 If these directions are inaccurate at any point, feel free to modify them.
