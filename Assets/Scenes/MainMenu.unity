@@ -3014,8 +3014,8 @@ MonoBehaviour:
   m_FillRect: {fileID: 1055806547}
   m_HandleRect: {fileID: 1228831419}
   m_Direction: 0
-  m_MinValue: -80
-  m_MaxValue: 0
+  m_MinValue: 0.001
+  m_MaxValue: 1
   m_WholeNumbers: 0
   m_Value: 0
   m_OnValueChanged:
@@ -4958,8 +4958,8 @@ MonoBehaviour:
   m_FillRect: {fileID: 1651830992}
   m_HandleRect: {fileID: 151629275}
   m_Direction: 0
-  m_MinValue: -80
-  m_MaxValue: 0
+  m_MinValue: 0.001
+  m_MaxValue: 1
   m_WholeNumbers: 0
   m_Value: 0
   m_OnValueChanged:
@@ -6475,7 +6475,7 @@ MonoBehaviour:
   masterSlider: {fileID: 2102377352}
   musicSlider: {fileID: 1060233741}
   soundSlider: {fileID: 808699885}
-  qualityDropdown: {fileID: 0}
+  qualityDropdown: {fileID: 598283688}
 --- !u!114 &1651247646
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8514,8 +8514,8 @@ MonoBehaviour:
   m_FillRect: {fileID: 1188646957}
   m_HandleRect: {fileID: 775538723}
   m_Direction: 0
-  m_MinValue: -80
-  m_MaxValue: 0
+  m_MinValue: 0.001
+  m_MaxValue: 1
   m_WholeNumbers: 0
   m_Value: 0
   m_OnValueChanged:
