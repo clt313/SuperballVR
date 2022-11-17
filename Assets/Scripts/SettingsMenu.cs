@@ -6,8 +6,7 @@ using UnityEngine.Events;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class SettingsMenu : MonoBehaviour
-{
+public class SettingsMenu : MonoBehaviour {
     public AudioMixer audioMixer;
     public Slider masterSlider;
     public Slider musicSlider;
