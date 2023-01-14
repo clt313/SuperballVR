@@ -50,7 +50,7 @@ public class SingleplayerMenu : MonoBehaviour {
 
     // Starts the game and moves to the game scene
     public void StartGame() {
-        // TODO: implement this once game scene is implemented
-        // SceneManager.LoadScene("...");
+        // TODO: feed AI difficulty to AI before loading scene
+        SceneManager.LoadScene(map.ToString());
     }
 }
