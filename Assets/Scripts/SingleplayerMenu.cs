@@ -11,6 +11,10 @@ public class SingleplayerMenu : MonoBehaviour {
     public Slider difficultySlider;
     public TMPro.TMP_Text difficultyText;
 
+    public int matchLength;
+    public Slider matchLengthSlider;
+    public TMPro.TMP_Text matchLengthText;
+
     public enum MapType {Map1, Map2, Map3};
     public MapType map;
     public Button map1;
@@ -20,6 +24,7 @@ public class SingleplayerMenu : MonoBehaviour {
     // Set default variables on start
     void Start() {
         SetAiDifficulty((float)AiDifficulty.Normal);
+        SetMatchLength(11);
         SetMap((int)MapType.Map1);
     }
 
@@ -37,6 +42,12 @@ public class SingleplayerMenu : MonoBehaviour {
         difficultyText.SetText(this.aiDifficulty.ToString());
     }
 
+    public void SetMatchLength(float matchLength) {
+        this.matchLength = (int)matchLength;
+        matchLengthSlider.value = matchLength;
+        matchLengthText.SetText(matchLength.ToString() + " points");
+    }
+
     // Set the map by selecting one of the map buttons
     public void SetMap(int map) {
         this.map = (MapType)map;
@@ -50,7 +61,8 @@ public class SingleplayerMenu : MonoBehaviour {
 
     // Starts the game and moves to the game scene
     public void StartGame() {
-        // TODO: implement this once game scene is implemented
-        // SceneManager.LoadScene("...");
+        // TODO: feed AI difficulty to AI before loading scene
+        // Also feed match length to game handler
+        SceneManager.LoadScene(map.ToString());
     }
 }
