@@ -2,10 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+enum TEAM
+{
+  TEAM_ONE,
+  TEAM_TWO
+}
+
+enum ROUND_END_REASON
+{
+  NONE,
+  NET,
+  OUT_OF_BOUNDS,
+  TIME,
+  TOO_MANY_TOUCHES
+}
 
 public class GameManager : MonoBehaviour
 {
 
+  ////////////////////////
+  // INPUT PARAMETERS
+  ////////////////////////
   public int maxBounces = 1;
   public int maxPasses = 1;
   public int maxGameTimeSeconds = 10 * 60;
@@ -15,23 +32,12 @@ public class GameManager : MonoBehaviour
   public GameObject net;
   public GameObject BallPrefab;
 
+
+  ////////////////////////
+  // GAME STATE
+  ////////////////////////
   private int scoreTeamOne = 0;
   private int scoreTeamTwo = 0;
-
-  enum TEAM
-  {
-    TEAM_ONE,
-    TEAM_TWO
-  }
-
-  enum ROUND_END_REASON
-  {
-    NONE,
-    NET,
-    OUT_OF_BOUNDS,
-    TIME,
-    TOO_MANY_TOUCHES
-  }
 
   private float startTime = -1.0f;
   private bool gameRunning = true;
@@ -80,18 +86,9 @@ public class GameManager : MonoBehaviour
     }
   }
 
-  void addScore(TEAM team)
-  {
-    if (team == TEAM.TEAM_ONE)
-    {
-      scoreTeamOne++;
-    }
-    else if (team == TEAM.TEAM_TWO)
-    {
-      scoreTeamTwo++;
-    }
-  }
-
+  ////////////////////////
+  // GAME LOOP FUNCTIONS
+  ////////////////////////
   void resetGame()
   {
     startTime = -1.0f;
@@ -129,6 +126,21 @@ public class GameManager : MonoBehaviour
     Debug.Log($"Final Score: {scoreTeamOne} to {scoreTeamTwo}");
   }
 
+  void addScore(TEAM team)
+  {
+    if (team == TEAM.TEAM_ONE)
+    {
+      scoreTeamOne++;
+    }
+    else if (team == TEAM.TEAM_TWO)
+    {
+      scoreTeamTwo++;
+    }
+  }
+
+  ////////////////////////
+  // EVENT HANDLES
+  ////////////////////////
   void handleServeButtonPressed(GameObject player)
   {
 
