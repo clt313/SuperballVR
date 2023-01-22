@@ -54,6 +54,7 @@ public class GameManager : MonoBehaviour
   {
     resetGame();
     BallEvents.ballBounceEvent.AddListener(handleBallBounce);
+    PlayerEvents.playerServeEvent.AddListener(handleServeButtonPressed);
   }
 
   // Handles performing actions as a result of collisions
