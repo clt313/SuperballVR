@@ -3,7 +3,11 @@ guid: 1ff14d05c675ffd4f8a9a379baece019
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - teamOneCourt: {instanceID: 0}
+  - teamTwoCourt: {instanceID: 0}
+  - net: {instanceID: 0}
+  - BallPrefab: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

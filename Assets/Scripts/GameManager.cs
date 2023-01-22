@@ -176,6 +176,7 @@ public class GameManager : MonoBehaviour
     if (isBallInPlay && gameRunning)
     {
 
+      int rootID = listenedCollidedObject.transform.root.GetInstanceID();
       int collidedID = listenedCollidedObject.GetInstanceID();
       bool isCourtCollision = collidedID == teamOneCourt.GetInstanceID() || collidedID == teamTwoCourt.GetInstanceID();
 
@@ -203,7 +204,7 @@ public class GameManager : MonoBehaviour
       }
 
       // Net Collision
-      else if (collidedID == net.GetInstanceID())
+      else if (rootID == net.GetInstanceID())
       {
         roundEndReason = ROUND_END_REASON.NET;
       }
