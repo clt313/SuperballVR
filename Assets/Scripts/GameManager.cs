@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
   public GameObject teamOneCourt;
   public GameObject teamTwoCourt;
   public GameObject net;
+  public GameObject BallPrefab;
 
   private int scoreTeamOne = 0;
   private int scoreTeamTwo = 0;
@@ -32,7 +33,8 @@ public class GameManager : MonoBehaviour
     TOO_MANY_TOUCHES
   }
 
-  private bool gameRunning = false;
+  private float startTime = -1.0f;
+  private bool gameRunning = true;
   private bool isBallInPlay = false;
   private int currentBounces = 0;
   private int currentPasses = 0;
@@ -54,6 +56,7 @@ public class GameManager : MonoBehaviour
   {
     if (gameRunning)
     {
+      startTime = startTime == -1.0f ? Time.time : startTime;
       gameRunning = checkGameEnded();
       if (gameRunning)
       {
@@ -61,7 +64,13 @@ public class GameManager : MonoBehaviour
         {
           isBallInPlay = false;
 
-          // TODO Switch the current player
+          // Switch the current serving team
+          currentServer = currentServer == TEAM.TEAM_ONE ? TEAM.TEAM_TWO : TEAM.TEAM_ONE;
+          currentPossession = currentServer;
+          addScore(currentServer);
+
+          Debug.Log($"Round Ended! Reason: {roundEndReason.ToString()}");
+          roundEndReason = ROUND_END_REASON.NONE;
         }
       }
       else
@@ -71,8 +80,21 @@ public class GameManager : MonoBehaviour
     }
   }
 
+  void addScore(TEAM team)
+  {
+    if (team == TEAM.TEAM_ONE)
+    {
+      scoreTeamOne++;
+    }
+    else if (team == TEAM.TEAM_TWO)
+    {
+      scoreTeamTwo++;
+    }
+  }
+
   void resetGame()
   {
+    startTime = -1.0f;
     gameRunning = false;
     scoreTeamOne = 0;
     scoreTeamTwo = 0;
@@ -90,7 +112,10 @@ public class GameManager : MonoBehaviour
     {
       return true;
     }
-    // TODO time check
+    else if (Time.time - startTime > maxGameTimeSeconds)
+    {
+      return true;
+    }
 
     return false;
   }
@@ -101,23 +126,35 @@ public class GameManager : MonoBehaviour
     bool teamOneWon = scoreTeamOne > scoreTeamTwo;
     string winner = isDraw ? "DRAW" : teamOneWon ? "TEAM ONE WON" : "TEAM TWO WON";
     Debug.Log($"Game Ended! {winner}");
+    Debug.Log($"Final Score: {scoreTeamOne} to {scoreTeamTwo}");
   }
 
   void handleServeButtonPressed(GameObject player)
   {
 
-    // TODO Get player team
+    // TODO Get player team and verify == currentServer
 
     if (isBallInPlay && gameRunning)
     {
       return;
     }
 
-    // TODO Spawn ball above player if team matchwes
+    // TODO Check if team matches
     else if (!isBallInPlay && gameRunning)
     {
-
+      isBallInPlay = true;
+      spawnBall(player);
     }
+  }
+
+  void spawnBall(GameObject player)
+  {
+    float spawnDistance = 0.3f;
+    Vector3 forward = player.transform.forward;
+    forward.y = 0;
+    forward = forward * spawnDistance;
+    GameObject ball = (GameObject)Instantiate(BallPrefab, player.transform.position + forward, player.transform.rotation);
+    ball.GetComponent<Rigidbody>().velocity = new Vector3(0.0f, 10.0f, 0.0f);
   }
 
   // Handles anything to do with collisions
@@ -140,7 +177,7 @@ public class GameManager : MonoBehaviour
       else if (isCourtCollision)
       {
         // Switch possession
-        TEAM courtWhereBallLanded = collidedID == teamOneCourt.GetInstanceID() ? TEAM.TEAM_ONE : TEAM.TEAM_TWO; ;
+        TEAM courtWhereBallLanded = collidedID == teamOneCourt.GetInstanceID() ? TEAM.TEAM_ONE : TEAM.TEAM_TWO;
         if (currentPossession == courtWhereBallLanded)
         {
           currentBounces += 1;
