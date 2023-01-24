@@ -31,9 +31,9 @@ your projects and Unity installations in one place.
 6. Sign in to your Unity account and add your license with the license key. This
 should take you to the Projects page.
 
-7. Go to the `Installs` tab, and select `Install Editor`. Select `2021.3.11f1` (the
-latest official release). At minimum, select the `Windows Build Support` module
-since that's our target platform.
+7. Go to the `Installs` tab, and select `Install Editor`. Select the version currently
+being used by the project (defined [here](https://github.com/clt313/SuperballVR/blob/first-map/ProjectSettings/ProjectVersion.txt)).
+At minimum, select the `Windows Build Support` module since that's our target platform.
 
 ### Import and Open Project
 8. Now that Unity is installed, we can import our project. In any folder, open
@@ -56,6 +56,22 @@ everything together.
 Here are some guides on how to setup [VSCode](https://code.visualstudio.com/docs/other/unity)
 or [Visual Studio](https://learn.microsoft.com/en-us/visualstudio/gamedev/unity/get-started/getting-started-with-visual-studio-tools-for-unity)
 for Unity development, including intellisense and other useful features.
+
+### Solving a Merge Conflict
+If you ever find that the branch you're working on is x commits behind main, you've
+got a merge conflict coming. Insert the following into the repo's `.git\config` file:
+```
+[merge]
+tool = unityyamlmerge
+[mergetool "unityyamlmerge"]
+trustExitCode = false
+cmd = 'C:\\Program Files\\Unity\\Editor\\Data\\Tools\\UnityYAMLMerge.exe' merge -p "$BASE" "$REMOTE" "$LOCAL" "$MERGED"
+```
+
+Now whenever you run into a merge conflict, use git mergetool to fix the issue.
+There may be more steps to it, but this process hasn't been tested yet. 😅
+
+For a deeper dive, take a look at https://github.com/anacat/unity-mergetool.
 
 ### Final Note
 If these directions are inaccurate at any point, feel free to modify them.
