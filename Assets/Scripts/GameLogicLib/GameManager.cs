@@ -61,13 +61,11 @@ public class GameManager : MonoBehaviour
     if (gameRunning)
     {
       startTime = startTime == -1.0f ? Time.time : startTime;
-      gameRunning = checkGameEnded();
+      gameRunning = !checkGameEnded();
       if (gameRunning)
       {
         if (roundEndReason != ROUND_END_REASON.NONE)
         {
-          isBallInPlay = false;
-
           // Round winner is whoever did not have possession of ball (last touch / court touch)
           TEAM roundWinnder = currentPossession == TEAM.TEAM_ONE ? TEAM.TEAM_TWO : TEAM.TEAM_ONE;
           addScore(roundWinnder);
@@ -75,12 +73,15 @@ public class GameManager : MonoBehaviour
           // Switch the current serving team
           currentServer = currentServer == TEAM.TEAM_ONE ? TEAM.TEAM_TWO : TEAM.TEAM_ONE;
           currentPossession = currentServer;
+          currentBounces = 0;
+          currentPasses = 0;
+
+          Debug.Log($"Round Ended! Reason: {roundEndReason.ToString()}");
+          Debug.Log($"Current Score: {scoreTeamOne} to {scoreTeamTwo}");
+          roundEndReason = ROUND_END_REASON.NONE;
 
           // Dispatch event
           GameEvents.roundEndEvent.Invoke();
-
-          Debug.Log($"Round Ended! Reason: {roundEndReason.ToString()}");
-          roundEndReason = ROUND_END_REASON.NONE;
         }
       }
       else
@@ -130,6 +131,8 @@ public class GameManager : MonoBehaviour
 
   void endGame()
   {
+    GameEvents.roundEndEvent.Invoke();
+
     bool isDraw = scoreTeamOne == scoreTeamTwo;
     bool teamOneWon = scoreTeamOne > scoreTeamTwo;
     string winner = isDraw ? "DRAW" : teamOneWon ? "TEAM ONE WON" : "TEAM TWO WON";
@@ -157,7 +160,7 @@ public class GameManager : MonoBehaviour
 
     // TODO Get player team and verify == currentServer
 
-    if (isBallInPlay && gameRunning)
+    if (isBallInPlay)
     {
       return;
     }
@@ -172,13 +175,10 @@ public class GameManager : MonoBehaviour
 
   void spawnBall(GameObject player)
   {
-    float spawnDistance = 0.3f;
-    Vector3 forward = player.transform.forward;
-    forward.y = 0;
-    forward = forward * spawnDistance;
-    GameObject ball = (GameObject)Instantiate(BallPrefab, player.transform.position + forward, player.transform.rotation);
-    ball.GetComponent<Rigidbody>().velocity = new Vector3(0.0f, 10.0f, 0.0f);
+    GameObject ball = (GameObject)Instantiate(BallPrefab, player.transform.position, player.transform.rotation);
+    ball.GetComponent<Rigidbody>().velocity = new Vector3(0.0f, 3.0f, 0.0f);
     ball.name = "Ball";
+    Debug.Log($"Spawning Ball At: {ball.transform.position.x}, {ball.transform.position.y}, {ball.transform.position.z}");
   }
 
   // Handles anything to do with collisions
@@ -225,17 +225,42 @@ public class GameManager : MonoBehaviour
       else
       {
         roundEndReason = ROUND_END_REASON.OUT_OF_BOUNDS;
+        isBallInPlay = false;
       }
 
       // Check max bounces
       if (currentBounces > maxBounces)
       {
         roundEndReason = ROUND_END_REASON.TOO_MANY_TOUCHES;
+        isBallInPlay = false;
       }
+      Debug.Log("Game manager detected a ball bounce with: " + listenedCollidedObject.name);
     }
 
-
-    Debug.Log("Game manager detected a ball bounce with: " + listenedCollidedObject.name);
   }
 
+  ////////////////////////////
+  // TESTING HELPER FUNCTIONS
+  ////////////////////////////
+  public void expectTestServe()
+  {
+    currentPasses = 1; // Account for fact ball doesn't hit player hands
+  }
+
+  public int getTeamOneScore()
+  {
+    return scoreTeamOne;
+  }
+
+  public int getTeamTwoScore()
+  {
+    return scoreTeamTwo;
+  }
+
+  public bool isGameRunning()
+  {
+    return gameRunning;
+  }
 }
+
+
