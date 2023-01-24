@@ -11,9 +11,7 @@ enum TEAM
 enum ROUND_END_REASON
 {
   NONE,
-  NET,
   OUT_OF_BOUNDS,
-  TIME,
   TOO_MANY_TOUCHES
 }
 
@@ -48,7 +46,6 @@ public class GameManager : MonoBehaviour
   private TEAM currentPossession = TEAM.TEAM_ONE;
   private ROUND_END_REASON roundEndReason = ROUND_END_REASON.NONE;
 
-
   // Start is called before the first frame update
   void Start()
   {
@@ -71,10 +68,16 @@ public class GameManager : MonoBehaviour
         {
           isBallInPlay = false;
 
+          // Round winner is whoever did not have possession of ball (last touch / court touch)
+          TEAM roundWinnder = currentPossession == TEAM.TEAM_ONE ? TEAM.TEAM_TWO : TEAM.TEAM_ONE;
+          addScore(roundWinnder);
+
           // Switch the current serving team
           currentServer = currentServer == TEAM.TEAM_ONE ? TEAM.TEAM_TWO : TEAM.TEAM_ONE;
           currentPossession = currentServer;
-          addScore(currentServer);
+
+          // Dispatch event
+          GameEvents.roundEndEvent.Invoke();
 
           Debug.Log($"Round Ended! Reason: {roundEndReason.ToString()}");
           roundEndReason = ROUND_END_REASON.NONE;
@@ -90,6 +93,13 @@ public class GameManager : MonoBehaviour
   ////////////////////////
   // GAME LOOP FUNCTIONS
   ////////////////////////
+
+  public void startGame()
+  {
+    resetGame();
+    gameRunning = true;
+  }
+
   void resetGame()
   {
     startTime = -1.0f;
@@ -168,6 +178,7 @@ public class GameManager : MonoBehaviour
     forward = forward * spawnDistance;
     GameObject ball = (GameObject)Instantiate(BallPrefab, player.transform.position + forward, player.transform.rotation);
     ball.GetComponent<Rigidbody>().velocity = new Vector3(0.0f, 10.0f, 0.0f);
+    ball.name = "Ball";
   }
 
   // Handles anything to do with collisions
@@ -204,16 +215,22 @@ public class GameManager : MonoBehaviour
 
       }
 
-      // Net Collision
+      // Net Collision, don't do anything
       else if (rootID == net.GetInstanceID())
       {
-        roundEndReason = ROUND_END_REASON.NET;
+
       }
 
       // OOB
       else
       {
         roundEndReason = ROUND_END_REASON.OUT_OF_BOUNDS;
+      }
+
+      // Check max bounces
+      if (currentBounces > maxBounces)
+      {
+        roundEndReason = ROUND_END_REASON.TOO_MANY_TOUCHES;
       }
     }
 

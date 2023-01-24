@@ -498,6 +498,37 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 13651895}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &18625420
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 18625421}
+  m_Layer: 0
+  m_Name: OOB_TEST_MARKER
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &18625421
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 18625420}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 48.18, y: 6, z: 29.46}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 18
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &30983476
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4713,7 +4744,6 @@ GameObject:
   - component: {fileID: 409984729}
   - component: {fileID: 409984728}
   - component: {fileID: 409984727}
-  - component: {fileID: 409984730}
   - component: {fileID: 409984734}
   - component: {fileID: 409984735}
   - component: {fileID: 409984733}
@@ -4776,22 +4806,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &409984730
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 409984726}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d27d56eaaedb9b4b8534b4f45649df0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Player: {fileID: 146937308}
-  spawnDistance: 0.2
-  BallPrefab: {fileID: 1059506415888024964, guid: a9161f76474b7aa498eb390f91725201,
-    type: 3}
 --- !u!114 &409984731
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6680,7 +6694,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh39100
+  m_Name: pb_Mesh32682
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
