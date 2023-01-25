@@ -6,8 +6,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class SingleplayerMenu : MonoBehaviour {
-    public enum AiDifficulty {Easy, Normal, Hard};
-    public AiDifficulty aiDifficulty;
+    public StateController.AiDifficulty aiDifficulty;
     public Slider difficultySlider;
     public TMPro.TMP_Text difficultyText;
 
@@ -23,7 +22,7 @@ public class SingleplayerMenu : MonoBehaviour {
 
     // Set default variables on start
     void Start() {
-        SetAiDifficulty((float)AiDifficulty.Normal);
+        SetAiDifficulty((float)StateController.AiDifficulty.Normal);
         SetMatchLength(11);
         SetMap((int)MapType.Map1);
     }
@@ -37,7 +36,7 @@ public class SingleplayerMenu : MonoBehaviour {
 
     // Set the AI difficulty using a slider and display it on the text below
     public void SetAiDifficulty(float aiDifficulty) {
-        this.aiDifficulty = (AiDifficulty)aiDifficulty;
+        this.aiDifficulty = (StateController.AiDifficulty)aiDifficulty;
         difficultySlider.value = (int)aiDifficulty;
         difficultyText.SetText(this.aiDifficulty.ToString());
     }
@@ -61,8 +60,8 @@ public class SingleplayerMenu : MonoBehaviour {
 
     // Starts the game and moves to the game scene
     public void StartGame() {
-        // TODO: feed AI difficulty to AI before loading scene
-        // Also feed match length to game handler
+        StateController.matchLength = matchLength;
+        StateController.aiDifficulty = aiDifficulty;
         SceneManager.LoadScene(map.ToString());
     }
 }
