@@ -1,0 +1,9 @@
+{
+  "tests": [
+    {
+      "rounds": [{ "roundData": ["HIT_T1"] }],
+      "expectedScoreTeamOne": 5,
+      "expectedScoreTeamTwo": 0
+    }
+  ]
+}

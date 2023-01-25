@@ -1,0 +1,26 @@
+{
+  "tests": [
+    {
+      "rounds": [
+        { "roundData": ["SERVE_T1", "OOB"] },
+        { "roundData": ["SERVE_T2", "HIT_T1", "OOB"] },
+        { "roundData": ["SERVE_T1", "OOB"] },
+        { "roundData": ["SERVE_T2", "HIT_T1", "OOB"] },
+        { "roundData": ["SERVE_T1", "OOB"] }
+      ],
+      "expectedScoreTeamOne": 5,
+      "expectedScoreTeamTwo": 0
+    },
+    {
+      "rounds": [
+        { "roundData": ["SERVE_T1", "HIT_T2", "OOB"] },
+        { "roundData": ["SERVE_T2", "OOB"] },
+        { "roundData": ["SERVE_T1", "HIT_T2", "OOB"] },
+        { "roundData": ["SERVE_T2", "OOB"] },
+        { "roundData": ["SERVE_T1", "HIT_T2", "OOB"] }
+      ],
+      "expectedScoreTeamOne": 0,
+      "expectedScoreTeamTwo": 5
+    }
+  ]
+}

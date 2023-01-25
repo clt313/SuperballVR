@@ -101,7 +101,7 @@ public class GameManager : MonoBehaviour
     gameRunning = true;
   }
 
-  void resetGame()
+  public void resetGame()
   {
     startTime = -1.0f;
     gameRunning = false;

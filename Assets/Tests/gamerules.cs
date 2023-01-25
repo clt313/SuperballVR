@@ -1,25 +1,69 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.TestTools;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
-enum TEST_COMMANDS
+[System.Serializable]
+[JsonConverter(typeof(StringEnumConverter))]
+public enum TEST_COMMANDS
 {
   SERVE_T1,
   SERVE_T2,
   HIT_T1,
   HIT_T2,
   MISS,
-  OOB
+  OOB,
+  NONE
+}
+[System.Serializable]
+public class RoundData
+{
+  public List<TEST_COMMANDS> roundData;
+}
+
+[System.Serializable]
+public class TEST_CASE
+{
+  public List<RoundData> rounds;
+  public int expectedScoreTeamOne;
+  public int expectedScoreTeamTwo;
+
+}
+
+[System.Serializable]
+public class TESTS
+{
+  public List<TEST_CASE> tests;
+  public TEST_COMMANDS getCommand(int testCaseIndex, int roundIndex, int commandIndex)
+  {
+    if (roundIndex >= tests[testCaseIndex].rounds.Count)
+    {
+      return TEST_COMMANDS.NONE;
+    }
+    else if (commandIndex >= tests[testCaseIndex].rounds[roundIndex].roundData.Count)
+    {
+      return TEST_COMMANDS.NONE;
+    }
+    return tests[testCaseIndex].rounds[roundIndex].roundData[commandIndex];
+  }
+  public int size()
+  {
+    return tests.Count;
+  }
 }
 
 public class gamerules
 {
 
-  public bool finishedTest = false;
-
+  ////////////////////////////
+  // Configuration Parameters
+  ////////////////////////////
+  public string testCasesPath = "./Assets/Tests/tests.json";
   public string testSceneName = "Map1";
   public string courtOneRigidbodyName = "CourtOne";
   public string courtTwoRigidbodyName = "CourtTwo";
@@ -28,6 +72,10 @@ public class gamerules
   public Vector3 OOB_LOCATION;
   public Vector3 bounceHeight = new Vector3(0.0f, 6.0f, 0.0f);
 
+
+  ////////////////////////////
+  // STATE VARIABLES
+  ////////////////////////////
   public GameManager gameManager;
 
   GameObject courtOne;
@@ -35,46 +83,37 @@ public class gamerules
   GameObject net;
   GameObject teamOnePlayer;
   GameObject teamTwoPlayer;
+  int currentTestCase = 0;
+  int currentRound = -1;
   int currentCommand = 0;
   bool waitForMissToComplete = false;
 
-  // T1 WIN 5-0
-  List<TEST_COMMANDS> commands = new List<TEST_COMMANDS>{
-    // Round 1
-    TEST_COMMANDS.SERVE_T1,
-    TEST_COMMANDS.OOB,
+  // See "./tests.json" for example format
+  TESTS testGames;
 
-    // Round 2
-    TEST_COMMANDS.SERVE_T2,
-    TEST_COMMANDS.HIT_T1,
-    TEST_COMMANDS.OOB,
-
-    // Round 3
-    TEST_COMMANDS.SERVE_T1,
-    TEST_COMMANDS.OOB,
-
-    // Round 4
-    TEST_COMMANDS.SERVE_T2,
-    TEST_COMMANDS.HIT_T1,
-    TEST_COMMANDS.OOB,
-
-    // Round 5
-    TEST_COMMANDS.SERVE_T1,
-    TEST_COMMANDS.OOB
-  };
-
-
-
-  [OneTimeSetUp]
-  public void Setup()
+  public void getTestCases()
   {
+    // Deserialize the JSON data
+    JsonSerializer serializer = new JsonSerializer();
+    StreamReader file = File.OpenText(testCasesPath);
+    testGames = (TESTS)serializer.Deserialize(file, typeof(TESTS));
+  }
+
+  public void loadScene()
+  {
+    // Load the scene
     LogAssert.ignoreFailingMessages = true; // Only fail tests on failed assertions here. Not other errors in game.
     SceneManager.LoadScene(testSceneName);
   }
 
   public void initTest()
   {
+    // Init state variables for the tests
     gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+    gameManager.resetGame();
+
+    currentRound = -1;
+    currentCommand = 0;
 
     OOB_LOCATION = GameObject.Find("OOB_TEST_MARKER").transform.position;
     courtOne = GameObject.Find(courtOneRigidbodyName);
@@ -88,53 +127,65 @@ public class gamerules
     teamTwoPlayer.transform.position = courtTwo.transform.position;
     teamTwoPlayer.transform.position += bounceHeight;
 
+    // Register listeners
     BallEvents.ballBounceEvent.AddListener(processNextCommand);
     GameEvents.roundEndEvent.AddListener(serveBall);
 
-    gameManager.startGame();
     Debug.Log("Finished Setup For Tests");
   }
 
-  // A UnityTest behaves like a coroutine in Play Mode. In Edit Mode you can use
-  // `yield return null;` to skip a frame.
+
   [UnityTest]
   public IEnumerator gamerulesWithEnumeratorPasses()
   {
-    yield return null;
-    LogAssert.ignoreFailingMessages = true; // Only fail tests on failed assertions here. Not other errors in game.
-    initTest();
-    float startTime = Time.time;
+    getTestCases();
+    loadScene();
 
-    // Get game started by serving
-    serveBall();
+    Debug.Log($"Detected {testGames.size()} test cases.");
 
-    while (!finishedTest)
-    {
-
-      // Advances a frame
-      yield return null;
-      finishedTest = currentCommand == commands.Count;
-    }
-
-    // Wait for game to finish
-    while (gameManager.isGameRunning())
+    for (int i = 0; i < testGames.size(); i++)
     {
       yield return null;
-    }
+      LogAssert.ignoreFailingMessages = true; // Only fail tests on failed assertions here. Not other errors in game.
+      initTest();
 
-    // Check the final score
-    Assert.AreEqual(5, gameManager.getTeamOneScore());
-    Assert.AreEqual(0, gameManager.getTeamTwoScore());
+      // SHOULD BE WRAPPED IN simulateMatch(). But the yield return null is acting weird.
+      /////////////////////////////////////////////////////////////
+
+      gameManager.startGame();
+
+      // Start match by manually serving
+      serveBall();
+
+      while (gameManager.isGameRunning()) // TODO: Add timeout
+      {
+        // Advances a frame
+        yield return null;
+      }
+
+      // Check the final score
+      int expectedTeamOneScore = testGames.tests[currentTestCase].expectedScoreTeamOne;
+      int expectedTeamTwoScore = testGames.tests[currentTestCase].expectedScoreTeamTwo;
+      Assert.AreEqual(expectedTeamOneScore, gameManager.getTeamOneScore());
+      Assert.AreEqual(expectedTeamTwoScore, gameManager.getTeamTwoScore());
+      currentTestCase++;
+      /////////////////////////////////////////////////////////////
+
+
+
+      // simulateMatch();
+    }
 
     Debug.Log("Finished running tests!");
   }
 
   void serveBall()
   {
+    currentCommand = 0;
     currentCommand += waitForMissToComplete == true ? 1 : 0;
     waitForMissToComplete = false;
-    TEST_COMMANDS cmd = commands[currentCommand];
-    Debug.Log(cmd.ToString());
+    TEST_COMMANDS cmd = testGames.getCommand(currentTestCase, ++currentRound, currentCommand++);
+    Debug.Log($"Serving ball with command: {cmd.ToString()} at {currentTestCase} {currentRound - 1} {currentCommand}");
     if (cmd == TEST_COMMANDS.SERVE_T1)
     {
       PlayerEvents.playerServeEvent.Invoke(teamTwoPlayer); // Players are switched because serve goes to other side 
@@ -144,7 +195,6 @@ public class gamerules
       PlayerEvents.playerServeEvent.Invoke(teamOnePlayer); // Players are switched because serve goes to other side
     }
     gameManager.expectTestServe();
-    currentCommand++;
   }
 
   // Teleport ball to wherever next command says
@@ -154,13 +204,13 @@ public class gamerules
     if (!waitForMissToComplete)
     {
 
-      TEST_COMMANDS cmd = commands[currentCommand];
-      if (cmd == TEST_COMMANDS.SERVE_T1 || cmd == TEST_COMMANDS.SERVE_T2)
+      TEST_COMMANDS cmd = testGames.getCommand(currentTestCase, currentRound, currentCommand);
+      Debug.Log($"CMD: {cmd.ToString()} at {currentTestCase} {currentRound} {currentCommand}");
+      if (cmd == TEST_COMMANDS.SERVE_T1 || cmd == TEST_COMMANDS.SERVE_T2 || cmd == TEST_COMMANDS.NONE)
       {
         return;
       }
 
-      Debug.Log(cmd.ToString());
       if (cmd == TEST_COMMANDS.OOB)
       {
         GameObject ball = GameObject.Find(ballName);
