@@ -103,6 +103,7 @@ public class GameManager : MonoBehaviour
 
   public void resetGame()
   {
+    maxScore = StateController.matchLength;
     startTime = -1.0f;
     gameRunning = false;
     scoreTeamOne = 0;
