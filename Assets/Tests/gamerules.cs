@@ -106,14 +106,16 @@ public class gamerules
     SceneManager.LoadScene(testSceneName);
   }
 
-  public void initTest()
+  public void initTests()
   {
+
     // Init state variables for the tests
     gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     gameManager.resetGame();
 
     currentRound = -1;
     currentCommand = 0;
+    waitForMissToComplete = false;
 
     OOB_LOCATION = GameObject.Find("OOB_TEST_MARKER").transform.position;
     courtOne = GameObject.Find(courtOneRigidbodyName);
@@ -140,6 +142,8 @@ public class gamerules
   {
     getTestCases();
     loadScene();
+    yield return null; // Load Scene needs one frame to finish loading
+    initTests();
 
     Debug.Log($"Detected {testGames.size()} test cases.");
 
@@ -147,7 +151,6 @@ public class gamerules
     {
       yield return null;
       LogAssert.ignoreFailingMessages = true; // Only fail tests on failed assertions here. Not other errors in game.
-      initTest();
 
       // SHOULD BE WRAPPED IN simulateMatch(). But the yield return null is acting weird.
       /////////////////////////////////////////////////////////////
@@ -169,6 +172,9 @@ public class gamerules
       Assert.AreEqual(expectedTeamOneScore, gameManager.getTeamOneScore());
       Assert.AreEqual(expectedTeamTwoScore, gameManager.getTeamTwoScore());
       currentTestCase++;
+      currentRound = -1;
+      currentCommand = 0;
+      waitForMissToComplete = false;
       /////////////////////////////////////////////////////////////
 
 
@@ -205,12 +211,12 @@ public class gamerules
     {
 
       TEST_COMMANDS cmd = testGames.getCommand(currentTestCase, currentRound, currentCommand);
-      Debug.Log($"CMD: {cmd.ToString()} at {currentTestCase} {currentRound} {currentCommand}");
       if (cmd == TEST_COMMANDS.SERVE_T1 || cmd == TEST_COMMANDS.SERVE_T2 || cmd == TEST_COMMANDS.NONE)
       {
         return;
       }
 
+      Debug.Log($"CMD: {cmd.ToString()} at {currentTestCase} {currentRound} {currentCommand}");
       if (cmd == TEST_COMMANDS.OOB)
       {
         GameObject ball = GameObject.Find(ballName);
