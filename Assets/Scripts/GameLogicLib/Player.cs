@@ -22,4 +22,9 @@ public class Player : MonoBehaviour
       PlayerEvents.playerServeEvent.Invoke(this);
     }
   }
+
+  public Vector3 getGameraPosition()
+  {
+    return this.transform.root.GetChild(0).GetChild(0).transform.position;
+  }
 }
