@@ -5079,6 +5079,7 @@ GameObject:
   - component: {fileID: 409984735}
   - component: {fileID: 409984733}
   - component: {fileID: 409984731}
+  - component: {fileID: 409984737}
   - component: {fileID: 409984736}
   m_Layer: 0
   m_Name: XRRig
@@ -5270,6 +5271,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 116
   m_CollisionDetection: 2
+--- !u!114 &409984737
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 409984726}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5a381ef597c4b8478755199325dfb7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  team: 0
 --- !u!1001 &410932041
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6233,7 +6247,6 @@ Transform:
   m_Children:
   - {fileID: 1113115788}
   - {fileID: 347164928}
-  - {fileID: 1243781840}
   - {fileID: 888860848}
   m_Father: {fileID: 1671046586}
   m_RootOrder: 8
@@ -8774,7 +8787,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 566502376}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!65 &888860849
 BoxCollider:
@@ -14405,7 +14418,7 @@ MonoBehaviour:
   teamOneCourt: {fileID: 663726798}
   teamTwoCourt: {fileID: 683625643}
   net: {fileID: 1808912839}
-  BallPrefab: {fileID: 8417315021592821187, guid: 40bac94bea7d26e4eb5a5c914a13b4c5,
+  BallPrefab: {fileID: 1059506415888024964, guid: a9161f76474b7aa498eb390f91725201,
     type: 3}
 --- !u!4 &1457298769
 Transform:

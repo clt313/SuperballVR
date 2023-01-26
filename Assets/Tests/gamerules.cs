@@ -123,7 +123,9 @@ public class gamerules
     net = GameObject.Find(netBodyName);
 
     teamOnePlayer = new GameObject();
+    teamOnePlayer.AddComponent<Player>();
     teamTwoPlayer = new GameObject();
+    teamTwoPlayer.AddComponent<Player>();
     teamOnePlayer.transform.position = courtOne.transform.position;
     teamOnePlayer.transform.position += bounceHeight;
     teamTwoPlayer.transform.position = courtTwo.transform.position;
@@ -194,11 +196,11 @@ public class gamerules
     Debug.Log($"Serving ball with command: {cmd.ToString()} at {currentTestCase} {currentRound - 1} {currentCommand}");
     if (cmd == TEST_COMMANDS.SERVE_T1)
     {
-      PlayerEvents.playerServeEvent.Invoke(teamTwoPlayer); // Players are switched because serve goes to other side 
+      PlayerEvents.playerServeEvent.Invoke(teamTwoPlayer.GetComponent<Player>()); // Players are switched because serve goes to other side 
     }
     else if (cmd == TEST_COMMANDS.SERVE_T2)
     {
-      PlayerEvents.playerServeEvent.Invoke(teamOnePlayer); // Players are switched because serve goes to other side
+      PlayerEvents.playerServeEvent.Invoke(teamOnePlayer.GetComponent<Player>()); // Players are switched because serve goes to other side
     }
     gameManager.expectTestServe();
   }

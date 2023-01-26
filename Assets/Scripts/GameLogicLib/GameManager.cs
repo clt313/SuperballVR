@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-enum TEAM
+public enum TEAM
 {
   TEAM_ONE,
   TEAM_TWO
@@ -156,7 +156,7 @@ public class GameManager : MonoBehaviour
   ////////////////////////
   // EVENT HANDLES
   ////////////////////////
-  void handleServeButtonPressed(GameObject player)
+  void handleServeButtonPressed(Player player)
   {
 
     // TODO Get player team and verify == currentServer
@@ -174,9 +174,9 @@ public class GameManager : MonoBehaviour
     }
   }
 
-  void spawnBall(GameObject player)
+  void spawnBall(Player player)
   {
-    GameObject ball = (GameObject)Instantiate(BallPrefab, player.transform.position, player.transform.rotation);
+    GameObject ball = (GameObject)Instantiate(BallPrefab, player.gameObject.transform.position, player.gameObject.transform.rotation);
     ball.GetComponent<Rigidbody>().velocity = new Vector3(0.0f, 3.0f, 0.0f);
     ball.name = "Ball";
     Debug.Log($"Spawning Ball At: {ball.transform.position.x}, {ball.transform.position.y}, {ball.transform.position.z}");
