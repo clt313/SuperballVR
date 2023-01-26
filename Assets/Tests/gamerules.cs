@@ -132,6 +132,7 @@ public class gamerules
 
     // Init state variables for the tests
     gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+    StateController.matchLength = 5; // TODO: Clean this up and have configuration as part of test case
     gameManager.resetGame();
 
     currentRound = -1;
