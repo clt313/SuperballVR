@@ -6233,7 +6233,6 @@ Transform:
   m_Children:
   - {fileID: 1113115788}
   - {fileID: 347164928}
-  - {fileID: 1243781840}
   - {fileID: 888860848}
   m_Father: {fileID: 1671046586}
   m_RootOrder: 8
@@ -8774,7 +8773,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 566502376}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!65 &888860849
 BoxCollider:
@@ -14405,7 +14404,7 @@ MonoBehaviour:
   teamOneCourt: {fileID: 663726798}
   teamTwoCourt: {fileID: 683625643}
   net: {fileID: 1808912839}
-  BallPrefab: {fileID: 8417315021592821187, guid: 40bac94bea7d26e4eb5a5c914a13b4c5,
+  BallPrefab: {fileID: 1059506415888024964, guid: a9161f76474b7aa498eb390f91725201,
     type: 3}
 --- !u!4 &1457298769
 Transform:
