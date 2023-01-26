@@ -176,8 +176,8 @@ public class GameManager : MonoBehaviour
 
   void spawnBall(Player player)
   {
-    GameObject ball = (GameObject)Instantiate(BallPrefab, player.gameObject.transform.position, player.gameObject.transform.rotation);
-    ball.GetComponent<Rigidbody>().velocity = new Vector3(0.0f, 3.0f, 0.0f);
+    GameObject ball = (GameObject)Instantiate(BallPrefab, player.getGameraPosition(), player.gameObject.transform.rotation);
+    ball.GetComponent<Rigidbody>().velocity = new Vector3(0.0f, 10.0f, 0.0f);
     ball.name = "Ball";
     Debug.Log($"Spawning Ball At: {ball.transform.position.x}, {ball.transform.position.y}, {ball.transform.position.z}");
   }
@@ -192,11 +192,16 @@ public class GameManager : MonoBehaviour
       int rootID = listenedCollidedObject.transform.root.GetInstanceID();
       int collidedID = listenedCollidedObject.GetInstanceID();
       bool isCourtCollision = collidedID == teamOneCourt.GetInstanceID() || collidedID == teamTwoCourt.GetInstanceID();
+      bool isPlayer = listenedCollidedObject.transform.root.GetComponentInChildren<Player>() != null;
+      bool performedGameStateUpdate = false;
 
       // TODO Player Collision
-      if (false)
+      if (isPlayer)
       {
+        // Check for hands
 
+
+        // Don't do anything if XRRig
       }
 
       // Court Collision
@@ -213,7 +218,7 @@ public class GameManager : MonoBehaviour
           currentPossession = courtWhereBallLanded;
           currentBounces = 1;
         }
-
+        performedGameStateUpdate = true;
       }
 
       // Net Collision, don't do anything
@@ -227,6 +232,7 @@ public class GameManager : MonoBehaviour
       {
         roundEndReason = ROUND_END_REASON.OUT_OF_BOUNDS;
         isBallInPlay = false;
+        performedGameStateUpdate = true;
       }
 
       // Check max bounces
@@ -234,8 +240,12 @@ public class GameManager : MonoBehaviour
       {
         roundEndReason = ROUND_END_REASON.TOO_MANY_TOUCHES;
         isBallInPlay = false;
+        performedGameStateUpdate = true;
       }
-      Debug.Log("Game manager detected a ball bounce with: " + listenedCollidedObject.name);
+      if (performedGameStateUpdate)
+      {
+        Debug.Log("Game manager detected a ball bounce with: " + listenedCollidedObject.name);
+      }
     }
 
   }
