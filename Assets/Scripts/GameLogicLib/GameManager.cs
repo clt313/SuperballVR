@@ -49,7 +49,7 @@ public class GameManager : MonoBehaviour
   // Start is called before the first frame update
   void Start()
   {
-    resetGame();
+    startGame();
     BallEvents.ballBounceEvent.AddListener(handleBallBounce);
     PlayerEvents.playerServeEvent.AddListener(handleServeButtonPressed);
   }
