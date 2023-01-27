@@ -130,6 +130,9 @@ public class gamerules
   public void initTests()
   {
 
+    // TODO: Set time scale
+    Time.timeScale = 5.0f;
+
     // Init state variables for the tests
     gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     StateController.matchLength = 5; // TODO: Clean this up and have configuration as part of test case
