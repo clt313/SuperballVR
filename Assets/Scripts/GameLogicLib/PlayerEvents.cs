@@ -11,7 +11,7 @@ public class PlayerEvents : MonoBehaviour
 
 }
 
-public class PlayerServeEvent : UnityEvent<GameObject>
+public class PlayerServeEvent : UnityEvent<Player>
 {
 
 }

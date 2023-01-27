@@ -106,8 +106,32 @@ public class gamerules
     SceneManager.LoadScene(testSceneName);
   }
 
+  public GameObject getTestPlayer(TEAM team)
+  {
+    var player = new GameObject();
+    var cameraOffset = new GameObject();
+    var mainCamera = new GameObject();
+    mainCamera.transform.parent = cameraOffset.transform;
+    cameraOffset.transform.parent = player.transform;
+    player.AddComponent<Player>();
+    if (team == TEAM.TEAM_ONE)
+    {
+      player.transform.position = courtOne.transform.position;
+      player.transform.position += bounceHeight;
+    }
+    else if (team == TEAM.TEAM_TWO)
+    {
+      player.transform.position = courtTwo.transform.position;
+      player.transform.position += bounceHeight;
+    }
+    return player;
+  }
+
   public void initTests()
   {
+
+    // TODO: Set time scale
+    Time.timeScale = 5.0f;
 
     // Init state variables for the tests
     gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
@@ -123,12 +147,9 @@ public class gamerules
     courtTwo = GameObject.Find(courtTwoRigidbodyName);
     net = GameObject.Find(netBodyName);
 
-    teamOnePlayer = new GameObject();
-    teamTwoPlayer = new GameObject();
-    teamOnePlayer.transform.position = courtOne.transform.position;
-    teamOnePlayer.transform.position += bounceHeight;
-    teamTwoPlayer.transform.position = courtTwo.transform.position;
-    teamTwoPlayer.transform.position += bounceHeight;
+    // Create the test players
+    teamOnePlayer = getTestPlayer(TEAM.TEAM_ONE);
+    teamTwoPlayer = getTestPlayer(TEAM.TEAM_TWO);
 
     // Register listeners
     BallEvents.ballBounceEvent.AddListener(processNextCommand);
@@ -195,11 +216,11 @@ public class gamerules
     Debug.Log($"Serving ball with command: {cmd.ToString()} at {currentTestCase} {currentRound - 1} {currentCommand}");
     if (cmd == TEST_COMMANDS.SERVE_T1)
     {
-      PlayerEvents.playerServeEvent.Invoke(teamTwoPlayer); // Players are switched because serve goes to other side 
+      PlayerEvents.playerServeEvent.Invoke(teamTwoPlayer.GetComponent<Player>()); // Players are switched because serve goes to other side 
     }
     else if (cmd == TEST_COMMANDS.SERVE_T2)
     {
-      PlayerEvents.playerServeEvent.Invoke(teamOnePlayer); // Players are switched because serve goes to other side
+      PlayerEvents.playerServeEvent.Invoke(teamOnePlayer.GetComponent<Player>()); // Players are switched because serve goes to other side
     }
     gameManager.expectTestServe();
   }
