@@ -12,6 +12,7 @@ enum ROUND_END_REASON
 {
   NONE,
   OUT_OF_BOUNDS,
+  TOO_MANY_BOUNCES,
   TOO_MANY_TOUCHES
 }
 
@@ -45,6 +46,7 @@ public class GameManager : MonoBehaviour
   private TEAM currentServer = TEAM.TEAM_ONE;
   private TEAM currentPossession = TEAM.TEAM_ONE;
   private ROUND_END_REASON roundEndReason = ROUND_END_REASON.NONE;
+  private Player previousPossessor = null;
 
   // Start is called before the first frame update
   void Start()
@@ -159,7 +161,7 @@ public class GameManager : MonoBehaviour
   void handleServeButtonPressed(Player player)
   {
 
-    // TODO Get player team and verify == currentServer
+    TEAM playerTeam = player.team;
 
     if (isBallInPlay)
     {
@@ -195,11 +197,32 @@ public class GameManager : MonoBehaviour
       bool isPlayer = listenedCollidedObject.transform.root.GetComponentInChildren<Player>() != null;
       bool performedGameStateUpdate = false;
 
-      // TODO Player Collision
       if (isPlayer)
       {
+        Player player = listenedCollidedObject.transform.root.GetComponentInChildren<Player>();
+        TEAM playerTeam = player.team;
+        GameObject playerLeftHand = player.transform.Find("LeftHand").gameObject;
+        GameObject playerRightHand = player.transform.Find("RightHand").gameObject;
         // Check for hands
-
+        if (listenedCollidedObject.GetInstanceID() == playerLeftHand.GetInstanceID() || listenedCollidedObject.GetInstanceID() == playerRightHand.GetInstanceID())
+        {
+          if (player.GetInstanceID() == previousPossessor.GetInstanceID())
+          {
+            currentPasses = maxPasses; // Indiicate too many touches
+          }
+          else if (currentPossession != player.team)
+          {
+            currentBounces = 0;
+            currentPasses = 0;
+            currentPossession = player.team;
+          }
+          else
+          {
+            currentPasses++;
+          }
+          previousPossessor = player;
+          performedGameStateUpdate = true;
+        }
 
         // Don't do anything if XRRig
       }
@@ -237,6 +260,13 @@ public class GameManager : MonoBehaviour
 
       // Check max bounces
       if (currentBounces > maxBounces)
+      {
+        roundEndReason = ROUND_END_REASON.TOO_MANY_BOUNCES;
+        isBallInPlay = false;
+        performedGameStateUpdate = true;
+      }
+      // Check max passes
+      if (currentPasses > maxPasses)
       {
         roundEndReason = ROUND_END_REASON.TOO_MANY_TOUCHES;
         isBallInPlay = false;
