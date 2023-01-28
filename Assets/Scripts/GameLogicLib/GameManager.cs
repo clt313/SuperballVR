@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.XR.Interaction.Toolkit;
+using TMPro;
 
 public enum TEAM
 {
@@ -30,6 +32,14 @@ public class GameManager : MonoBehaviour
   public GameObject teamTwoCourt;
   public GameObject net;
   public GameObject BallPrefab;
+  public TMP_Text[] teamOneScoreTexts;
+  public TMP_Text[] teamTwoScoreTexts;
+  public TMP_Text[] maxScoreTexts;
+  public GameObject endgameUI;
+  public GameObject player;
+  public GameObject leftController;
+  public GameObject rightController;
+  public TMP_Text endgameText;
 
 
   ////////////////////////
@@ -47,6 +57,7 @@ public class GameManager : MonoBehaviour
   private TEAM currentPossession = TEAM.TEAM_ONE;
   private ROUND_END_REASON roundEndReason = ROUND_END_REASON.NONE;
   private Player previousPossessor = null;
+
 
   // Start is called before the first frame update
   void Start()
@@ -116,6 +127,9 @@ public class GameManager : MonoBehaviour
     currentServer = TEAM.TEAM_ONE;
     currentPossession = TEAM.TEAM_ONE;
     roundEndReason = ROUND_END_REASON.NONE;
+    updateScoreboard();
+    foreach (TMP_Text maxScoreText in maxScoreTexts)
+      maxScoreText.SetText(maxScore.ToString());
   }
 
   bool checkGameEnded()
@@ -141,6 +155,24 @@ public class GameManager : MonoBehaviour
     string winner = isDraw ? "DRAW" : teamOneWon ? "TEAM ONE WON" : "TEAM TWO WON";
     Debug.Log($"Game Ended! {winner}");
     Debug.Log($"Final Score: {scoreTeamOne} to {scoreTeamTwo}");
+
+    endgameText.SetText((isDraw ? "It's a draw!" : teamOneWon ? "You won!" : "You lost!") +
+        "\nFinal Score: " + scoreTeamOne + " - " + scoreTeamTwo);
+
+    // Yes this is copy-pasted from PauseMenu, but the assembly definition won't just let me use it :)
+    // Enable interaction rays
+    leftController.GetComponent<XRInteractorLineVisual>().enabled = true;
+    rightController.GetComponent<XRInteractorLineVisual>().enabled = true;
+
+    // Summon pause menu in front of player camera
+    endgameUI.SetActive(true);
+    Vector3 pos = player.transform.position;
+    pos.x += player.transform.forward.x * 2;
+    pos.z += player.transform.forward.z * 2;
+    endgameUI.transform.position = pos;
+    Vector3 angle = new Vector3(player.transform.forward.x, 0, player.transform.forward.z);
+    endgameUI.transform.forward = angle;
+    Time.timeScale = 0f;
   }
 
   void addScore(TEAM team)
@@ -153,6 +185,15 @@ public class GameManager : MonoBehaviour
     {
       scoreTeamTwo++;
     }
+    updateScoreboard();
+  }
+
+  void updateScoreboard()
+  {
+    foreach (TMP_Text teamOneScoreText in teamOneScoreTexts)
+      teamOneScoreText.SetText(scoreTeamOne.ToString());
+    foreach (TMP_Text teamTwoScoreText in teamTwoScoreTexts)
+      teamTwoScoreText.SetText(scoreTeamTwo.ToString());
   }
 
   ////////////////////////
