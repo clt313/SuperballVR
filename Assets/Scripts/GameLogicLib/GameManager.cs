@@ -40,6 +40,7 @@ public class GameManager : MonoBehaviour
   public GameObject leftController;
   public GameObject rightController;
   public TMP_Text endgameText;
+  public AudioSource bounceAudio;
 
 
   ////////////////////////
@@ -316,6 +317,7 @@ public class GameManager : MonoBehaviour
       if (performedGameStateUpdate)
       {
         Debug.Log("Game manager detected a ball bounce with: " + listenedCollidedObject.name);
+        bounceAudio.Play();
       }
     }
 
