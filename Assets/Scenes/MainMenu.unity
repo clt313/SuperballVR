@@ -6268,14 +6268,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '<b>LJoystick</b>   Move
-
-    <b>RJoystick</b>    Turn
-
-    <b>Trigger</b>     
-    Select
-
-    <b>Y</b>                Pause'
+  m_text: "<b>LJoystick</b>   Move\n<b>RJoystick</b>    Turn\n<b>Trigger</b>     
+    Select\n    <b>Y</b>             Pause\n    <b>A</b>              Serve"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -6284,8 +6278,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294934800
-  m_fontColor: {r: 0.06132078, g: 0.50607073, b: 1, a: 1}
+    rgba: 4294957568
+  m_fontColor: {r: 0, g: 0.85490197, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -11477,14 +11471,14 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '<i>Superball combines <#0D0>tennis<#000> and <#DDD>volleyball<#000>.</i>
+  m_text: '<#00DAFF><i>Superball combines <#0D0>tennis<#00DAFF> and <#DDD>volleyball<#00DAFF>.</i>
 
 
     <#DDD>Hit
     the ball like a volleyball <#0D0>but play it like tennis.
 
 
-    <#1081FF>Scores
+    <#00DAFF>Scores
     are kept volleyball-style. First to the match length wins!'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

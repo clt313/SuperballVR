@@ -44,8 +44,12 @@ public class PauseMenu : MonoBehaviour
 
         // Summon pause menu in front of player camera
         pauseUI.SetActive(true);
-        pauseUI.transform.position = player.transform.position + (player.transform.forward * 2f);
-        pauseUI.transform.forward = player.transform.forward;
+        Vector3 pos = player.transform.position;
+        pos.x += player.transform.forward.x * 2;
+        pos.z += player.transform.forward.z * 2;
+        pauseUI.transform.position = pos;
+        Vector3 angle = new Vector3(player.transform.forward.x, 0, player.transform.forward.z);
+        pauseUI.transform.forward = angle;
         Time.timeScale = 0f;
         GamePaused = true;
     }
