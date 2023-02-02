@@ -23,8 +23,8 @@ public class Player : MonoBehaviour
     }
   }
 
-  public Vector3 getGameraPosition()
+  public Vector3  getGameraPosition()
   {
-    return this.transform.root.GetChild(0).GetChild(0).transform.position;
+    return this.transform.GetChild(0).GetChild(0).transform.position;
   }
 }
