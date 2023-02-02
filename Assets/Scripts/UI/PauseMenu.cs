@@ -16,7 +16,7 @@ public class PauseMenu : MonoBehaviour
 
     // Update is called once per frame
     void Update() {
-        if (Input.GetButtonDown("XRI_Left_SecondaryButton")) {
+        if (Input.GetButtonDown("XRI_Left_SecondaryButton") || Input.GetButtonDown("XRI_Right_SecondaryButton")) {
             if (GamePaused) {
                 Resume();
             }
@@ -56,7 +56,7 @@ public class PauseMenu : MonoBehaviour
 
     public void Restart() {
         Resume();
-        SceneManager.LoadScene("Map1");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void Quit() {

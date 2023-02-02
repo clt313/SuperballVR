@@ -16,15 +16,15 @@ public class Player : MonoBehaviour
   // Update is called once per frame
   void Update()
   {
-    if (Input.GetButtonDown("XRI_Right_PrimaryButton"))
+    if (Input.GetButtonDown("XRI_Right_PrimaryButton") || Input.GetButtonDown("XRI_Left_PrimaryButton"))
     {
       Debug.Log("Detected serve button press!");
       PlayerEvents.playerServeEvent.Invoke(this);
     }
   }
 
-  public Vector3 getGameraPosition()
+  public Vector3  getGameraPosition()
   {
-    return this.transform.root.GetChild(0).GetChild(0).transform.position;
+    return this.transform.GetChild(0).GetChild(0).transform.position;
   }
 }
