@@ -233,18 +233,18 @@ public class GameManager : MonoBehaviour
     if (isBallInPlay && gameRunning)
     {
 
-      int rootID = listenedCollidedObject.transform.root.GetInstanceID();
+      int rootID = listenedCollidedObject.transform.GetInstanceID();
       int collidedID = listenedCollidedObject.GetInstanceID();
       bool isCourtCollision = collidedID == teamOneCourt.GetInstanceID() || collidedID == teamTwoCourt.GetInstanceID();
-      bool isPlayer = listenedCollidedObject.transform.root.GetComponentInChildren<Player>() != null;
+      bool isPlayer = listenedCollidedObject.transform.GetComponentInChildren<Player>() != null;
       bool performedGameStateUpdate = false;
 
       if (isPlayer)
       {
-        Player player = listenedCollidedObject.transform.root.GetComponentInChildren<Player>();
+        Player player = listenedCollidedObject.transform.GetComponentInChildren<Player>();
         TEAM playerTeam = player.team;
-        GameObject playerLeftHand = player.transform.Find("LeftHand").gameObject;
-        GameObject playerRightHand = player.transform.Find("RightHand").gameObject;
+        GameObject playerLeftHand = player.transform.Find("LeftController").gameObject;
+        GameObject playerRightHand = player.transform.Find("RightController").gameObject;
         // Check for hands
         if (listenedCollidedObject.GetInstanceID() == playerLeftHand.GetInstanceID() || listenedCollidedObject.GetInstanceID() == playerRightHand.GetInstanceID())
         {
