@@ -46,15 +46,13 @@ public class AudioManager : MonoBehaviour {
         }
     }
 
-    // On load, play the main theme
+    // On load, play the main theme (moved to settings)
     IEnumerator Start() {
         // Setting the sliders produces a sound on load. So skip it!
         Sound s = FindSound("ButtonPress");
         s.source.mute = true;
         yield return new WaitForSeconds(0.1f);
         s.source.mute = false;
-
-        Play("MainTheme");
     }
 
     // Play sound, looking up by its name
