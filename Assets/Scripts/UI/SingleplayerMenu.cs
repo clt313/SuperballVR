@@ -60,6 +60,7 @@ public class SingleplayerMenu : MonoBehaviour {
 
     // Starts the game and moves to the game scene
     public void StartGame() {
+        FindObjectOfType<AudioManager>().Stop("MainTheme");
         StateController.matchLength = matchLength;
         StateController.aiDifficulty = aiDifficulty;
         SceneManager.LoadScene(map.ToString());

@@ -174,6 +174,9 @@ public class GameManager : MonoBehaviour
     Vector3 angle = new Vector3(player.transform.forward.x, 0, player.transform.forward.z);
     endgameUI.transform.forward = angle;
     Time.timeScale = 0f;
+
+    // Win/Lose Sound Effects
+    FindObjectOfType<AudioManager>().Play(teamOneWon ? "GameWin" : "GameLose");
   }
 
   void addScore(TEAM team)
@@ -317,7 +320,7 @@ public class GameManager : MonoBehaviour
       if (performedGameStateUpdate)
       {
         Debug.Log("Game manager detected a ball bounce with: " + listenedCollidedObject.name);
-        bounceAudio.Play();
+        FindObjectOfType<AudioManager>().Play("BallBounce");
       }
     }
 
