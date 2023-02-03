@@ -60,22 +60,26 @@ public class AudioManager : MonoBehaviour {
     // Play sound, looking up by its name
     public void Play(string name) {
         Sound s = FindSound(name);
-        s.source.Play();
+        if (s != null)
+            s.source.Play();
     }
 
     public void Stop(string name) {
         Sound s = FindSound(name);
-        s.source.Stop();
+        if (s != null)
+            s.source.Stop();
     }
 
     public void Pause(string name) {
         Sound s = FindSound(name);
-        s.source.Pause();
+        if (s != null)
+            s.source.Pause();
     }
 
     public void Unpause(string name) {
         Sound s = FindSound(name);
-        s.source.UnPause();
+        if (s != null)
+            s.source.UnPause();
     }
 
     // Attempts to find sound by name. Returns null if not found.

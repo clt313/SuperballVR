@@ -10119,10 +10119,11 @@ MonoBehaviour:
     sounds:
     - name: BallBounce
       clip: {fileID: 8300000, guid: 62ed485fdb4130648abe996a03dcdc4b, type: 3}
-      output: {fileID: 0}
+      output: {fileID: -2953447420649394822, guid: 0c728bf6cf4cb8647b71257d32287d28,
+        type: 2}
       loop: 0
-      volume: 0
-      pitch: 0
+      volume: 1
+      pitch: 1
       source: {fileID: 0}
 --- !u!4 &1322881004
 Transform:
@@ -15554,6 +15555,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_RaycastMask.m_Bits
       value: 32
+      objectReference: {fileID: 0}
+    - target: {fileID: 2183002543912009249, guid: 8593d4afb35590340acf0698b2d8d1d3,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.36144
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8593d4afb35590340acf0698b2d8d1d3, type: 3}

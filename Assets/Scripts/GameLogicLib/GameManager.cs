@@ -317,7 +317,7 @@ public class GameManager : MonoBehaviour
       if (performedGameStateUpdate)
       {
         Debug.Log("Game manager detected a ball bounce with: " + listenedCollidedObject.name);
-        bounceAudio.Play();
+        FindObjectOfType<AudioManager>().Play("BallBounce");
       }
     }
 
