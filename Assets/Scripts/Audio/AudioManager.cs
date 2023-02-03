@@ -12,8 +12,19 @@ public class AudioManager : MonoBehaviour {
     // Dictionary for efficient lookup
     private Dictionary<string, Sound> d;
 
+    public static AudioManager instance;
+
     // Initialize each Sound once
     void Awake() {
+        // Only initialize once
+        if (instance == null)
+            instance = this;
+        else {
+            Destroy(gameObject);
+            return;
+        }
+        DontDestroyOnLoad(gameObject);
+
         d = new Dictionary<string, Sound>();
 
         foreach (SoundGroup sg in soundGroups) {
@@ -36,7 +47,13 @@ public class AudioManager : MonoBehaviour {
     }
 
     // On load, play the main theme
-    void Start() {
+    IEnumerator Start() {
+        // Setting the sliders produces a sound on load. So skip it!
+        Sound s = FindSound("ButtonPress");
+        s.source.mute = true;
+        yield return new WaitForSeconds(0.1f);
+        s.source.mute = false;
+
         Play("MainTheme");
     }
 
