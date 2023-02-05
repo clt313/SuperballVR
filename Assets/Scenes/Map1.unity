@@ -16427,11 +16427,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 819128307168833742, guid: b61ee656507c68d4cb42bfd0a69be6e4,
-        type: 3}
-      propertyPath: m_CollisionDetection
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 4874482072974449048, guid: b61ee656507c68d4cb42bfd0a69be6e4,
         type: 3}
       propertyPath: m_RootOrder
@@ -16494,21 +16489,3 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b61ee656507c68d4cb42bfd0a69be6e4, type: 3}
---- !u!1 &1519320448008079103 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 9136772027619157875, guid: b61ee656507c68d4cb42bfd0a69be6e4,
-    type: 3}
-  m_PrefabInstance: {fileID: 1519320448008079102}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1519320448008079104
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1519320448008079103}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5e85da3ecde82014c81498fd0a05589c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

@@ -10,10 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1296780891963253910}
   - component: {fileID: 8125890670302083303}
-  - component: {fileID: 8957962817236960778}
-  - component: {fileID: 2078207269627928116}
   m_Layer: 0
-  m_Name: HandColliderLeft
+  m_Name: Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26,13 +24,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2390803766174259828}
-  m_LocalRotation: {x: -0.032649465, y: -0.042145073, z: 0.71369493, w: 0.69842494}
-  m_LocalPosition: {x: -30.245678, y: -53.42775, z: -18.540794}
-  m_LocalScale: {x: 0.12999998, y: 0.049999986, z: 0.19}
+  m_LocalRotation: {x: 0, y: -0.0748917, z: 0, w: 0.9971917}
+  m_LocalPosition: {x: -0.0281, y: 0.0299, z: 0.0198}
+  m_LocalScale: {x: 0.13, y: 0.05, z: 0.19}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 5960768155218950531}
-  m_RootOrder: 1
+  m_Father: {fileID: 3004357249564223638}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: -8.59, z: 0}
 --- !u!65 &8125890670302083303
 BoxCollider:
@@ -42,39 +40,11 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2390803766174259828}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &8957962817236960778
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2390803766174259828}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d30f1842a1ffc6842b434e3004717404, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!54 &2078207269627928116
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2390803766174259828}
-  serializedVersion: 2
-  m_Mass: 10
-  m_Drag: 0
-  m_AngularDrag: 0
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 3
 --- !u!1 &9146554977589081349
 GameObject:
   m_ObjectHideFlags: 0
@@ -106,7 +76,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3004357249564223638}
-  - {fileID: 1296780891963253910}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
