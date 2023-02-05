@@ -64,7 +64,6 @@ public class gamerules
   // Configuration Parameters
   ////////////////////////////
   public string testCasesPath = "./Assets/Tests/tests.json";
-  public string mainMenuSceneName = "MainMenu";
   public string testSceneName = "Map1";
   public string courtOneRigidbodyName = "CourtOne";
   public string courtTwoRigidbodyName = "CourtTwo";
@@ -72,8 +71,6 @@ public class gamerules
   public string ballName = "Ball";
   public Vector3 OOB_LOCATION;
   public Vector3 bounceHeight = new Vector3(0.0f, 6.0f, 0.0f);
-  public float timeFactor = 5.0f;
-
 
 
   ////////////////////////////
@@ -106,7 +103,6 @@ public class gamerules
   {
     // Load the scene
     LogAssert.ignoreFailingMessages = true; // Only fail tests on failed assertions here. Not other errors in game.
-    SceneManager.LoadScene(mainMenuSceneName);
     SceneManager.LoadScene(testSceneName);
   }
 
@@ -134,6 +130,9 @@ public class gamerules
   public void initTests()
   {
 
+    // TODO: Set time scale
+    Time.timeScale = 5.0f;
+
     // Init state variables for the tests
     gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     StateController.matchLength = 5; // TODO: Clean this up and have configuration as part of test case
@@ -155,8 +154,6 @@ public class gamerules
     // Register listeners
     BallEvents.ballBounceEvent.AddListener(processNextCommand);
     GameEvents.roundEndEvent.AddListener(serveBall);
-
-    Time.timeScale = timeFactor;
 
     Debug.Log("Finished Setup For Tests");
   }
@@ -200,7 +197,6 @@ public class gamerules
       currentRound = -1;
       currentCommand = 0;
       waitForMissToComplete = false;
-      Time.timeScale = timeFactor;
       /////////////////////////////////////////////////////////////
 
 
