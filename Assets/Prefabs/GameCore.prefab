@@ -150,7 +150,7 @@ MonoBehaviour:
   maxScore: 5
   teamOneCourt: {fileID: 1519320448554101808}
   teamTwoCourt: {fileID: 1519320448674630229}
-  net: {fileID: 1519320447552034617}
+  net: {fileID: 1519320448460835576}
   BallPrefab: {fileID: 1059506415888024964, guid: a9161f76474b7aa498eb390f91725201,
     type: 3}
   teamOneScoreTexts:
@@ -652,7 +652,7 @@ BoxCollider:
   m_GameObject: {fileID: 1519320446925523333}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}

@@ -236,24 +236,25 @@ public class GameManager : MonoBehaviour
     if (isBallInPlay && gameRunning)
     {
 
-      int rootID = listenedCollidedObject.transform.GetInstanceID();
+      int rootID = listenedCollidedObject.transform.root.GetInstanceID();
       int collidedID = listenedCollidedObject.GetInstanceID();
       bool isCourtCollision = collidedID == teamOneCourt.GetInstanceID() || collidedID == teamTwoCourt.GetInstanceID();
-      bool isPlayer = listenedCollidedObject.transform.GetComponentInChildren<Player>() != null;
-      bool performedGameStateUpdate = false;
+      bool isNetCollision = collidedID == net.GetInstanceID();
+      Player player = listenedCollidedObject.transform.root.GetComponentInChildren<Player>();
 
-      if (isPlayer)
+      if (player)
       {
-        Player player = listenedCollidedObject.transform.GetComponentInChildren<Player>();
         TEAM playerTeam = player.team;
-        GameObject playerLeftHand = player.transform.Find("LeftController").gameObject;
-        GameObject playerRightHand = player.transform.Find("RightController").gameObject;
+        bool isHandCollision = listenedCollidedObject.name == "HandCollider";
+        // GameObject playerLeftHand = player.transform.root.Find("HandColliderLeft").gameObject;
+        // GameObject playerRightHand = player.transform.root.Find("HandColliderRight").gameObject;
         // Check for hands
-        if (listenedCollidedObject.GetInstanceID() == playerLeftHand.GetInstanceID() || listenedCollidedObject.GetInstanceID() == playerRightHand.GetInstanceID())
+        // if (listenedCollidedObject.GetInstanceID() == playerLeftHand.GetInstanceID() || listenedCollidedObject.GetInstanceID() == playerRightHand.GetInstanceID())
+        if (isHandCollision)
         {
-          if (player.GetInstanceID() == previousPossessor.GetInstanceID())
+          if (previousPossessor && player.GetInstanceID() == previousPossessor.GetInstanceID())
           {
-            currentPasses = maxPasses; // Indiicate too many touches
+            currentPasses = maxPasses; // Indicate too many touches
           }
           else if (currentPossession != player.team)
           {
@@ -266,7 +267,6 @@ public class GameManager : MonoBehaviour
             currentPasses++;
           }
           previousPossessor = player;
-          performedGameStateUpdate = true;
         }
 
         // Don't do anything if XRRig
@@ -286,11 +286,10 @@ public class GameManager : MonoBehaviour
           currentPossession = courtWhereBallLanded;
           currentBounces = 1;
         }
-        performedGameStateUpdate = true;
       }
 
       // Net Collision, don't do anything
-      else if (rootID == net.GetInstanceID())
+      else if (isNetCollision)
       {
 
       }
@@ -300,7 +299,6 @@ public class GameManager : MonoBehaviour
       {
         roundEndReason = ROUND_END_REASON.OUT_OF_BOUNDS;
         isBallInPlay = false;
-        performedGameStateUpdate = true;
       }
 
       // Check max bounces
@@ -308,20 +306,15 @@ public class GameManager : MonoBehaviour
       {
         roundEndReason = ROUND_END_REASON.TOO_MANY_BOUNCES;
         isBallInPlay = false;
-        performedGameStateUpdate = true;
       }
       // Check max passes
       if (currentPasses > maxPasses)
       {
         roundEndReason = ROUND_END_REASON.TOO_MANY_TOUCHES;
         isBallInPlay = false;
-        performedGameStateUpdate = true;
       }
-      if (performedGameStateUpdate)
-      {
-        Debug.Log("Game manager detected a ball bounce with: " + listenedCollidedObject.name);
-        FindObjectOfType<AudioManager>().Play("BallBounce");
-      }
+      Debug.Log("Game manager detected a ball bounce with: " + listenedCollidedObject.name);
+      FindObjectOfType<AudioManager>().Play("BallBounce");
     }
 
   }
@@ -349,5 +342,3 @@ public class GameManager : MonoBehaviour
     return gameRunning;
   }
 }
-
-
