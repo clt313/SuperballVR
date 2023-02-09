@@ -11,6 +11,9 @@ jobs:
         id: tests
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+        with:
+          projectPath: ./github/workspace
+          unityVersion: 2021.3.14f1
       # - uses: actions/checkout@v2
       #   with:
       #     lfs: true
