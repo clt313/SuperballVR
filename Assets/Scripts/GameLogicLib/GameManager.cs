@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 using TMPro;
@@ -223,7 +221,16 @@ public class GameManager : MonoBehaviour
 
   void spawnBall(Player player)
   {
-    GameObject ball = (GameObject)Instantiate(BallPrefab, player.getGameraPosition(), player.gameObject.transform.rotation);
+    Vector3 playerforward = player.transform.forward;
+    Vector3 ballSpawnLocation;
+
+    playerforward.y = 0;
+    playerforward = playerforward.normalized;
+
+    ballSpawnLocation = player.getCameraPosition() + playerforward * 1.1f;
+    ballSpawnLocation.y = 1.3f;
+
+    GameObject ball = (GameObject)Instantiate(BallPrefab, ballSpawnLocation, player.gameObject.transform.rotation);
     ball.GetComponent<Rigidbody>().velocity = new Vector3(0.0f, 10.0f, 0.0f);
     ball.name = "Ball";
     Debug.Log($"Spawning Ball At: {ball.transform.position.x}, {ball.transform.position.y}, {ball.transform.position.z}");

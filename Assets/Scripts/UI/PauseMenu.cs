@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.XR.Interaction.Toolkit;
@@ -10,9 +8,12 @@ public class PauseMenu : MonoBehaviour
     public GameObject pauseUI;
     public GameObject player;
 
-    public GameObject leftController;
-    
+    public GameObject leftController; 
     public GameObject rightController;
+
+    void Start() {
+        
+    }
 
     // Update is called once per frame
     void Update() {
