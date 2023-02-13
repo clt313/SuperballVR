@@ -147,7 +147,8 @@ public class GameManager : MonoBehaviour
 
   void endGame()
   {
-    GameEvents.roundEndEvent.Invoke();
+    // GameEvents.roundEndEvent.Invoke();
+    GameEvents.gameEndEvent.Invoke();
 
     bool isDraw = scoreTeamOne == scoreTeamTwo;
     bool teamOneWon = scoreTeamOne > scoreTeamTwo;

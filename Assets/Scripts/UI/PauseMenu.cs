@@ -14,7 +14,7 @@ public class PauseMenu : MonoBehaviour
     private bool gameEnded = false;
 
     void Start() {
-        GameEvents.roundEndEvent.AddListener(handleRoundEnd);
+        GameEvents.gameEndEvent.AddListener(handleGameEnd);
     }
 
     // Update is called once per frame
@@ -70,7 +70,7 @@ public class PauseMenu : MonoBehaviour
     ////////////////////////
     // EVENT HANDLES
     ////////////////////////
-    void handleRoundEnd() {
+    void handleGameEnd() {
         gameEnded = true;
     }
 }
