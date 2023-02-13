@@ -4622,6 +4622,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: XRRig
       objectReference: {fileID: 0}
+    - target: {fileID: 2183002543912009249, guid: 8593d4afb35590340acf0698b2d8d1d3,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.36144
+      objectReference: {fileID: 0}
     - target: {fileID: 2183002543403777970, guid: 8593d4afb35590340acf0698b2d8d1d3,
         type: 3}
       propertyPath: m_Layer
