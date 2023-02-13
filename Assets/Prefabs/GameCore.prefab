@@ -1045,7 +1045,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1519320447104080912}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Scoreboards
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3645,7 +3645,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1519320448710691794}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4291,6 +4291,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4874482072974449048}
     m_Modifications:
+    - target: {fileID: 2183002542512132361, guid: 8593d4afb35590340acf0698b2d8d1d3,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2183002542512132361, guid: 8593d4afb35590340acf0698b2d8d1d3,
+        type: 3}
+      propertyPath: m_UseForceGrab
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2183002542512132361, guid: 8593d4afb35590340acf0698b2d8d1d3,
+        type: 3}
+      propertyPath: m_InteractionLayers.m_Bits
+      value: 34
+      objectReference: {fileID: 0}
     - target: {fileID: 2183002542682781525, guid: 8593d4afb35590340acf0698b2d8d1d3,
         type: 3}
       propertyPath: m_RootOrder
@@ -4350,6 +4365,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: XRRig
+      objectReference: {fileID: 0}
+    - target: {fileID: 2183002543403777970, guid: 8593d4afb35590340acf0698b2d8d1d3,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2183002543522132150, guid: 8593d4afb35590340acf0698b2d8d1d3,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2183002543522132150, guid: 8593d4afb35590340acf0698b2d8d1d3,
+        type: 3}
+      propertyPath: m_UseForceGrab
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2183002543522132150, guid: 8593d4afb35590340acf0698b2d8d1d3,
+        type: 3}
+      propertyPath: m_InteractionLayers.m_Bits
+      value: 4294967294
       objectReference: {fileID: 0}
     - target: {fileID: 2183002543912009249, guid: 8593d4afb35590340acf0698b2d8d1d3,
         type: 3}
