@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 58e8c223e60bd3648932556aaf4b2a68
-timeCreated: 1508930226
+guid: 6d58037af810b4021ac921a71033e575
+timeCreated: 1508930112
 licenseType: Store
 ModelImporter:
   serializedVersion: 18
@@ -9,7 +9,7 @@ ModelImporter:
     400000: //RootNode
     2300000: //RootNode
     3300000: //RootNode
-    4300000: Poplar
+    4300000: Oak
   materials:
     importMaterials: 1
     materialName: 0
