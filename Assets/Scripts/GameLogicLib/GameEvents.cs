@@ -6,12 +6,19 @@ using UnityEngine.Events;
 public class GameEvents : MonoBehaviour
 {
 
-  // Passes the ball and bounced object data to listener
+  // Event for each round end
   public static RoundEndEvent roundEndEvent = new RoundEndEvent();
 
+  // Event for game end
+  public static GameEndEvent gameEndEvent = new GameEndEvent();
 }
 
 public class RoundEndEvent : UnityEvent
+{
+
+}
+
+public class GameEndEvent : UnityEvent
 {
 
 }
