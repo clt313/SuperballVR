@@ -7,6 +7,7 @@ public class PatrolCourt : Node
 {
     private Transform _transform;
     private Transform[] _waypoints;
+    private Animator _animator;
 
     private int _currentWaypointIndex = 0;
 
@@ -18,6 +19,7 @@ public class PatrolCourt : Node
     {
         _transform = transform;
         _waypoints = waypoints;
+        _animator = transform.GetComponent<Animator>();
     }
 
     public override NodeState Evaluate()
@@ -29,6 +31,7 @@ public class PatrolCourt : Node
             if(_waitCounter >= _waitTime)
             {
                 _waiting = false;
+                _animator.SetBool("BasicMotions@Walk01-Forwards", true);
             }
         }
         else
@@ -40,6 +43,7 @@ public class PatrolCourt : Node
                 _waitCounter = 0f;
                 _waiting = true;
                 _currentWaypointIndex = (_currentWaypointIndex + 1) % _waypoints.Length;
+                _animator.SetBool("BasicMotions@Walk01-Forwards", false);
             }
             else
             {
