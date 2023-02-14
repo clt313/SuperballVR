@@ -4085,6 +4085,29 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1490775271}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1512280504 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7364609093512375138, guid: b61ee656507c68d4cb42bfd0a69be6e4,
+    type: 3}
+  m_PrefabInstance: {fileID: 1519320448008079102}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1512280506
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1512280504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c92631aa7360ec4dba7c1124a3a1851, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waypoints:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!1001 &1540406054
 PrefabInstance:
   m_ObjectHideFlags: 0
