@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.XR.Interaction.Toolkit;
@@ -10,9 +8,14 @@ public class PauseMenu : MonoBehaviour
     public GameObject pauseUI;
     public GameObject player;
 
-    public GameObject leftController;
-    
+    public GameObject leftController; 
     public GameObject rightController;
+
+    private bool gameEnded = false;
+
+    void Start() {
+        GameEvents.gameEndEvent.AddListener(handleGameEnd);
+    }
 
     // Update is called once per frame
     void Update() {
@@ -20,7 +23,7 @@ public class PauseMenu : MonoBehaviour
             if (GamePaused) {
                 Resume();
             }
-            else {
+            else if(!gameEnded) {
                 Pause();
             }
         }
@@ -62,5 +65,12 @@ public class PauseMenu : MonoBehaviour
     public void Quit() {
         Resume();
         SceneManager.LoadScene("MainMenu");
+    }
+
+    ////////////////////////
+    // EVENT HANDLES
+    ////////////////////////
+    void handleGameEnd() {
+        gameEnded = true;
     }
 }
