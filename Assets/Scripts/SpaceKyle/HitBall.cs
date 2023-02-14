@@ -22,8 +22,8 @@ public class HitBall : Node
 
         if(_hitCounter >= _hitTime)
         {
-            _animator.SetBool("BasicMotions@Jump01", false);
-            _animator.SetBool("BasicMotions@Walk01-Forwards", true);
+            _animator.SetBool("HittingBall", false);
+            _animator.SetBool("Walking", true);
         }
 
         state = NodeState.RUNNING;

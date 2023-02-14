@@ -31,7 +31,7 @@ public class PatrolCourt : Node
             if(_waitCounter >= _waitTime)
             {
                 _waiting = false;
-                _animator.SetBool("BasicMotions@Walk01-Forwards", true);
+                _animator.SetBool("Walking", true);
             }
         }
         else
@@ -43,7 +43,7 @@ public class PatrolCourt : Node
                 _waitCounter = 0f;
                 _waiting = true;
                 _currentWaypointIndex = (_currentWaypointIndex + 1) % _waypoints.Length;
-                _animator.SetBool("BasicMotions@Walk01-Forwards", false);
+                _animator.SetBool("Walking", false);
             }
             else
             {

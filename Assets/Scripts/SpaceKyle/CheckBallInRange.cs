@@ -26,8 +26,8 @@ public class CheckBallInRange : Node
         Transform target = t.transform;
         if(Vector3.Distance(_transform.position, target.position) <= KyleBT.hitRange)
         {
-            _animator.SetBool("BasicMotions@Jump01", true);
-            _animator.SetBool("BasicMotions@Walk01-Forwards", false);
+            _animator.SetBool("HittingBall", true);
+            _animator.SetBool("Walking", false);
             state = NodeState.SUCCESS;
             return state;
         }
