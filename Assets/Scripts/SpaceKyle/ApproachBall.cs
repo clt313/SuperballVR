@@ -14,12 +14,14 @@ public class ApproachBall : Node
 
     public override NodeState Evaluate()
     {
-        Transform target = (Transform)GetData("Ball");
+        Transform target = GameObject.Find("Ball").transform;
+        Vector3 _target = target.position;
+        _target.y = 0;
 
-        if(Vector3.Distance(_transform.position, target.position) > 0.01f)
+        if(Vector3.Distance(_transform.position, _target) > 0.01f)
         {
-            _transform.position = Vector3.MoveTowards(_transform.position, target.position, KyleBT.speed * Time.deltaTime);
-            _transform.LookAt(target.position);
+            _transform.position = Vector3.MoveTowards(_transform.position, _target, KyleBT.speed * Time.deltaTime);
+            _transform.LookAt(_target);
         }
 
         state = NodeState.RUNNING;

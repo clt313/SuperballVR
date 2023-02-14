@@ -15,7 +15,7 @@ public class CheckBall : Node
 
     public override NodeState Evaluate()
     {
-        object t = GetData("Ball");
+        GameObject t = GameObject.Find("Ball");
         if(t == null)
         {
             Collider[] colliders = Physics.OverlapSphere(_transform.position, KyleBT.fovRange, ballLayerMask);

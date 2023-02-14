@@ -5,7 +5,7 @@ public class KyleBT : Tree
 {
     public UnityEngine.Transform[] waypoints;
     public static float speed = 2f;
-    public static float fovRange = 6f;
+    public static float fovRange = 100f;
 
     protected override Node SetupTree()
     {
