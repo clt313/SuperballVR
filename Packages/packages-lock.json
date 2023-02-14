@@ -1,7 +1,7 @@
 {
   "dependencies": {
     "com.unity.burst": {
-      "version": "1.6.6",
+      "version": "1.7.3",
       "depth": 1,
       "source": "registry",
       "dependencies": {
@@ -141,29 +141,15 @@
         "com.unity.modules.jsonserialize": "1.0.0"
       }
     },
-    "com.unity.render-pipelines.high-definition": {
+    "com.unity.render-pipelines.universal": {
       "version": "12.1.8",
       "depth": 0,
       "source": "builtin",
       "dependencies": {
-        "com.unity.mathematics": "1.2.4",
-        "com.unity.burst": "1.6.0",
-        "com.unity.modules.video": "1.0.0",
-        "com.unity.modules.animation": "1.0.0",
-        "com.unity.modules.imageconversion": "1.0.0",
-        "com.unity.modules.terrain": "1.0.0",
+        "com.unity.mathematics": "1.2.1",
+        "com.unity.burst": "1.7.3",
         "com.unity.render-pipelines.core": "12.1.8",
-        "com.unity.shadergraph": "12.1.8",
-        "com.unity.visualeffectgraph": "12.1.8",
-        "com.unity.render-pipelines.high-definition-config": "12.1.8"
-      }
-    },
-    "com.unity.render-pipelines.high-definition-config": {
-      "version": "12.1.8",
-      "depth": 1,
-      "source": "builtin",
-      "dependencies": {
-        "com.unity.render-pipelines.core": "12.1.8"
+        "com.unity.shadergraph": "12.1.8"
       }
     },
     "com.unity.searcher": {
