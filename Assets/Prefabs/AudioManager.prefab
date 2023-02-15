@@ -44,7 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62ea560f09780544bab263fad62d5320, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioManagerPrefab: {fileID: 1313012226156052299}
   soundGroups:
   - name: Main Menu
     sounds:
@@ -74,8 +73,24 @@ MonoBehaviour:
       volume: 1
       pitch: 1
       source: {fileID: 0}
+    - name: BallHit
+      clip: {fileID: 8300000, guid: 1b7ae1b57c45df848b0cf18b4acebed1, type: 3}
+      output: {fileID: -2953447420649394822, guid: 0c728bf6cf4cb8647b71257d32287d28,
+        type: 2}
+      loop: 0
+      volume: 1
+      pitch: 1
+      source: {fileID: 0}
+    - name: BallServe
+      clip: {fileID: 8300000, guid: e3fe615e43db7644a88e2df9a338f6b5, type: 3}
+      output: {fileID: -2953447420649394822, guid: 0c728bf6cf4cb8647b71257d32287d28,
+        type: 2}
+      loop: 0
+      volume: 1
+      pitch: 1
+      source: {fileID: 0}
     - name: BallNet
-      clip: {fileID: 8300000, guid: fcfd8116c523e9042bd974b1f49f0f4d, type: 3}
+      clip: {fileID: 8300000, guid: c79a0d77401313e4881684fd69bc8ed3, type: 3}
       output: {fileID: -2953447420649394822, guid: 0c728bf6cf4cb8647b71257d32287d28,
         type: 2}
       loop: 0
@@ -93,6 +108,38 @@ MonoBehaviour:
     - name: GameLose
       clip: {fileID: 8300000, guid: e2ad590d7b42f934ab903fde6ee80966, type: 3}
       output: {fileID: 1901724217671068144, guid: 0c728bf6cf4cb8647b71257d32287d28,
+        type: 2}
+      loop: 0
+      volume: 1
+      pitch: 1
+      source: {fileID: 0}
+    - name: RoundWin
+      clip: {fileID: 8300000, guid: ed5cd66a662df444d95fda3950832972, type: 3}
+      output: {fileID: -2953447420649394822, guid: 0c728bf6cf4cb8647b71257d32287d28,
+        type: 2}
+      loop: 0
+      volume: 1
+      pitch: 1
+      source: {fileID: 0}
+    - name: RoundLose
+      clip: {fileID: 8300000, guid: dd42ec95325e1da4cb89289d10b5c48b, type: 3}
+      output: {fileID: -2953447420649394822, guid: 0c728bf6cf4cb8647b71257d32287d28,
+        type: 2}
+      loop: 0
+      volume: 1
+      pitch: 1
+      source: {fileID: 0}
+    - name: Pause
+      clip: {fileID: 8300000, guid: f5f630d2cfbf12240a8d1f91e6d70568, type: 3}
+      output: {fileID: -2953447420649394822, guid: 0c728bf6cf4cb8647b71257d32287d28,
+        type: 2}
+      loop: 0
+      volume: 1
+      pitch: 1
+      source: {fileID: 0}
+    - name: Unpause
+      clip: {fileID: 8300000, guid: df8476cdca923e64cac178dcdcd4abc2, type: 3}
+      output: {fileID: -2953447420649394822, guid: 0c728bf6cf4cb8647b71257d32287d28,
         type: 2}
       loop: 0
       volume: 1

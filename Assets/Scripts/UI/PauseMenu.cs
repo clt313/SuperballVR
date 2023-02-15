@@ -22,9 +22,11 @@ public class PauseMenu : MonoBehaviour
         if (Input.GetButtonDown("XRI_Left_SecondaryButton") || Input.GetButtonDown("XRI_Right_SecondaryButton")) {
             if (GamePaused) {
                 Resume();
+                AudioManager.instance.Play("Unpause");
             }
             else if(!gameEnded) {
                 Pause();
+                AudioManager.instance.Play("Pause");
             }
         }
     }
