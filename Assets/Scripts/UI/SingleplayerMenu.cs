@@ -60,6 +60,11 @@ public class SingleplayerMenu : MonoBehaviour {
 
     // Starts the game and moves to the game scene
     public void StartGame() {
+        int buildIndex = SceneUtility.GetBuildIndexByScenePath(map.ToString());
+        if (buildIndex == -1) {
+            Debug.LogWarning("Could not find scene with name " + map.ToString() + "! Is it in the build? (File > Build Settings > Scenes in Build)");
+            return;
+        }
         AudioManager.instance.Stop("MainTheme");
         StateController.matchLength = matchLength;
         StateController.aiDifficulty = aiDifficulty;
