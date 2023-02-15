@@ -6,6 +6,9 @@ using UnityEngine;
 // Inspired by: https://www.youtube.com/watch?v=6OT43pvUyfY&ab_channel=Brackeys
 public class AudioManager : MonoBehaviour {
 
+    // Prefab to load saved Sounds from (use the interactor to adjust)
+    public GameObject audioManagerPrefab;
+
     // Array for easy use in inspector
     public SoundGroup[] soundGroups;
 

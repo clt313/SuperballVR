@@ -26,7 +26,7 @@ public class SettingsMenu : MonoBehaviour {
         SetMasterVolume(masterSlider.value);
         qualityDropdown.value = PlayerPrefs.GetInt(PrefQuality, 3);
         SetQuality(qualityDropdown.value);
-        FindObjectOfType<AudioManager>().Play("MainTheme");
+        AudioManager.instance.Play("MainTheme");
     }
 
     public void SetMasterVolume (float volume) {

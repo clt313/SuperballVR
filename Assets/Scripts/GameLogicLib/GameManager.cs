@@ -175,7 +175,7 @@ public class GameManager : MonoBehaviour
     Time.timeScale = 0f;
 
     // Win/Lose Sound Effects
-    FindObjectOfType<AudioManager>().Play(teamOneWon ? "GameWin" : "GameLose");
+    AudioManager.instance.Play(teamOneWon ? "GameWin" : "GameLose");
   }
 
   void addScore(TEAM team)
@@ -322,7 +322,7 @@ public class GameManager : MonoBehaviour
         isBallInPlay = false;
       }
       Debug.Log("Game manager detected a ball bounce with: " + listenedCollidedObject.name);
-      FindObjectOfType<AudioManager>().Play("BallBounce");
+      AudioManager.instance.Play("BallBounce");
     }
 
   }
