@@ -79,8 +79,8 @@ public class GameManager : MonoBehaviour
         if (roundEndReason != ROUND_END_REASON.NONE)
         {
           // Round winner is whoever did not have possession of ball (last touch / court touch)
-          TEAM roundWinnder = currentPossession == TEAM.TEAM_ONE ? TEAM.TEAM_TWO : TEAM.TEAM_ONE;
-          addScore(roundWinnder);
+          TEAM roundWinner = currentPossession == TEAM.TEAM_ONE ? TEAM.TEAM_TWO : TEAM.TEAM_ONE;
+          addScore(roundWinner);
 
           // Switch the current serving team
           currentServer = currentServer == TEAM.TEAM_ONE ? TEAM.TEAM_TWO : TEAM.TEAM_ONE;
@@ -91,6 +91,9 @@ public class GameManager : MonoBehaviour
           Debug.Log($"Round Ended! Reason: {roundEndReason.ToString()}");
           Debug.Log($"Current Score: {scoreTeamOne} to {scoreTeamTwo}");
           roundEndReason = ROUND_END_REASON.NONE;
+
+          // Round end sound effect
+          AudioManager.instance.Play( (roundWinner == TEAM.TEAM_ONE) ? "RoundWin" : "RoundLose");
 
           // Dispatch event
           GameEvents.roundEndEvent.Invoke();
@@ -175,7 +178,7 @@ public class GameManager : MonoBehaviour
     Time.timeScale = 0f;
 
     // Win/Lose Sound Effects
-    FindObjectOfType<AudioManager>().Play(teamOneWon ? "GameWin" : "GameLose");
+    AudioManager.instance.Play(teamOneWon ? "GameWin" : "GameLose");
   }
 
   void addScore(TEAM team)
@@ -235,6 +238,7 @@ public class GameManager : MonoBehaviour
     ball.GetComponent<Rigidbody>().velocity = new Vector3(0.0f, 10.0f, 0.0f);
     ball.name = "Ball";
     Debug.Log($"Spawning Ball At: {ball.transform.position.x}, {ball.transform.position.y}, {ball.transform.position.z}");
+    AudioManager.instance.Play("BallServe");
   }
 
   // Handles anything to do with collisions
@@ -278,6 +282,7 @@ public class GameManager : MonoBehaviour
         }
 
         // Don't do anything if XRRig
+        AudioManager.instance.Play("BallHit");
       }
 
       // Court Collision
@@ -294,12 +299,13 @@ public class GameManager : MonoBehaviour
           currentPossession = courtWhereBallLanded;
           currentBounces = 1;
         }
+        AudioManager.instance.Play("BallBounce");
       }
 
       // Net Collision, don't do anything
       else if (isNetCollision)
       {
-
+        AudioManager.instance.Play("BallNet");
       }
 
       // OOB
@@ -322,7 +328,6 @@ public class GameManager : MonoBehaviour
         isBallInPlay = false;
       }
       Debug.Log("Game manager detected a ball bounce with: " + listenedCollidedObject.name);
-      FindObjectOfType<AudioManager>().Play("BallBounce");
     }
 
   }

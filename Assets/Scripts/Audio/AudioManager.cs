@@ -4,15 +4,17 @@ using UnityEngine;
 
 // Global manager for audio sources
 // Inspired by: https://www.youtube.com/watch?v=6OT43pvUyfY&ab_channel=Brackeys
+// To add or update sounds, edit the AudioManager prefab.
 public class AudioManager : MonoBehaviour {
+
+    // Singleton object
+    public static AudioManager instance;
 
     // Array for easy use in inspector
     public SoundGroup[] soundGroups;
 
     // Dictionary for efficient lookup
     private Dictionary<string, Sound> d;
-
-    public static AudioManager instance;
 
     // Initialize each Sound once
     void Awake() {

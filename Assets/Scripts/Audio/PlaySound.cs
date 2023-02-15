@@ -8,6 +8,6 @@ public class PlaySound : MonoBehaviour {
 
     // Attempts to play a sound specified by the sound name. Only works when an AudioManager is present in the scene.
     public void Play() {
-        FindObjectOfType<AudioManager>().Play(soundName);
+        AudioManager.instance.Play(soundName);
     }
 }
