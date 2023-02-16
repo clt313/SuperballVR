@@ -11,9 +11,9 @@ public class PatrolCourt : Node
 
     private int _currentWaypointIndex = 0;
 
-    private float _waitTime = 1f;
-    private float _waitCounter = 0f;
-    private bool _waiting = false;
+    // private float _waitTime = 1f;
+    // private float _waitCounter = 0f;
+    // private bool _waiting = false;
 
     public PatrolCourt(Transform transform, Transform[] waypoints)
     {
@@ -24,33 +24,53 @@ public class PatrolCourt : Node
 
     public override NodeState Evaluate()
     {
-        if(_waiting)
-        {
-            _waitCounter += Time.deltaTime;
+        // if(_waiting)
+        // {
+        //     _waitCounter += Time.deltaTime;
 
-            if(_waitCounter >= _waitTime)
-            {
-                _waiting = false;
-                _animator.SetBool("Walking", true);
-            }
-        }
-        else
-        {
+        //     if(_waitCounter >= _waitTime)
+        //     {
+        //         _waiting = false;
+        //         _animator.SetBool("Walking", true);
+        //     }
+        // }
+        // else
+        // {
+            _animator.SetBool("Walking", false);
             Transform wp = _waypoints[_currentWaypointIndex];
-            if(Vector3.Distance(_transform.position, wp.position) < 0.01f)
+            Vector3 _wp = wp.position;
+            _wp.y = 0f;
+
+            if(_currentWaypointIndex == 0)
             {
-                _transform.position = wp.position;
-                _waitCounter = 0f;
-                _waiting = true;
-                _currentWaypointIndex = (_currentWaypointIndex + 1) % _waypoints.Length;
-                _animator.SetBool("Walking", false);
+                _animator.SetBool("StrafeRight", true);
+                _animator.SetBool("StrafeLeft", false);
+            }
+            else{
+                _animator.SetBool("StrafeRight", false);
+                _animator.SetBool("StrafeLeft", true);
+            }
+
+            if(Vector3.Distance(_transform.position, _wp) < 0.01f)
+            {
+                _transform.position = _wp;
+                // _waitCounter = 0f;
+                // _waiting = true;
+                if(_currentWaypointIndex == 0)
+                {
+                    _currentWaypointIndex = 1;
+                }
+                else{
+                    _currentWaypointIndex = 0;
+                }
+                //_animator.SetBool("Walking", false);
             }
             else
             {
-                _transform.position = Vector3.MoveTowards(_transform.position, wp.position, KyleBT.speed * Time.deltaTime);
-                _transform.LookAt(wp.position);
+                _transform.position = Vector3.MoveTowards(_transform.position, _wp, KyleBT.speed * Time.deltaTime);
+                _transform.LookAt(Vector3.left);
             }
-        }
+        //}
 
         state = NodeState.RUNNING;
         return state;
