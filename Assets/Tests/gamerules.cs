@@ -156,6 +156,18 @@ public class gamerules
     BallEvents.ballBounceEvent.AddListener(processNextCommand);
     GameEvents.roundEndEvent.AddListener(serveBall);
 
+    // Remove players
+    foreach (Player player in Object.FindObjectsOfType<Player>())
+    {
+
+      // Move all default player assets out. Only use tests ones.
+      var playerID = player.gameObject.GetInstanceID();
+      if (playerID != teamOnePlayer.GetInstanceID() && playerID != teamTwoPlayer.GetInstanceID())
+      {
+        Vector3 farFarAway = new Vector3(int.MaxValue / 2, int.MaxValue / 2, int.MaxValue / 2);
+        player.transform.root.position = farFarAway;
+      }
+    }
     Time.timeScale = timeFactor;
 
     Debug.Log("Finished Setup For Tests");
