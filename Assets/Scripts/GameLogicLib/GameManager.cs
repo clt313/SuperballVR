@@ -278,6 +278,23 @@ public class GameManager : MonoBehaviour
           previousPossessor = player;
         }
 
+        // Check if this was an AI.
+        if (player.GetComponent<AIPlayer>() != null)
+        {
+
+          // Return Ball To Other Side Of Court
+          float returnTime = 2.0f;
+          Vector3 target = new Vector3(-6.4000001f, 0.439999998f, -1.88999999f);
+          float gravity = Physics.gravity.y;
+          Vector3 currentPosition = player.GetComponent<Rigidbody>().position;
+          Vector3 returnVelocity = new Vector3(
+            (target.x - currentPosition.x) / returnTime,
+            ((target.y - currentPosition.y) / returnTime) - (gravity * returnTime) / 2.0f,
+            (target.z - currentPosition.z) / returnTime
+          );
+          listenedBall.GetComponent<Rigidbody>().velocity = returnVelocity;
+        }
+
         // Don't do anything if XRRig
         AudioManager.instance.Play("BallHit");
       }
