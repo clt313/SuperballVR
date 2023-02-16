@@ -289,7 +289,7 @@ public class GameManager : MonoBehaviour
           Vector3 currentPosition = player.GetComponent<Rigidbody>().position;
           Vector3 returnVelocity = new Vector3(
             (target.x - currentPosition.x) / returnTime,
-            (-currentPosition.y / returnTime) - (gravity * returnTime) / 2.0f,
+            ((target.y - currentPosition.y) / returnTime) - (gravity * returnTime) / 2.0f,
             (target.z - currentPosition.z) / returnTime
           );
           listenedBall.GetComponent<Rigidbody>().velocity = returnVelocity;
