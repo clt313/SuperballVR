@@ -8,13 +8,13 @@ public class Player : MonoBehaviour
   public TEAM team;
 
   // Start is called before the first frame update
-  void Start()
+  public virtual void Start()
   {
     team = TEAM.TEAM_ONE;
   }
 
   // Update is called once per frame
-  void Update()
+  public virtual void Update()
   {
     if (Input.GetButtonDown("XRI_Right_PrimaryButton") || Input.GetButtonDown("XRI_Left_PrimaryButton"))
     {
@@ -23,7 +23,7 @@ public class Player : MonoBehaviour
     }
   }
 
-  public Vector3  getCameraPosition()
+  public virtual Vector3 getCameraPosition()
   {
     return this.transform.GetChild(0).GetChild(0).transform.position;
   }
