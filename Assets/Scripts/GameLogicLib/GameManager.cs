@@ -214,21 +214,45 @@ public class GameManager : MonoBehaviour
     return sample;
   }
 
-  void returnBallAI(GameObject listenedBall, AIPlayer AIPlayer)
+  void returnBallAI(GameObject listenedBall, Player AIPlayer)
   {
 
-    // CONFIGURATION
-    float returnTime = 2.0f;
-    Vector3 target = new Vector3(-6.4000001f, 0.439999998f, -1.88999999f);
+    // // CONFIGURATION
+    // float returnTime = 2.0f;
+    // float gaussianScale = 0.66f; // Scale width/length of court to one standard deviation. Smaller is tighter gaussian.
 
-    float gravity = Physics.gravity.y;
-    Vector3 currentPosition = player.GetComponent<Rigidbody>().position;
-    Vector3 returnVelocity = new Vector3(
-      (target.x - currentPosition.x) / returnTime,
-      ((target.y - currentPosition.y) / returnTime) - (gravity * returnTime) / 2.0f,
-      (target.z - currentPosition.z) / returnTime
-    );
-    listenedBall.GetComponent<Rigidbody>().velocity = returnVelocity;
+    // Collider opposingCourt =
+    //   AIPlayer.team == TEAM.TEAM_ONE ?
+    //     teamTwoCourt.GetComponent<Collider>() :
+    //     teamOneCourt.GetComponent<Collider>();
+
+    // Vector3 opposingCourtCenter = opposingCourt.bounds.center;
+    // float sigmaX = gaussianScale * opposingCourt.bounds.size.x / 2.0f;
+    // float sigmaZ = gaussianScale * opposingCourt.bounds.size.z / 2.0f;
+    // float xTarget = sampleGaussianDistribution(opposingCourtCenter.x, sigmaX);
+    // float zTarget = sampleGaussianDistribution(opposingCourtCenter.z, sigmaZ);
+    // // Vector3 target = new Vector3(xTarget, opposingCourtCenter.y, zTarget);
+    // Vector3 target = new Vector3(-6.4000001f, 0.439999998f, -1.88999999f);
+
+    // float gravity = Physics.gravity.y;
+    // Vector3 currentPosition = player.GetComponent<Rigidbody>().position;
+    // Vector3 returnVelocity = new Vector3(
+    //   (target.x - currentPosition.x) / returnTime,
+    //   ((target.y - currentPosition.y) / returnTime) - (gravity * returnTime) / 2.0f,
+    //   (target.z - currentPosition.z) / returnTime
+    // );
+    // listenedBall.GetComponent<Rigidbody>().velocity = returnVelocity;
+
+    // float returnTime = 2.0f;
+    // Vector3 target = new Vector3(-6.4000001f, 0.439999998f, -1.88999999f);
+    // float gravity = Physics.gravity.y;
+    // Vector3 currentPosition = player.GetComponent<Rigidbody>().position;
+    // Vector3 returnVelocity = new Vector3(
+    //   (target.x - currentPosition.x) / returnTime,
+    //   ((target.y - currentPosition.y) / returnTime) - (gravity * returnTime) / 2.0f,
+    //   (target.z - currentPosition.z) / returnTime
+    // );
+    // listenedBall.GetComponent<Rigidbody>().velocity = returnVelocity;
   }
 
   void updateScoreboard()
@@ -320,7 +344,32 @@ public class GameManager : MonoBehaviour
         {
 
           // Return Ball To Other Side Of Court
-          returnBallAI(listenedBall, player.GetComponent<AIPlayer>());
+          // returnBallAI(listenedBall, player);
+          // // CONFIGURATION
+          float returnTime = 2.0f;
+          float gaussianScale = 0.66f; // Scale width/length of court to one standard deviation. Smaller is tighter gaussian.
+
+          Collider opposingCourt =
+            player.team == TEAM.TEAM_ONE ?
+              teamTwoCourt.GetComponent<Collider>() :
+              teamOneCourt.GetComponent<Collider>();
+
+          Vector3 opposingCourtCenter = opposingCourt.bounds.center;
+          float sigmaX = gaussianScale * opposingCourt.bounds.size.x / 2.0f;
+          float sigmaZ = gaussianScale * opposingCourt.bounds.size.z / 2.0f;
+          float xTarget = sampleGaussianDistribution(opposingCourtCenter.x, sigmaX);
+          float zTarget = sampleGaussianDistribution(opposingCourtCenter.z, sigmaZ);
+          Vector3 target = new Vector3(xTarget, opposingCourtCenter.y, zTarget);
+          // Vector3 target = new Vector3(-6.4000001f, 0.439999998f, -1.88999999f);
+
+          float gravity = Physics.gravity.y;
+          Vector3 currentPosition = player.GetComponent<Rigidbody>().position;
+          Vector3 returnVelocity = new Vector3(
+            (target.x - currentPosition.x) / returnTime,
+            ((target.y - currentPosition.y) / returnTime) - (gravity * returnTime) / 2.0f,
+            (target.z - currentPosition.z) / returnTime
+          );
+          listenedBall.GetComponent<Rigidbody>().velocity = returnVelocity;
         }
 
         // Don't do anything if XRRig
