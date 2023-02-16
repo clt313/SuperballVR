@@ -93,7 +93,7 @@ public class GameManager : MonoBehaviour
           roundEndReason = ROUND_END_REASON.NONE;
 
           // Round end sound effect
-          AudioManager.instance.Play( (roundWinner == TEAM.TEAM_ONE) ? "RoundWin" : "RoundLose");
+          AudioManager.instance.Play((roundWinner == TEAM.TEAM_ONE) ? "RoundWin" : "RoundLose");
 
           // Dispatch event
           GameEvents.roundEndEvent.Invoke();
@@ -258,10 +258,7 @@ public class GameManager : MonoBehaviour
       {
         TEAM playerTeam = player.team;
         bool isHandCollision = listenedCollidedObject.name == "HandCollider";
-        // GameObject playerLeftHand = player.transform.root.Find("HandColliderLeft").gameObject;
-        // GameObject playerRightHand = player.transform.root.Find("HandColliderRight").gameObject;
-        // Check for hands
-        // if (listenedCollidedObject.GetInstanceID() == playerLeftHand.GetInstanceID() || listenedCollidedObject.GetInstanceID() == playerRightHand.GetInstanceID())
+
         if (isHandCollision)
         {
           if (previousPossessor && player.GetInstanceID() == previousPossessor.GetInstanceID())
