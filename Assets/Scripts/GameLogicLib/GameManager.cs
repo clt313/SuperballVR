@@ -194,6 +194,43 @@ public class GameManager : MonoBehaviour
     updateScoreboard();
   }
 
+  // Based on the Box-Muller transform https://towardsdatascience.com/how-to-generate-random-variables-from-scratch-no-library-used-4b71eb3c8dc7
+  float sampleGaussianDistribution(float mu, float sigma)
+  {
+    // create a new instance of the Random class
+    System.Random random = new System.Random();
+
+    // generate two random numbers that are uniformly distributed between 0 and 1
+    float u1 = (float)random.NextDouble();
+    float u2 = (float)random.NextDouble();
+
+    // transform the uniformly distributed numbers to normally distributed numbers
+    float z1 = Mathf.Sqrt(-2f * Mathf.Log(u1)) * Mathf.Cos(2f * Mathf.PI * u2);
+    float z2 = Mathf.Sqrt(-2f * Mathf.Log(u1)) * Mathf.Sin(2f * Mathf.PI * u2);
+
+    // use the first normally distributed number (z1) as the sample from the normal distribution
+    float sample = mu + sigma * z1;
+
+    return sample;
+  }
+
+  void returnBallAI(GameObject listenedBall, AIPlayer AIPlayer)
+  {
+
+    // CONFIGURATION
+    float returnTime = 2.0f;
+    Vector3 target = new Vector3(-6.4000001f, 0.439999998f, -1.88999999f);
+
+    float gravity = Physics.gravity.y;
+    Vector3 currentPosition = player.GetComponent<Rigidbody>().position;
+    Vector3 returnVelocity = new Vector3(
+      (target.x - currentPosition.x) / returnTime,
+      ((target.y - currentPosition.y) / returnTime) - (gravity * returnTime) / 2.0f,
+      (target.z - currentPosition.z) / returnTime
+    );
+    listenedBall.GetComponent<Rigidbody>().velocity = returnVelocity;
+  }
+
   void updateScoreboard()
   {
     foreach (TMP_Text teamOneScoreText in teamOneScoreTexts)
@@ -283,16 +320,7 @@ public class GameManager : MonoBehaviour
         {
 
           // Return Ball To Other Side Of Court
-          float returnTime = 2.0f;
-          Vector3 target = new Vector3(-6.4000001f, 0.439999998f, -1.88999999f);
-          float gravity = Physics.gravity.y;
-          Vector3 currentPosition = player.GetComponent<Rigidbody>().position;
-          Vector3 returnVelocity = new Vector3(
-            (target.x - currentPosition.x) / returnTime,
-            ((target.y - currentPosition.y) / returnTime) - (gravity * returnTime) / 2.0f,
-            (target.z - currentPosition.z) / returnTime
-          );
-          listenedBall.GetComponent<Rigidbody>().velocity = returnVelocity;
+          returnBallAI(listenedBall, player.GetComponent<AIPlayer>());
         }
 
         // Don't do anything if XRRig
