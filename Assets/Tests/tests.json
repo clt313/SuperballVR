@@ -1,4 +1,15 @@
 {
+  "config": {
+    "timeFactor": 5.0,
+    "bounceHeight": 6.0,
+    "oobTestMarkerName": "OOB_TEST_MARKER",
+    "mainMenuSceneName": "MainMenu",
+    "testSceneName": "Map1",
+    "courtOneRigidbodyName": "CourtOne",
+    "courtTwoRigidbodyName": "CourtTwo",
+    "netBodyName": "GridNet",
+    "ballName": "Ball"
+  },
   "tests": [
     {
       "rounds": [

@@ -9,6 +9,20 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
 [System.Serializable]
+public class TestConfig
+{
+  public float timeFactor;
+  public float bounceHeight;
+  public string oobTestMarkerName;
+  public string mainMenuSceneName;
+  public string testSceneName;
+  public string courtOneRigidbodyName;
+  public string courtTwoRigidbodyName;
+  public string netBodyName;
+  public string ballName;
+}
+
+[System.Serializable]
 [JsonConverter(typeof(StringEnumConverter))]
 public enum TEST_COMMANDS
 {
@@ -38,6 +52,7 @@ public class TEST_CASE
 [System.Serializable]
 public class TESTS
 {
+  public TestConfig config;
   public List<TEST_CASE> tests;
   public TEST_COMMANDS getCommand(int testCaseIndex, int roundIndex, int commandIndex)
   {
@@ -64,23 +79,13 @@ public class gamerules
   // Configuration Parameters
   ////////////////////////////
   public string testCasesPath = "./Assets/Tests/tests.json";
-  public string mainMenuSceneName = "MainMenu";
-  public string testSceneName = "Map1";
-  public string courtOneRigidbodyName = "CourtOne";
-  public string courtTwoRigidbodyName = "CourtTwo";
-  public string netBodyName = "GridNet";
-  public string ballName = "Ball";
-  public Vector3 OOB_LOCATION;
-  public Vector3 bounceHeight = new Vector3(0.0f, 6.0f, 0.0f);
-  public float timeFactor = 5.0f;
-
-
 
   ////////////////////////////
   // STATE VARIABLES
   ////////////////////////////
   public GameManager gameManager;
 
+  Vector3 OOB_LOCATION;
   GameObject courtOne;
   GameObject courtTwo;
   GameObject net;
@@ -106,8 +111,8 @@ public class gamerules
   {
     // Load the scene
     LogAssert.ignoreFailingMessages = true; // Only fail tests on failed assertions here. Not other errors in game.
-    SceneManager.LoadScene(mainMenuSceneName);
-    SceneManager.LoadScene(testSceneName);
+    SceneManager.LoadScene(testGames.config.mainMenuSceneName);
+    SceneManager.LoadScene(testGames.config.testSceneName);
   }
 
   public GameObject getTestPlayer(TEAM team)
@@ -121,12 +126,12 @@ public class gamerules
     if (team == TEAM.TEAM_ONE)
     {
       player.transform.position = courtOne.transform.position;
-      player.transform.position += bounceHeight;
+      player.transform.position += new Vector3(0.0f, testGames.config.bounceHeight, 0.0f);
     }
     else if (team == TEAM.TEAM_TWO)
     {
       player.transform.position = courtTwo.transform.position;
-      player.transform.position += bounceHeight;
+      player.transform.position += new Vector3(0.0f, testGames.config.bounceHeight, 0.0f);
     }
     return player;
   }
@@ -143,10 +148,10 @@ public class gamerules
     currentCommand = 0;
     waitForMissToComplete = false;
 
-    OOB_LOCATION = GameObject.Find("OOB_TEST_MARKER").transform.position;
-    courtOne = GameObject.Find(courtOneRigidbodyName);
-    courtTwo = GameObject.Find(courtTwoRigidbodyName);
-    net = GameObject.Find(netBodyName);
+    OOB_LOCATION = GameObject.Find(testGames.config.oobTestMarkerName).transform.position;
+    courtOne = GameObject.Find(testGames.config.courtOneRigidbodyName);
+    courtTwo = GameObject.Find(testGames.config.courtTwoRigidbodyName);
+    net = GameObject.Find(testGames.config.netBodyName);
 
     // Create the test players
     teamOnePlayer = getTestPlayer(TEAM.TEAM_ONE);
@@ -168,7 +173,7 @@ public class gamerules
         player.transform.root.position = farFarAway;
       }
     }
-    Time.timeScale = timeFactor;
+    Time.timeScale = testGames.config.timeFactor;
 
     Debug.Log("Finished Setup For Tests");
   }
@@ -212,7 +217,7 @@ public class gamerules
       currentRound = -1;
       currentCommand = 0;
       waitForMissToComplete = false;
-      Time.timeScale = timeFactor;
+      Time.timeScale = testGames.config.timeFactor;
       /////////////////////////////////////////////////////////////
 
 
@@ -244,7 +249,7 @@ public class gamerules
   // Teleport ball to wherever next command says
   void processNextCommand(GameObject listenedBall, GameObject collided)
   {
-
+    GameObject ball = GameObject.Find(testGames.config.ballName);
     if (!waitForMissToComplete)
     {
 
@@ -257,7 +262,6 @@ public class gamerules
       Debug.Log($"CMD: {cmd.ToString()} at {currentTestCase} {currentRound} {currentCommand}");
       if (cmd == TEST_COMMANDS.OOB)
       {
-        GameObject ball = GameObject.Find(ballName);
         ball.transform.position = OOB_LOCATION;
       }
       else if (cmd == TEST_COMMANDS.MISS)
@@ -267,15 +271,13 @@ public class gamerules
       }
       else if (cmd == TEST_COMMANDS.HIT_T1)
       {
-        GameObject ball = GameObject.Find(ballName);
         ball.transform.position = courtTwo.transform.position;
-        ball.transform.position += bounceHeight;
+        ball.transform.position += new Vector3(0.0f, testGames.config.bounceHeight, 0.0f); ;
       }
       else if (cmd == TEST_COMMANDS.HIT_T2)
       {
-        GameObject ball = GameObject.Find(ballName);
         ball.transform.position = courtOne.transform.position;
-        ball.transform.position += bounceHeight;
+        ball.transform.position += new Vector3(0.0f, testGames.config.bounceHeight, 0.0f); ;
       }
       currentCommand++;
     }
