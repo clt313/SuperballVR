@@ -6,10 +6,12 @@ using BehaviorTree;
 public class ApproachBall : Node
 {
     private Transform _transform;
+    private Transform _net;
 
     public ApproachBall(Transform transform)
     {
         _transform = transform;
+        _net = GameObject.Find("TennisNet").transform;
     }
 
     public override NodeState Evaluate()
@@ -20,6 +22,11 @@ public class ApproachBall : Node
 
         if(Vector3.Distance(_transform.position, _target) > 0.01f)
         {
+            if (_transform.position.x > _net.position.x)
+            {
+                _target.x = 1;
+            }
+            Debug.Log("Approaching");
             _transform.position = Vector3.MoveTowards(_transform.position, _target, KyleBT.speed * Time.deltaTime);
             _transform.LookAt(_target);
         }
