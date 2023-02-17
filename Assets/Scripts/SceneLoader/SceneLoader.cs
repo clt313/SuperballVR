@@ -40,8 +40,9 @@ public class SceneLoader : MonoBehaviour {
         StartCoroutine(LoadSceneCoroutine(buildIndex));
     }
     
-    // Loads a scene by name
+    // Loads a scene by buildIndex
     public IEnumerator LoadSceneCoroutine(int index) {
+        // Bring UI to player and wait for fadeout
         progressSlider.value = 0;
         player = GameObject.Find("XRRig/Camera Offset/Main Camera");
         SummonUI(loaderUI, player);
@@ -49,6 +50,7 @@ public class SceneLoader : MonoBehaviour {
         GameObject slider = loaderUI.transform.Find("Slider").gameObject;
         slider.SetActive(true);
 
+        // Wait for new scene to load
         AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(index);
         asyncOperation.allowSceneActivation = false;
         float progress = 0;
@@ -62,6 +64,7 @@ public class SceneLoader : MonoBehaviour {
             yield return null;
         }
 
+        // Fadeout UI (yes we need to bring it back to the player because the player location changes)
         slider.SetActive(false);
         player = GameObject.Find("XRRig/Camera Offset/Main Camera");
         SummonUI(loaderUI, player);
