@@ -4,9 +4,11 @@ using UnityEngine;
 using UnityEngine.UI;
 
 // Fades the screen
+// Some optimizations COULD be made, but it works as is (the software engineer grindset)
 public class ScreenFader : MonoBehaviour {
 
     public GameObject screen;
+    public GameObject cube;
     public float fadeDuration = 1.0f;
     
     // Calls the FadeIn couroutine
@@ -17,14 +19,14 @@ public class ScreenFader : MonoBehaviour {
     // Fades in the screen
     public IEnumerator FadeInCoroutine() {
         screen.SetActive(true);
-        Image image = screen.GetComponent<Image>();
+        Material cubeMaterial = cube.GetComponent<Renderer>().material;
         float timer = 0;
         Color c;
         // Interpolate alpha value across the fadeDuration
-        while (image.color.a < 1) {
-            c = image.color;
+        while (cubeMaterial.color.a < 1) {
+            c = cubeMaterial.color;
             c.a = Mathf.Lerp(0, 1, timer / fadeDuration);
-            image.color = c;
+            cubeMaterial.color = c;
             timer += Time.deltaTime;
             yield return null;
         }
@@ -38,14 +40,14 @@ public class ScreenFader : MonoBehaviour {
     // Fades out the screen
     public IEnumerator FadeOutCoroutine() {
         screen.SetActive(true);
-        Image image = screen.GetComponent<Image>();
+        Material cubeMaterial = cube.GetComponent<Renderer>().material;
         float timer = 0;
         Color c;
         // Interpolate alpha value across the fadeDuration
-        while (image.color.a > 0) {
-            c = image.color;
+        while (cubeMaterial.color.a > 0) {
+            c = cubeMaterial.color;
             c.a = Mathf.Lerp(1, 0, timer / fadeDuration);
-            image.color = c;
+            cubeMaterial.color = c;
             timer += Time.deltaTime;
             yield return null;
         }

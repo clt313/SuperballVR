@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -23,6 +24,12 @@ public class SceneLoader : MonoBehaviour {
             return;
         }
         DontDestroyOnLoad(gameObject);
+
+        // Flip cube mesh inside out (so player sees from inside it)
+        // With help from https://answers.unity.com/questions/476810/flip-a-mesh-inside-out.html
+        GameObject cube = loaderUI.transform.Find("Cube").gameObject;
+        Mesh mesh = cube.GetComponent<MeshFilter>().mesh;
+        mesh.triangles = mesh.triangles.Reverse().ToArray();
     }
 
     // Reloads the current scene
