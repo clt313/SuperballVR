@@ -9,10 +9,20 @@ public class AIPlayer : Player
   public override void Start()
   {
     team = TEAM.TEAM_TWO;
+    GameEvents.roundEndEvent.AddListener(handleRoundEnd);
   }
 
   // Update is called once per frame
   public override void Update()
+  {
+  }
+
+  public void handleRoundEnd()
+  {
+    Invoke(nameof(attemptToServe), 2.0f);
+  }
+
+  public void attemptToServe()
   {
     PlayerEvents.playerServeEvent.Invoke(this);
   }
