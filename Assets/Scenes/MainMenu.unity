@@ -5653,8 +5653,16 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "<b>LJoystick</b>   Move\n<b>RJoystick</b>    Turn\n<b>Trigger</b>     
-    Select\n    <b>Y</b>             Pause\n    <b>A</b>              Serve"
+  m_text: '<b>LJoystick</b>   Move
+
+    <b>RJoystick</b>    Turn
+
+    <b>Trigger</b>     
+    Select
+
+    <b>B/Y/Menu</b> Pause
+
+    <b>A/X/Grip</b>    Serve'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
