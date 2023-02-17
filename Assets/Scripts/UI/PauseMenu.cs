@@ -61,12 +61,12 @@ public class PauseMenu : MonoBehaviour
 
     public void Restart() {
         Resume();
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        SceneLoader.instance.ReloadCurrent();
     }
 
     public void Quit() {
         Resume();
-        SceneManager.LoadScene("MainMenu");
+        SceneLoader.instance.LoadScene("MainMenu");
     }
 
     ////////////////////////

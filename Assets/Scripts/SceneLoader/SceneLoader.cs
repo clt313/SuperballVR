@@ -24,6 +24,11 @@ public class SceneLoader : MonoBehaviour {
         DontDestroyOnLoad(gameObject);
     }
 
+    // Reloads the current scene
+    public void ReloadCurrent() {
+        StartCoroutine(LoadSceneCoroutine(SceneManager.GetActiveScene().buildIndex));
+    }
+
     // Searches scene by name, validates it, and begins load
     public void LoadScene(string name) {
         int buildIndex = SceneUtility.GetBuildIndexByScenePath(name);
@@ -31,7 +36,6 @@ public class SceneLoader : MonoBehaviour {
             Debug.LogWarning("Could not load scene with name " + name + "! Is it in the build? (File > Build Settings > Scenes in Build)");
             return;
         }
-        // TODO: fade out screen
         StartCoroutine(LoadSceneCoroutine(buildIndex));
     }
     
@@ -58,11 +62,11 @@ public class SceneLoader : MonoBehaviour {
         loaderUI.SetActive(false);
     }
 
-    // Summons UI in front of some target (usually the player)
+    // Summons UI directly in front of some target (usually the player)
     private void SummonUI(GameObject ui, GameObject target) {
         Vector3 pos = target.transform.position;
-        pos.x += target.transform.forward.x * 2;
-        pos.z += target.transform.forward.z * 2;
+        pos.x += target.transform.forward.x * 0.5f;
+        pos.z += target.transform.forward.z * 0.5f;
         ui.transform.position = pos;
         Vector3 angle = new Vector3(target.transform.forward.x, 0, target.transform.forward.z);
         ui.transform.forward = angle;
