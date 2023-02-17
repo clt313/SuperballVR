@@ -5,33 +5,33 @@ using BehaviorTree;
 
 public class CheckBall : Node
 {
-    private static int ballLayerMask = 1 << 6;
+    private static int ballLayerMask = 1 << 1;
     private Transform _transform;
+    private Animator _animator;
 
     public CheckBall(Transform transform)
     {
         _transform = transform;
+        _animator = transform.GetComponent<Animator>();
     }
 
     public override NodeState Evaluate()
     {
         GameObject t = GameObject.Find("Ball");
-        if(t == null)
+        if(t != null)
         {
-            Collider[] colliders = Physics.OverlapSphere(_transform.position, KyleBT.fovRange, ballLayerMask);
-
-            if(colliders.Length > 0)
+            if(Vector3.Distance(_transform.position, t.transform.position) < KyleBT.fovRange)
             {
-                parent.parent.SetData("Ball", colliders[0].transform);
+                _animator.SetBool("StrafeLeft", false);
+                _animator.SetBool("StrafeRight", false);
+                _animator.SetBool("Walking", true);
+                
                 state = NodeState.SUCCESS;
                 return state;
             }
-
-            state = NodeState.FAILURE;
-            return state;
         }
 
-        state = NodeState.SUCCESS;
+        state = NodeState.FAILURE;
         return state;
     }
 }
