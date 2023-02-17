@@ -11,6 +11,7 @@ public class SceneLoader : MonoBehaviour {
     public static SceneLoader instance;
     public GameObject loaderUI;
     public Slider progressSlider;
+    private GameObject player;
 
     void Awake() {
         // Only initialize once
@@ -30,14 +31,16 @@ public class SceneLoader : MonoBehaviour {
             Debug.LogWarning("Could not load scene with name " + name + "! Is it in the build? (File > Build Settings > Scenes in Build)");
             return;
         }
-        StartCoroutine(LoadSceneCoroutine(buildIndex));
         // TODO: fade out screen
+        StartCoroutine(LoadSceneCoroutine(buildIndex));
     }
     
     // Loads a scene by name
     public IEnumerator LoadSceneCoroutine(int index) {
         progressSlider.value = 0;
         loaderUI.SetActive(true);
+        player = GameObject.Find("XRRig/Camera Offset/Main Camera");
+        SummonUI(loaderUI, player);
 
         AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(index);
         asyncOperation.allowSceneActivation = false;
@@ -51,5 +54,17 @@ public class SceneLoader : MonoBehaviour {
             }
             yield return null;
         }
+
+        loaderUI.SetActive(false);
+    }
+
+    // Summons UI in front of some target (usually the player)
+    private void SummonUI(GameObject ui, GameObject target) {
+        Vector3 pos = target.transform.position;
+        pos.x += target.transform.forward.x * 2;
+        pos.z += target.transform.forward.z * 2;
+        ui.transform.position = pos;
+        Vector3 angle = new Vector3(target.transform.forward.x, 0, target.transform.forward.z);
+        ui.transform.forward = angle;
     }
 }
