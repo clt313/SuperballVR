@@ -12823,6 +12823,7 @@ GameObject:
   - component: {fileID: 1730282213}
   - component: {fileID: 1730282212}
   - component: {fileID: 1730282214}
+  - component: {fileID: 1730282215}
   m_Layer: 0
   m_Name: Directional Light
   m_TagString: Untagged
@@ -12919,6 +12920,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a68c43fe1f2a47cfa234b5eeaa98012, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1730282215
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1730282211}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Version: 1
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_LightLayerMask: 1
+  m_CustomShadowLayers: 0
+  m_ShadowLayerMask: 1
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
 --- !u!1001 &1748455673
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15816,6 +15837,11 @@ PrefabInstance:
     - target: {fileID: 4698724492893326297, guid: bfafec44c2310fc4f9e36f0f70b17273,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4698724494742892768, guid: bfafec44c2310fc4f9e36f0f70b17273,
+        type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

@@ -11,6 +11,7 @@ public class SceneLoader : MonoBehaviour {
     public static SceneLoader instance;
     public GameObject loaderUI;
     public Slider progressSlider;
+    public ScreenFader screenFader;
     private GameObject player;
 
     void Awake() {
@@ -42,9 +43,11 @@ public class SceneLoader : MonoBehaviour {
     // Loads a scene by name
     public IEnumerator LoadSceneCoroutine(int index) {
         progressSlider.value = 0;
-        loaderUI.SetActive(true);
         player = GameObject.Find("XRRig/Camera Offset/Main Camera");
         SummonUI(loaderUI, player);
+        yield return screenFader.FadeInCoroutine();
+        GameObject slider = loaderUI.transform.Find("Slider").gameObject;
+        slider.SetActive(true);
 
         AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(index);
         asyncOperation.allowSceneActivation = false;
@@ -59,6 +62,10 @@ public class SceneLoader : MonoBehaviour {
             yield return null;
         }
 
+        slider.SetActive(false);
+        player = GameObject.Find("XRRig/Camera Offset/Main Camera");
+        SummonUI(loaderUI, player);
+        yield return screenFader.FadeOutCoroutine();
         loaderUI.SetActive(false);
     }
 
