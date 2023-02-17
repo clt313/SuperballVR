@@ -14,7 +14,7 @@ public class AIPlayer : Player
   // Update is called once per frame
   public override void Update()
   {
-
+    PlayerEvents.playerServeEvent.Invoke(this);
   }
 
   public override Vector3 getCameraPosition()

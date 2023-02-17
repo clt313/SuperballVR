@@ -215,8 +215,7 @@ public class GameManager : MonoBehaviour
       return;
     }
 
-    // TODO Check if team matches
-    else if (!isBallInPlay && gameRunning)
+    else if (!isBallInPlay && gameRunning && playerTeam == currentPossession)
     {
       isBallInPlay = true;
       spawnBall(player);
