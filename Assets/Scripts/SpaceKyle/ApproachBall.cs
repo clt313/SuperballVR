@@ -22,15 +22,15 @@ public class ApproachBall : Node
 
         if(Vector3.Distance(_transform.position, _target) > 0.01f)
         {
-            if (_transform.position.x > _net.position.x)
-            {
-                _target.x = 0.5f;
-            }
-            Debug.Log("Approaching");
+            // if (_transform.position.x > _net.position.x)
+            // {
+            //     _transform.position.x = 0.5f;
+            // }
+            // Debug.Log("Approaching");
             _transform.position = Vector3.MoveTowards(_transform.position, _target, KyleBT.speed * 2 * Time.deltaTime);
             _transform.LookAt(_target);
 
-            state = NodeState.RUNNING;
+            state = NodeState.SUCCESS;
             return state;
         }
 
