@@ -5,13 +5,15 @@ public class KyleBT : Tree
 {
     public UnityEngine.Transform[] waypoints;
     public static float speed = 1f;
-    public static float fovRange = 10f;
-    public static float hitRange = 1f;
+    public static float fovRange = 6f;
+    public static float hitRange = 2f;
+    public static bool AIserving = false;
 
     protected override Node SetupTree()
     {
         Node root = new Selector(new List<Node>
         {
+            new ServeBall(transform, waypoints),
             new Sequence(new List<Node>
             {
                 new CheckBallInRange(transform),

@@ -37,6 +37,7 @@ public class PatrolCourt : Node
         // else
         // {
             _animator.SetBool("Walking", false);
+            _animator.SetBool("HittingBall", false);
             Transform wp = _waypoints[_currentWaypointIndex];
             Vector3 _wp = wp.position;
             _wp.y = 0f;

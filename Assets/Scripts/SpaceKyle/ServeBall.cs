@@ -3,34 +3,34 @@ using System.Collections.Generic;
 using UnityEngine;
 using BehaviorTree;
 
-public class ApproachBall : Node
+public class ServeBall : Node
 {
     private Transform _transform;
-    private Transform _net;
+    private Transform[] _waypoints;
+    private Animator _animator;
 
-    public ApproachBall(Transform transform)
+    public ServeBall(Transform transform, Transform[] waypoints)
     {
         _transform = transform;
-        _net = GameObject.Find("TennisNet").transform;
+        _waypoints = waypoints;
+        _animator = transform.GetComponent<Animator>();
     }
 
     public override NodeState Evaluate()
     {
-        Transform target = GameObject.Find("Ball").transform;
+        Transform target = _waypoints[2];
         Vector3 _target = target.position;
         _target.y = 0;
 
-        if(Vector3.Distance(_transform.position, _target) > 0.01f)
+        if(KyleBT.AIserving)
         {
-            if (_transform.position.x > _net.position.x)
-            {
-                _target.x = 0.5f;
-            }
-            Debug.Log("Approaching");
+            _animator.SetBool("Walking", true);
             _transform.position = Vector3.MoveTowards(_transform.position, _target, KyleBT.speed * 2 * Time.deltaTime);
-            _transform.LookAt(_target);
+            _transform.LookAt(Vector3.left);
 
-            state = NodeState.RUNNING;
+            KyleBT.AIserving = false;
+
+            state = NodeState.SUCCESS;
             return state;
         }
 

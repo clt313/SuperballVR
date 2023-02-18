@@ -19,6 +19,7 @@ public class AIPlayer : Player
 
   public void handleRoundEnd()
   {
+    KyleBT.AIserving = true;
     Invoke(nameof(attemptToServe), 2.0f);
   }
 
