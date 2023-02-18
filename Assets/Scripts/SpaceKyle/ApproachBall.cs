@@ -18,7 +18,7 @@ public class ApproachBall : Node
     {
         Transform target = GameObject.Find("Ball").transform;
         Vector3 _target = target.position;
-        _target.y = 0;
+        _target.y = _transform.position.y;
 
         if(Vector3.Distance(_transform.position, _target) > 0.01f)
         {
