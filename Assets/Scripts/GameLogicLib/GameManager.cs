@@ -88,7 +88,7 @@ public class GameManager : MonoBehaviour
           currentBounces = 0;
           currentPasses = 0;
 
-          Debug.Log($"Round Ended! Reason: {roundEndReason.ToString()}");
+          Debug.Log($"Round Ended! Reason: {roundEndReason.ToString()}, Winner: {roundWinner}");
           Debug.Log($"Current Score: {scoreTeamOne} to {scoreTeamTwo}");
           roundEndReason = ROUND_END_REASON.NONE;
 
@@ -278,6 +278,7 @@ public class GameManager : MonoBehaviour
       if (player)
       {
         TEAM playerTeam = player.team;
+        Debug.Log("Detected hit by " + player.name + "(" + playerTeam + ")");
         bool isHandCollision = listenedCollidedObject.name == "HandCollider";
 
         if (isHandCollision)
@@ -379,7 +380,7 @@ public class GameManager : MonoBehaviour
         roundEndReason = ROUND_END_REASON.TOO_MANY_TOUCHES;
         isBallInPlay = false;
       }
-      Debug.Log("Game manager detected a ball bounce with: " + listenedCollidedObject.name);
+      Debug.Log("Game manager detected a ball bounce with: " + listenedCollidedObject.name + ", Current possesor: " + currentPossession.ToString());
     }
 
   }

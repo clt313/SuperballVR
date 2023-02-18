@@ -5,7 +5,6 @@ using BehaviorTree;
 
 public class CheckBall : Node
 {
-    private static int ballLayerMask = 1 << 1;
     private Transform _transform;
     private Animator _animator;
 
@@ -25,7 +24,7 @@ public class CheckBall : Node
                 _animator.SetBool("StrafeLeft", false);
                 _animator.SetBool("StrafeRight", false);
                 _animator.SetBool("Walking", true);
-                
+
                 state = NodeState.SUCCESS;
                 return state;
             }

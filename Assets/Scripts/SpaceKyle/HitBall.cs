@@ -22,6 +22,7 @@ public class HitBall : Node
 
         if(_hitCounter >= _hitTime)
         {
+            Debug.Log("Done");
             _animator.SetBool("HittingBall", false);
             _animator.SetBool("Walking", true);
         }
