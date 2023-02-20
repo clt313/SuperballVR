@@ -133,6 +133,7 @@ public class gamerules
       player.transform.position = courtTwo.transform.position;
       player.transform.position += new Vector3(0.0f, testGames.config.bounceHeight, 0.0f);
     }
+    player.GetComponent<Player>().team = team;
     return player;
   }
 
