@@ -277,7 +277,7 @@ public class GameManager : MonoBehaviour
       if (player)
       {
         TEAM playerTeam = player.team;
-        Debug.Log("Detected hit by " + player.name + "(" + playerTeam + ")");
+        //Debug.Log("Detected hit by " + player.name + "(" + playerTeam + ")");
 
         // Check if this was an AI.
         if (player.GetComponent<AIPlayer>() != null)
