@@ -46,7 +46,7 @@ public class Player : MonoBehaviour
     Vector3 vectorToCenter = otherCenter - GetComponent<Rigidbody>().position;
     Vector3 currentVelocity = GetComponent<Rigidbody>().velocity;
 
-    Debug.Log("Hitting Wall!");
+    // Debug.Log("Hitting Wall!");
 
     // If dot product is positive that means we are moving into wall...stop that
     if (Vector3.Dot(vectorToCenter, currentVelocity) > 0.0f)
