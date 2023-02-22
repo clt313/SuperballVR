@@ -176,7 +176,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxBounces: 1
-  maxPasses: 1
+  maxPasses: 2
   maxGameTimeSeconds: 600
   maxScore: 5
   teamOneCourt: {fileID: 1519320448554101808}
