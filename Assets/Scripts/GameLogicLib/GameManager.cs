@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
   // INPUT PARAMETERS
   ////////////////////////
   public int maxBounces = 1;
-  public int maxPasses = 1;
+  public int maxPasses = 2;
   public int maxGameTimeSeconds = 10 * 60;
   public int maxScore = 5;
   public GameObject teamOneCourt;
@@ -55,7 +55,6 @@ public class GameManager : MonoBehaviour
   private TEAM currentServer = TEAM.TEAM_ONE;
   private TEAM currentPossession = TEAM.TEAM_ONE;
   private ROUND_END_REASON roundEndReason = ROUND_END_REASON.NONE;
-  private Player previousPossessor = null;
 
 
   // Start is called before the first frame update
@@ -279,33 +278,12 @@ public class GameManager : MonoBehaviour
       {
         TEAM playerTeam = player.team;
         Debug.Log("Detected hit by " + player.name + "(" + playerTeam + ")");
-        bool isHandCollision = listenedCollidedObject.name == "HandCollider";
-
-        if (isHandCollision)
-        {
-          if (previousPossessor && player.GetInstanceID() == previousPossessor.GetInstanceID())
-          {
-            currentPasses = maxPasses; // Indicate too many touches
-          }
-          else if (currentPossession != player.team)
-          {
-            currentBounces = 0;
-            currentPasses = 0;
-            currentPossession = player.team;
-          }
-          else
-          {
-            currentPasses++;
-          }
-          previousPossessor = player;
-        }
 
         // Check if this was an AI.
         if (player.GetComponent<AIPlayer>() != null)
         {
 
           // Return Ball To Other Side Of Court
-
 
           // TODO: Move into function
           // CONFIGURATION
@@ -334,7 +312,18 @@ public class GameManager : MonoBehaviour
           listenedBall.GetComponent<Rigidbody>().velocity = returnVelocity;
         }
 
-        // Don't do anything if XRRig
+        // Switch possession or increment passes
+        if (currentPossession != player.team)
+        {
+          currentBounces = 0;
+          currentPasses = 0;
+          currentPossession = player.team;
+        }
+        else
+        {
+          currentPasses++;
+        }
+
         AudioManager.instance.Play("BallHit");
       }
 
@@ -351,6 +340,7 @@ public class GameManager : MonoBehaviour
         {
           currentPossession = courtWhereBallLanded;
           currentBounces = 1;
+          currentPasses = 0;
         }
         AudioManager.instance.Play("BallBounce");
       }
