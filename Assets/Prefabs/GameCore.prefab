@@ -3650,7 +3650,7 @@ GameObject:
   - component: {fileID: 1744739767909888868}
   - component: {fileID: 6803766900099782089}
   - component: {fileID: 3739214390179729830}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Divider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4609,7 +4609,7 @@ PrefabInstance:
     - target: {fileID: 2183002543912009249, guid: 8593d4afb35590340acf0698b2d8d1d3,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 1.36144
       objectReference: {fileID: 0}
     - target: {fileID: 2682557916027595056, guid: 8593d4afb35590340acf0698b2d8d1d3,
         type: 3}
