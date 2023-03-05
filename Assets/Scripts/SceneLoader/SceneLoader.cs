@@ -16,7 +16,7 @@ public class SceneLoader : MonoBehaviour {
     public ScreenFader screenFader;
     private GameObject player;
 
-    void Awake() {
+    void Start() {
         // Only initialize once
          if (instance == null)
             instance = this;
