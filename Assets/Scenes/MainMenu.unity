@@ -4695,7 +4695,7 @@ PrefabInstance:
     - target: {fileID: 7604568254160345372, guid: 320c7db85a327e442aab5ceea779dea3,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7604568254160345372, guid: 320c7db85a327e442aab5ceea779dea3,
         type: 3}
@@ -4720,7 +4720,7 @@ PrefabInstance:
     - target: {fileID: 7604568254160345372, guid: 320c7db85a327e442aab5ceea779dea3,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 1750
+      value: 1500
       objectReference: {fileID: 0}
     - target: {fileID: 7604568254160345372, guid: 320c7db85a327e442aab5ceea779dea3,
         type: 3}
@@ -4770,7 +4770,7 @@ PrefabInstance:
     - target: {fileID: 7604568254160345372, guid: 320c7db85a327e442aab5ceea779dea3,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -471
+      value: -90
       objectReference: {fileID: 0}
     - target: {fileID: 7604568254160345372, guid: 320c7db85a327e442aab5ceea779dea3,
         type: 3}
@@ -9270,6 +9270,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1152011532}
+  - component: {fileID: 1152011533}
   m_Layer: 5
   m_Name: MainMenu
   m_TagString: Untagged
@@ -9291,8 +9292,8 @@ RectTransform:
   m_Children:
   - {fileID: 812775680}
   - {fileID: 479175242}
-  - {fileID: 2085364149}
   - {fileID: 572702202}
+  - {fileID: 2085364149}
   m_Father: {fileID: 938667342}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -9301,6 +9302,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 79}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1152011533
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1152011531}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3edf656886e05eb41846d5d1aabd19d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1156962338
 GameObject:
   m_ObjectHideFlags: 0
@@ -15013,7 +15026,7 @@ PrefabInstance:
     - target: {fileID: 7604568253374784478, guid: 320c7db85a327e442aab5ceea779dea3,
         type: 3}
       propertyPath: m_text
-      value: Multiplayer
+      value: Exit
       objectReference: {fileID: 0}
     - target: {fileID: 7604568254160345372, guid: 320c7db85a327e442aab5ceea779dea3,
         type: 3}
@@ -15028,7 +15041,7 @@ PrefabInstance:
     - target: {fileID: 7604568254160345372, guid: 320c7db85a327e442aab5ceea779dea3,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7604568254160345372, guid: 320c7db85a327e442aab5ceea779dea3,
         type: 3}
@@ -15053,7 +15066,7 @@ PrefabInstance:
     - target: {fileID: 7604568254160345372, guid: 320c7db85a327e442aab5ceea779dea3,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 1750
+      value: 1500
       objectReference: {fileID: 0}
     - target: {fileID: 7604568254160345372, guid: 320c7db85a327e442aab5ceea779dea3,
         type: 3}
@@ -15103,7 +15116,7 @@ PrefabInstance:
     - target: {fileID: 7604568254160345372, guid: 320c7db85a327e442aab5ceea779dea3,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -90
+      value: -471
       objectReference: {fileID: 0}
     - target: {fileID: 7604568254160345372, guid: 320c7db85a327e442aab5ceea779dea3,
         type: 3}
@@ -15122,13 +15135,48 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7604568254160345373, guid: 320c7db85a327e442aab5ceea779dea3,
         type: 3}
-      propertyPath: m_Interactable
-      value: 0
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7604568254160345373, guid: 320c7db85a327e442aab5ceea779dea3,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7604568254160345373, guid: 320c7db85a327e442aab5ceea779dea3,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1152011533}
+    - target: {fileID: 7604568254160345373, guid: 320c7db85a327e442aab5ceea779dea3,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7604568254160345373, guid: 320c7db85a327e442aab5ceea779dea3,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: ExitGame
+      objectReference: {fileID: 0}
+    - target: {fileID: 7604568254160345373, guid: 320c7db85a327e442aab5ceea779dea3,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: MainMenu, Superball
+      objectReference: {fileID: 0}
+    - target: {fileID: 7604568254160345373, guid: 320c7db85a327e442aab5ceea779dea3,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_BoolArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7604568254160345373, guid: 320c7db85a327e442aab5ceea779dea3,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 7604568254160345375, guid: 320c7db85a327e442aab5ceea779dea3,
         type: 3}
       propertyPath: m_Name
-      value: Multiplayer
+      value: Exit
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 320c7db85a327e442aab5ceea779dea3, type: 3}
@@ -16147,7 +16195,7 @@ PrefabInstance:
     - target: {fileID: 7604568253374784478, guid: 320c7db85a327e442aab5ceea779dea3,
         type: 3}
       propertyPath: m_text
-      value: Singleplayer
+      value: Play
       objectReference: {fileID: 0}
     - target: {fileID: 7604568254160345372, guid: 320c7db85a327e442aab5ceea779dea3,
         type: 3}
@@ -16187,7 +16235,7 @@ PrefabInstance:
     - target: {fileID: 7604568254160345372, guid: 320c7db85a327e442aab5ceea779dea3,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 1750
+      value: 1500
       objectReference: {fileID: 0}
     - target: {fileID: 7604568254160345372, guid: 320c7db85a327e442aab5ceea779dea3,
         type: 3}

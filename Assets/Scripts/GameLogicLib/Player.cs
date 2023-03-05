@@ -16,8 +16,9 @@ public class Player : MonoBehaviour
   // Update is called once per frame
   public virtual void Update()
   {
-    if (Input.GetButtonDown("XRI_Right_PrimaryButton") || Input.GetButtonDown("XRI_Left_PrimaryButton")
-        || Input.GetButtonDown("XRI_Right_GripButton") || Input.GetButtonDown("XRI_Left_GripButton"))
+    if (StateController.inputEnabled
+        && (Input.GetButtonDown("XRI_Right_PrimaryButton") || Input.GetButtonDown("XRI_Left_PrimaryButton")
+        || Input.GetButtonDown("XRI_Right_GripButton") || Input.GetButtonDown("XRI_Left_GripButton")))
     {
       Debug.Log("Detected serve button press!");
       PlayerEvents.playerServeEvent.Invoke(this);

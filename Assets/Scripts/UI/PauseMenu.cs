@@ -19,8 +19,9 @@ public class PauseMenu : MonoBehaviour
 
     // Update is called once per frame
     void Update() {
-        if (Input.GetButtonDown("XRI_Left_SecondaryButton") || Input.GetButtonDown("XRI_Right_SecondaryButton")
-                || Input.GetButtonDown("XRI_Left_MenuButton") || Input.GetButtonDown("XRI_Right_MenuButton")) {
+        if (StateController.inputEnabled
+                && (Input.GetButtonDown("XRI_Left_SecondaryButton") || Input.GetButtonDown("XRI_Right_SecondaryButton")
+                || Input.GetButtonDown("XRI_Left_MenuButton") || Input.GetButtonDown("XRI_Right_MenuButton"))) {
             if (GamePaused) {
                 Resume();
                 AudioManager.instance.Play("Unpause");
