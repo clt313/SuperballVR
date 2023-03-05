@@ -7,4 +7,5 @@ public class StateController : MonoBehaviour {
     public enum AiDifficulty {Easy, Normal, Hard};
     public static AiDifficulty aiDifficulty = AiDifficulty.Normal;
     public static int matchLength = 11;
+    public static bool inputEnabled = true;
 }

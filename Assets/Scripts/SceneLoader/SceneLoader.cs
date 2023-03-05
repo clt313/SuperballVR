@@ -99,14 +99,14 @@ public class SceneLoader : MonoBehaviour {
     // Enables/disables player's hand controller inputs
     private void SetPlayerInput(bool enable) {
         GameObject xr = GameObject.Find("XRRig");
+
+        // Toggle movement
         ActionBasedContinuousMoveProvider move = xr.GetComponent<ActionBasedContinuousMoveProvider>();
         move.enabled = enable;
         ActionBasedContinuousTurnProvider turn = xr.GetComponent<ActionBasedContinuousTurnProvider>();
         turn.enabled = enable;
 
-        // TODO: input is still received despite this being off (verified in inspector)
-        XRBaseController[] controllers = xr.GetComponentsInChildren<ActionBasedController>();
-        foreach (XRBaseController controller in controllers)
-            controller.enableInputActions = enable;
+        // Toggle input
+        StateController.inputEnabled = enable;
     }
 }
