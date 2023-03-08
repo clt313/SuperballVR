@@ -12910,7 +12910,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1730282213}
   - component: {fileID: 1730282212}
-  - component: {fileID: 1730282214}
   - component: {fileID: 1730282215}
   m_Layer: 0
   m_Name: Directional Light
@@ -12996,18 +12995,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
---- !u!114 &1730282214
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1730282211}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a68c43fe1f2a47cfa234b5eeaa98012, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1730282215
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14166,7 +14153,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1946246163}
-  - component: {fileID: 1946246162}
   m_Layer: 0
   m_Name: StaticLightingSky
   m_TagString: Untagged
@@ -14174,18 +14160,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1946246162
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1946246161}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 441482e8936e35048a1dffac814e3ef8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1946246163
 Transform:
   m_ObjectHideFlags: 1
