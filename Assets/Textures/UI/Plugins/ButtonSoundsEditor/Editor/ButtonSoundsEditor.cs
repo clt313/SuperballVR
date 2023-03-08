@@ -61,6 +61,8 @@ namespace Assets.Plugins.ButtonSoundsEditor.Editor
             _buttonCandidates.Clear();
             _eventTriggerCandidates.Clear();
 
+            #pragma warning disable 0618
+
             var buttons = Resources.FindObjectsOfTypeAll<Button>().Where(_ => PrefabUtility.GetPrefabType(_) != PrefabType.Prefab).Select(_ => _.gameObject).ToList();
             _candidates.AddRange(buttons);
             _buttonCandidates.AddRange(buttons);
@@ -75,6 +77,8 @@ namespace Assets.Plugins.ButtonSoundsEditor.Editor
             _candidates = _candidates.OrderBy(orderByFunc).ToList();
             _buttonCandidates = _buttonCandidates.OrderBy(orderByFunc).ToList();
             _eventTriggerCandidates = _eventTriggerCandidates.OrderBy(orderByFunc).ToList();
+
+            #pragma warning restore 0618
         }
 
         private string GetTransformPath(Transform tr)
