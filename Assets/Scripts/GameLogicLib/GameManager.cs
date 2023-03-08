@@ -38,7 +38,6 @@ public class GameManager : MonoBehaviour
   public GameObject leftController;
   public GameObject rightController;
   public TMP_Text endgameText;
-  public AudioSource bounceAudio;
 
 
   ////////////////////////
