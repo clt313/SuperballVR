@@ -70,6 +70,14 @@ public class AudioManager : MonoBehaviour {
             s.source.Stop();
     }
 
+    public void StopAll() {
+        foreach (SoundGroup sg in soundGroups) {
+            foreach (Sound s in sg.sounds) {
+                s.source.Stop();
+            }
+        }
+    }
+
     public void Pause(string name) {
         Sound s = FindSound(name);
         if (s != null)
