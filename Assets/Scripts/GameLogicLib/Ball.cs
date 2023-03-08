@@ -24,6 +24,9 @@ public class Ball : MonoBehaviour
 
   void deleteSelf()
   {
+    GameObject ballEmitter = GameObject.Find("Particle Effects/BallEmitter");
+    GameObject particle = GameObject.Instantiate(ballEmitter, gameObject.transform.position, Quaternion.identity);
+    particle.GetComponent<ParticleSystem>().Play();
     Object.Destroy(this.gameObject);
   }
 
