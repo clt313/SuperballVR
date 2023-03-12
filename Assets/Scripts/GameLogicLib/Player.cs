@@ -1,7 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
+using Utility;
 public class Player : MonoBehaviour
 {
 
@@ -30,6 +28,28 @@ public class Player : MonoBehaviour
     return this.transform.GetChild(0).GetChild(0).transform.position;
   }
 
+  public virtual void hitBall(GameObject listenedBall, Collider opposingCourt)
+  {
+    float returnTime = 2.0f;
+    float gaussianScale = 0; // Scale width/length of court to one standard deviation. Smaller is tighter gaussian.
+
+    Vector3 opposingCourtCenter = opposingCourt.bounds.center;
+    float sigmaX = gaussianScale * opposingCourt.bounds.size.x / 2.0f;
+    float sigmaZ = gaussianScale * opposingCourt.bounds.size.z / 2.0f;
+    float xTarget = StatUtil.sampleGaussianDistribution(opposingCourtCenter.x, sigmaX);
+    float zTarget = StatUtil.sampleGaussianDistribution(opposingCourtCenter.z, sigmaZ);
+    Vector3 target = new Vector3(xTarget, opposingCourtCenter.y, zTarget);
+
+    float gravity = Physics.gravity.y;
+    Vector3 currentPosition = GetComponent<Rigidbody>().position;
+    Vector3 returnVelocity = new Vector3(
+      (target.x - currentPosition.x) / returnTime,
+      ((target.y - currentPosition.y) / returnTime) - (gravity * returnTime) / 2.0f,
+      (target.z - currentPosition.z) / returnTime
+    );
+    listenedBall.GetComponent<Rigidbody>().velocity = returnVelocity;
+  }
+
   // Prevent going through walls/boundaries
   void OnCollisionEnter(Collision collision)
   {
@@ -55,4 +75,5 @@ public class Player : MonoBehaviour
       GetComponent<Rigidbody>().velocity = new Vector3(0.0f, 0.0f, 0.0f);
     }
   }
+
 }

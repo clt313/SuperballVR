@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 using TMPro;
+using Utility;
 
 public enum TEAM
 {
@@ -192,28 +193,6 @@ public class GameManager : MonoBehaviour
     updateScoreboard();
   }
 
-  // Based on the Box-Muller transform https://towardsdatascience.com/how-to-generate-random-variables-from-scratch-no-library-used-4b71eb3c8dc7
-  float sampleGaussianDistribution(float mu, float sigma)
-  {
-    // create a new instance of the Random class
-    System.Random random = new System.Random();
-
-    // generate two random numbers that are uniformly distributed between 0 and 1
-    float u1 = (float)random.NextDouble();
-    float u2 = (float)random.NextDouble();
-
-    // transform the uniformly distributed numbers to normally distributed numbers
-    float z1 = Mathf.Sqrt(-2f * Mathf.Log(u1)) * Mathf.Cos(2f * Mathf.PI * u2);
-    float z2 = Mathf.Sqrt(-2f * Mathf.Log(u1)) * Mathf.Sin(2f * Mathf.PI * u2);
-
-    // use the first normally distributed number (z1) as the sample from the normal distribution
-    float sample = mu + sigma * z1;
-
-    return sample;
-  }
-
-
-
   void updateScoreboard()
   {
     foreach (TMP_Text teamOneScoreText in teamOneScoreTexts)
@@ -273,43 +252,17 @@ public class GameManager : MonoBehaviour
       bool isNetCollision = collidedID == net.GetInstanceID();
       Player player = listenedCollidedObject.transform.root.GetComponentInChildren<Player>();
 
+
       if (player)
       {
         TEAM playerTeam = player.team;
-        //Debug.Log("Detected hit by " + player.name + "(" + playerTeam + ")");
-
-        // Check if this was an AI.
-        if (player.GetComponent<AIPlayer>() != null)
-        {
-
-          // Return Ball To Other Side Of Court
-
-          // TODO: Move into function
-          // CONFIGURATION
-          float returnTime = 2.0f;
-          float gaussianScale = 0.66f; // Scale width/length of court to one standard deviation. Smaller is tighter gaussian.
-
-          Collider opposingCourt =
-            player.team == TEAM.TEAM_ONE ?
+        Collider opposingCourt =
+            playerTeam == TEAM.TEAM_ONE ?
               teamTwoCourt.GetComponent<Collider>() :
               teamOneCourt.GetComponent<Collider>();
 
-          Vector3 opposingCourtCenter = opposingCourt.bounds.center;
-          float sigmaX = gaussianScale * opposingCourt.bounds.size.x / 2.0f;
-          float sigmaZ = gaussianScale * opposingCourt.bounds.size.z / 2.0f;
-          float xTarget = sampleGaussianDistribution(opposingCourtCenter.x, sigmaX);
-          float zTarget = sampleGaussianDistribution(opposingCourtCenter.z, sigmaZ);
-          Vector3 target = new Vector3(xTarget, opposingCourtCenter.y, zTarget);
-
-          float gravity = Physics.gravity.y;
-          Vector3 currentPosition = player.GetComponent<Rigidbody>().position;
-          Vector3 returnVelocity = new Vector3(
-            (target.x - currentPosition.x) / returnTime,
-            ((target.y - currentPosition.y) / returnTime) - (gravity * returnTime) / 2.0f,
-            (target.z - currentPosition.z) / returnTime
-          );
-          listenedBall.GetComponent<Rigidbody>().velocity = returnVelocity;
-        }
+        // get player or AI to hit ball
+        player.hitBall(listenedBall, opposingCourt);
 
         // Switch possession or increment passes
         if (currentPossession != player.team)
