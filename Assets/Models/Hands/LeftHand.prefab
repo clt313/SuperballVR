@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8125890670302083303}
   - component: {fileID: 2152368480263196616}
   m_Layer: 6
-  m_Name: HandCollider
+  m_Name: HandColliderLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
