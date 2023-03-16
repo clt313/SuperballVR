@@ -55,8 +55,7 @@ public class GameManager : MonoBehaviour
   private TEAM currentServer = TEAM.TEAM_ONE;
   private TEAM currentPossession = TEAM.TEAM_ONE;
   private ROUND_END_REASON roundEndReason = ROUND_END_REASON.NONE;
-
-
+  private string ballName = "Ball";
   // Start is called before the first frame update
   void Start()
   {
@@ -234,7 +233,8 @@ public class GameManager : MonoBehaviour
 
     GameObject ball = (GameObject)Instantiate(BallPrefab, ballSpawnLocation, player.gameObject.transform.rotation);
     ball.GetComponent<Rigidbody>().velocity = new Vector3(0.0f, 10.0f, 0.0f);
-    ball.name = "Ball";
+    ball.name = ballName;
+    ball.GetComponent<Ball>().floorPosition = teamOneCourt.GetComponent<Rigidbody>().position.y + 0.03f;
     Debug.Log($"Spawning Ball At: {ball.transform.position.x}, {ball.transform.position.y}, {ball.transform.position.z}");
     AudioManager.instance.Play("BallServe");
   }

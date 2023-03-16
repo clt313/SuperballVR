@@ -5,6 +5,9 @@ using UnityEngine;
 public class Ball : MonoBehaviour
 {
   public Material glowMaterial;
+  public float floorPosition;
+
+  private GameObject landingIndicator;
 
   // Start is called before the first frame update
   void Start()
@@ -19,15 +22,52 @@ public class Ball : MonoBehaviour
 
     // Delete self on round end
     GameEvents.roundEndEvent.AddListener(deleteSelf);
+
+    createLandingIndicator();
   }
 
   // Update is called once per frame
   void Update()
   {
-
+    updateLandingIndicator();
   }
 
-  Vector3 getExpectedCollisionPosition(float yTarget)
+  void createLandingIndicator()
+  {
+    landingIndicator = new GameObject("Landing Indicator");
+    MeshRenderer meshRenderer = landingIndicator.AddComponent<MeshRenderer>();
+    Material material = new Material(Shader.Find("Standard"));
+    Texture2D texture = Resources.Load<Texture2D>("Textures/Landing_Indicator");
+    material.mainTexture = texture;
+    meshRenderer.material = material;
+    MeshFilter meshFilter = landingIndicator.AddComponent<MeshFilter>();
+
+    Mesh mesh = new Mesh();
+    mesh.vertices = new Vector3[] { new Vector3(-0.5f, 0, -0.5f), new Vector3(0.5f, 0, -0.5f), new Vector3(0.5f, 0, 0.5f), new Vector3(-0.5f, 0, 0.5f) };
+    mesh.triangles = new int[] { 0, 1, 2, 0, 2, 3 };
+    mesh.normals = new Vector3[] { Vector3.up, Vector3.up, Vector3.up, Vector3.up };
+    mesh.uv = new Vector2[] { new Vector2(0, 0), new Vector2(1, 0), new Vector2(1, 1), new Vector2(0, 1) };
+    meshFilter.mesh = mesh;
+
+    // Rotate so it faces upward
+    landingIndicator.transform.position = new Vector3(0, 2, 0);
+    landingIndicator.transform.rotation = Quaternion.Euler(180, 0, 0);
+    landingIndicator.transform.localScale = Vector3.one;
+  }
+
+  void updateLandingIndicator()
+  {
+    // Add a reticle at the landing position of the ball
+    Vector3 floorCollisionPoint = getExpectedFloorCollision();
+    landingIndicator.transform.position = floorCollisionPoint;
+  }
+
+  public Vector3 getExpectedFloorCollision()
+  {
+    return getExpectedCollisionPositionAtY(floorPosition);
+  }
+
+  public Vector3 getExpectedCollisionPositionAtY(float yTarget)
   {
 
     Vector3 ballPosition = GetComponent<Rigidbody>().position;
@@ -62,6 +102,7 @@ public class Ball : MonoBehaviour
     GameObject particle = GameObject.Instantiate(ballEmitter, gameObject.transform.position, Quaternion.identity);
     particle.GetComponent<ParticleSystem>().Play();
 
+    Object.Destroy(landingIndicator);
     Object.Destroy(this.gameObject);
   }
 
