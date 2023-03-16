@@ -36,10 +36,7 @@ public class Ball : MonoBehaviour
   {
     landingIndicator = new GameObject("Landing Indicator");
     MeshRenderer meshRenderer = landingIndicator.AddComponent<MeshRenderer>();
-    Material material = new Material(Shader.Find("Standard"));
-    Texture2D texture = Resources.Load<Texture2D>("Textures/Landing_Indicator");
-    material.mainTexture = texture;
-    meshRenderer.material = material;
+    meshRenderer.material = Resources.Load<Material>("LandingIndicator");
     MeshFilter meshFilter = landingIndicator.AddComponent<MeshFilter>();
 
     Mesh mesh = new Mesh();
@@ -52,7 +49,7 @@ public class Ball : MonoBehaviour
     // Rotate so it faces upward
     landingIndicator.transform.position = new Vector3(0, 2, 0);
     landingIndicator.transform.rotation = Quaternion.Euler(180, 0, 0);
-    landingIndicator.transform.localScale = Vector3.one;
+    landingIndicator.transform.localScale = new Vector3(1.60f, 1.0f, 1.0f);
   }
 
   void updateLandingIndicator()
