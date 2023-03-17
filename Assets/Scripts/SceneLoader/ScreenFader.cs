@@ -4,12 +4,26 @@ using UnityEngine;
 using UnityEngine.UI;
 
 // Fades the screen
-// Some optimizations COULD be made, but it works as is (the software engineer grindset)
 public class ScreenFader : MonoBehaviour {
 
     public GameObject screen;
-    public GameObject cube;
+    public GameObject[] objectsToFade;
     public float fadeDuration = 1.0f;
+
+    private List<Material> materials;
+    private List<Image> images;
+
+    void Start() {
+        materials = new List<Material>();
+        images = new List<Image>();
+
+        foreach (GameObject gameObject in objectsToFade) {
+            Renderer[] renderers = gameObject.GetComponentsInChildren<Renderer>();
+            foreach (Renderer renderer in renderers)
+                materials.Add(renderer?.material);
+            images.AddRange(gameObject.GetComponentsInChildren<Image>());
+        }
+    }
     
     // Calls the FadeIn couroutine
     public void FadeIn() {
@@ -19,14 +33,25 @@ public class ScreenFader : MonoBehaviour {
     // Fades in the screen
     public IEnumerator FadeInCoroutine() {
         screen.SetActive(true);
-        Material cubeMaterial = cube.GetComponent<Renderer>().material;
         float timer = 0;
-        Color c;
+        float alpha = 0.0f;
+
         // Interpolate alpha value across the fadeDuration
-        while (cubeMaterial.color.a < 1) {
-            c = cubeMaterial.color;
-            c.a = Mathf.Lerp(0, 1, timer / fadeDuration);
-            cubeMaterial.color = c;
+        while (alpha < 1) {
+            alpha = Mathf.Lerp(0, 1, timer / fadeDuration);
+
+            foreach (Material material in materials) {
+                Color temp = material.color;
+                temp.a = alpha;
+                material.color = temp;
+            }
+
+            foreach (Image image in images) {
+                Color temp = image.color;
+                temp.a = alpha;
+                image.color = temp;
+            }
+
             timer += Time.deltaTime;
             yield return null;
         }
@@ -40,14 +65,25 @@ public class ScreenFader : MonoBehaviour {
     // Fades out the screen
     public IEnumerator FadeOutCoroutine() {
         screen.SetActive(true);
-        Material cubeMaterial = cube.GetComponent<Renderer>().material;
         float timer = 0;
-        Color c;
+        float alpha = 1.0f;
+        
         // Interpolate alpha value across the fadeDuration
-        while (cubeMaterial.color.a > 0) {
-            c = cubeMaterial.color;
-            c.a = Mathf.Lerp(1, 0, timer / fadeDuration);
-            cubeMaterial.color = c;
+        while (alpha > 0) {
+            alpha = Mathf.Lerp(1, 0, timer / fadeDuration);
+
+            foreach (Material material in materials) {
+                Color temp = material.color;
+                temp.a = alpha;
+                material.color = temp;
+            }
+
+            foreach (Image image in images) {
+                Color temp = image.color;
+                temp.a = alpha;
+                image.color = temp;
+            }
+
             timer += Time.deltaTime;
             yield return null;
         }

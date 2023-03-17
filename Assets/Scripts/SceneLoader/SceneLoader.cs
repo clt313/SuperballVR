@@ -4,6 +4,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.XR.Interaction.Toolkit;
 
 // Loads scenes smoothly
 // Inspired by https://www.youtube.com/watch?v=qYoec93bZx0&ab_channel=Unity3DSchool
@@ -15,7 +16,7 @@ public class SceneLoader : MonoBehaviour {
     public ScreenFader screenFader;
     private GameObject player;
 
-    void Awake() {
+    void Start() {
         // Only initialize once
          if (instance == null)
             instance = this;
@@ -49,6 +50,9 @@ public class SceneLoader : MonoBehaviour {
     
     // Loads a scene by buildIndex
     public IEnumerator LoadSceneCoroutine(int index) {
+        // Temporarily disable player input
+        SetPlayerInput(false);
+
         // Bring UI to player and wait for fadeout
         progressSlider.value = 0;
         player = GameObject.Find("XRRig/Camera Offset/Main Camera");
@@ -77,6 +81,9 @@ public class SceneLoader : MonoBehaviour {
         SummonUI(loaderUI, player);
         yield return screenFader.FadeOutCoroutine();
         loaderUI.SetActive(false);
+
+        // Re-enable player input
+        SetPlayerInput(true);
     }
 
     // Summons UI directly in front of some target (usually the player)
@@ -87,5 +94,19 @@ public class SceneLoader : MonoBehaviour {
         ui.transform.position = pos;
         Vector3 angle = new Vector3(target.transform.forward.x, 0, target.transform.forward.z);
         ui.transform.forward = angle;
+    }
+
+    // Enables/disables player's hand controller inputs
+    private void SetPlayerInput(bool enable) {
+        GameObject xr = GameObject.Find("XRRig");
+
+        // Toggle movement
+        ActionBasedContinuousMoveProvider move = xr.GetComponent<ActionBasedContinuousMoveProvider>();
+        move.enabled = enable;
+        ActionBasedContinuousTurnProvider turn = xr.GetComponent<ActionBasedContinuousTurnProvider>();
+        turn.enabled = enable;
+
+        // Toggle input
+        StateController.inputEnabled = enable;
     }
 }

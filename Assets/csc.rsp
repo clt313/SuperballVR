@@ -1,0 +1,2 @@
+#"Line below treats warnings as errors for debugging purposes."
+#"-warnaserror+"

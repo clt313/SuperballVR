@@ -5,7 +5,6 @@ using BehaviorTree;
 
 public class CheckBall : Node
 {
-    private static int ballLayerMask = 1 << 1;
     private Transform _transform;
     private Animator _animator;
 

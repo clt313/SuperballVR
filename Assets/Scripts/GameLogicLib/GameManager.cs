@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
   // INPUT PARAMETERS
   ////////////////////////
   public int maxBounces = 1;
-  public int maxPasses = 1;
+  public int maxPasses = 2;
   public int maxGameTimeSeconds = 10 * 60;
   public int maxScore = 5;
   public GameObject teamOneCourt;
@@ -38,7 +38,6 @@ public class GameManager : MonoBehaviour
   public GameObject leftController;
   public GameObject rightController;
   public TMP_Text endgameText;
-  public AudioSource bounceAudio;
 
 
   ////////////////////////
@@ -55,7 +54,6 @@ public class GameManager : MonoBehaviour
   private TEAM currentServer = TEAM.TEAM_ONE;
   private TEAM currentPossession = TEAM.TEAM_ONE;
   private ROUND_END_REASON roundEndReason = ROUND_END_REASON.NONE;
-  private Player previousPossessor = null;
 
 
   // Start is called before the first frame update
@@ -88,7 +86,7 @@ public class GameManager : MonoBehaviour
           currentBounces = 0;
           currentPasses = 0;
 
-          Debug.Log($"Round Ended! Reason: {roundEndReason.ToString()}");
+          Debug.Log($"Round Ended! Reason: {roundEndReason.ToString()}, Winner: {roundWinner}");
           Debug.Log($"Current Score: {scoreTeamOne} to {scoreTeamTwo}");
           roundEndReason = ROUND_END_REASON.NONE;
 
@@ -278,33 +276,13 @@ public class GameManager : MonoBehaviour
       if (player)
       {
         TEAM playerTeam = player.team;
-        bool isHandCollision = listenedCollidedObject.name == "HandCollider";
-
-        if (isHandCollision)
-        {
-          if (previousPossessor && player.GetInstanceID() == previousPossessor.GetInstanceID())
-          {
-            currentPasses = maxPasses; // Indicate too many touches
-          }
-          else if (currentPossession != player.team)
-          {
-            currentBounces = 0;
-            currentPasses = 0;
-            currentPossession = player.team;
-          }
-          else
-          {
-            currentPasses++;
-          }
-          previousPossessor = player;
-        }
+        //Debug.Log("Detected hit by " + player.name + "(" + playerTeam + ")");
 
         // Check if this was an AI.
         if (player.GetComponent<AIPlayer>() != null)
         {
 
           // Return Ball To Other Side Of Court
-
 
           // TODO: Move into function
           // CONFIGURATION
@@ -333,7 +311,18 @@ public class GameManager : MonoBehaviour
           listenedBall.GetComponent<Rigidbody>().velocity = returnVelocity;
         }
 
-        // Don't do anything if XRRig
+        // Switch possession or increment passes
+        if (currentPossession != player.team)
+        {
+          currentBounces = 0;
+          currentPasses = 0;
+          currentPossession = player.team;
+        }
+        else
+        {
+          currentPasses++;
+        }
+
         AudioManager.instance.Play("BallHit");
       }
 
@@ -350,6 +339,7 @@ public class GameManager : MonoBehaviour
         {
           currentPossession = courtWhereBallLanded;
           currentBounces = 1;
+          currentPasses = 0;
         }
         AudioManager.instance.Play("BallBounce");
       }
@@ -379,7 +369,7 @@ public class GameManager : MonoBehaviour
         roundEndReason = ROUND_END_REASON.TOO_MANY_TOUCHES;
         isBallInPlay = false;
       }
-      Debug.Log("Game manager detected a ball bounce with: " + listenedCollidedObject.name);
+      Debug.Log("Game manager detected a ball bounce with: " + listenedCollidedObject.name + ", Current possesor: " + currentPossession.ToString());
     }
 
   }

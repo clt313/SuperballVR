@@ -2,20 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UnpackGameCore : MonoBehaviour
-{
-  // Start is called before the first frame update
-  void Start()
-  {
-    foreach (Transform child in transform)
-    {
-      child.SetParent(null);
-    }
-  }
-
-  // Update is called once per frame
-  void Update()
-  {
-
+public class UnpackGameCore : MonoBehaviour {
+  void Awake() {
+    transform.DetachChildren();
+    Destroy(gameObject);
   }
 }

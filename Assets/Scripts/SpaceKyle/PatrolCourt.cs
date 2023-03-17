@@ -40,7 +40,7 @@ public class PatrolCourt : Node
             _animator.SetBool("HittingBall", false);
             Transform wp = _waypoints[_currentWaypointIndex];
             Vector3 _wp = wp.position;
-            _wp.y = 0f;
+            // _wp.y = 0f;
 
             if(_currentWaypointIndex == 0)
             {
