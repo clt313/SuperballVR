@@ -17,8 +17,16 @@ enum ROUND_END_REASON
   TOO_MANY_TOUCHES
 }
 
+public enum DIFFICULTY {
+  EASY,
+  MEDIUM,
+  HARD
+}
+
 public class GameManager : MonoBehaviour
 {
+
+  public static DIFFICULTY gameDifficulty = DIFFICULTY.EASY;
 
   ////////////////////////
   // INPUT PARAMETERS

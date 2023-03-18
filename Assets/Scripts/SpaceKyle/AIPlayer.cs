@@ -3,6 +3,9 @@ using Utility;
 public class AIPlayer : Player
 {
 
+  public static float[] gaussianScaleDifficulties = [1.0f, 0.66f, ];
+  public static float[] returnTimeDifficulties = []
+
   // Start is called before the first frame update
   public override void Start()
   {
@@ -36,8 +39,8 @@ public class AIPlayer : Player
     // Return Ball To Other Side Of Court
 
     // CONFIGURATION
-    float returnTime = 2.0f;
-    float gaussianScale = 0.66f; // Scale width/length of court to one standard deviation. Smaller is tighter gaussian.
+    float returnTime = returnTimeDifficulties[GameManager.gameDifficulty];
+    float gaussianScale = gaussianScaleDifficulties[GameManager.gameDifficulty]; // Scale width/length of court to one standard deviation. Smaller is tighter gaussian.
 
     Vector3 opposingCourtCenter = opposingCourt.bounds.center;
     float sigmaX = gaussianScale * opposingCourt.bounds.size.x / 2.0f;
