@@ -1,10 +1,20 @@
 using UnityEngine;
 using Utility;
+using System.Collections.Generic;
 public class AIPlayer : Player
 {
 
-  public static float[] gaussianScaleDifficulties = [1.0f, 0.66f, ];
-  public static float[] returnTimeDifficulties = []
+  public static Dictionary<DIFFICULTY, float> gaussianScaleDifficulties = new Dictionary<DIFFICULTY, float>{
+    {DIFFICULTY.EASY, 0.8f},
+    {DIFFICULTY.MEDIUM, 0.66f},
+    {DIFFICULTY.HARD, 0.33f}
+  };
+
+  public static Dictionary<DIFFICULTY, float> returnTimeDifficulties = new Dictionary<DIFFICULTY, float>{
+    {DIFFICULTY.EASY, 2.0f},
+    {DIFFICULTY.MEDIUM, 1.5f},
+    {DIFFICULTY.HARD, 1.0f}
+  };
 
   // Start is called before the first frame update
   public override void Start()
