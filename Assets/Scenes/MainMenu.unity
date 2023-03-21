@@ -6114,7 +6114,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: c0a8ebd2c3f06954c88e8c8b627f29b3, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b71fc79f17f9f79468f7342d4d485b0d, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -16132,11 +16132,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1369040084115821442, guid: bfafec44c2310fc4f9e36f0f70b17273,
-        type: 3}
-      propertyPath: m_ConstrainProportionsScale
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4698724492893325863, guid: bfafec44c2310fc4f9e36f0f70b17273,
         type: 3}
       propertyPath: m_Name
@@ -16230,7 +16225,7 @@ PrefabInstance:
     - target: {fileID: 4698724492893326297, guid: bfafec44c2310fc4f9e36f0f70b17273,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -7
       objectReference: {fileID: 0}
     - target: {fileID: 4698724492893326297, guid: bfafec44c2310fc4f9e36f0f70b17273,
         type: 3}
@@ -16245,21 +16240,6 @@ PrefabInstance:
     - target: {fileID: 4698724492893326297, guid: bfafec44c2310fc4f9e36f0f70b17273,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4698724494682224972, guid: bfafec44c2310fc4f9e36f0f70b17273,
-        type: 3}
-      propertyPath: m_PresetInfoIsWorld
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4698724494682224973, guid: bfafec44c2310fc4f9e36f0f70b17273,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4698724494742892768, guid: bfafec44c2310fc4f9e36f0f70b17273,
-        type: 3}
-      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
