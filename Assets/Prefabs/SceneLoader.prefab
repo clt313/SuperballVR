@@ -689,4 +689,5 @@ MonoBehaviour:
   screen: {fileID: 4698724494682224973}
   objectsToFade:
   - {fileID: 4698724494682224973}
+  - {fileID: 7801359461945530844}
   fadeDuration: 0.5
