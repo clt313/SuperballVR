@@ -17,8 +17,10 @@ public class SceneLoader : MonoBehaviour {
 
     void Start() {
         // Only initialize once
-         if (instance == null)
+        if (instance == null) {
             instance = this;
+            loaderUI.SetActive(false);
+        }
         else {
             Destroy(gameObject);
             return;
