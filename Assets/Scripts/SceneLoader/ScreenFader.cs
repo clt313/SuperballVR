@@ -18,7 +18,7 @@ public class ScreenFader : MonoBehaviour {
         images = new List<Image>();
 
         foreach (GameObject gameObject in objectsToFade) {
-            Renderer[] renderers = gameObject.GetComponentsInChildren<Renderer>();
+            Renderer[] renderers = gameObject?.GetComponentsInChildren<Renderer>();
             foreach (Renderer renderer in renderers)
                 materials.Add(renderer?.material);
             images.AddRange(gameObject.GetComponentsInChildren<Image>());
