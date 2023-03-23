@@ -2,6 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+enum COURT_POSITION
+{
+  COURT_ONE,
+  COURT_TWO,
+  OOB
+}
+
 public class Ball : MonoBehaviour
 {
   public Material glowMaterial;
