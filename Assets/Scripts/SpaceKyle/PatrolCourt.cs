@@ -57,6 +57,7 @@ public class PatrolCourt : Node
     if (Vector3.Distance(rb.position, _wp) < 0.01f)
     {
       rb.position = _wp;
+      rb.velocity = Vector3.zero;
       // _waitCounter = 0f;
       // _waiting = true;
       if (_currentWaypointIndex == 0)

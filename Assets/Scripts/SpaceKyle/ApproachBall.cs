@@ -55,7 +55,8 @@ public class ApproachBall : Node
       else
       {
         rb.velocity = Vector3.zero;
-        _transform.root.position = _target;
+        rb.position = _target;
+        _transform.LookAt(lookAtVec);
       }
     }
 
