@@ -21,7 +21,7 @@ public class KyleBT : Tree
 
             new Sequence(new List<Node>
             {
-                // new CheckBall(transform),
+                new CheckBall(transform),
                 new ApproachBall(transform),
             }),
             new PatrolCourt(transform, waypoints),
