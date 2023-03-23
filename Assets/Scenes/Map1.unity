@@ -5441,6 +5441,11 @@ PrefabInstance:
       propertyPath: m_CameraType
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4234337900222890347, guid: b61ee656507c68d4cb42bfd0a69be6e4,
+        type: 3}
+      propertyPath: objectsToFade.Array.data[1]
+      value: 
+      objectReference: {fileID: 1519320448008079103}
     - target: {fileID: 4874482072974449048, guid: b61ee656507c68d4cb42bfd0a69be6e4,
         type: 3}
       propertyPath: m_RootOrder
@@ -5518,3 +5523,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b61ee656507c68d4cb42bfd0a69be6e4, type: 3}
+--- !u!1 &1519320448008079103 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5537299754723965868, guid: b61ee656507c68d4cb42bfd0a69be6e4,
+    type: 3}
+  m_PrefabInstance: {fileID: 1519320448008079102}
+  m_PrefabAsset: {fileID: 0}
