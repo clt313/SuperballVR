@@ -5,36 +5,48 @@ using BehaviorTree;
 
 public class ApproachBall : Node
 {
-    private Transform _transform;
-    private Transform _net;
+  private Transform _transform;
+  private Transform _net;
+  private Animator _animator;
 
-    public ApproachBall(Transform transform)
+  public ApproachBall(Transform transform)
+  {
+    _transform = transform;
+    _animator = transform.GetComponent<Animator>();
+  }
+
+  public override NodeState Evaluate()
+  {
+    GameManager gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+    Rigidbody rb = _transform.root.GetComponent<Rigidbody>();
+
+    float AIPlayerHitHeight = rb.position.y;
+    Ball ball = GameObject.Find("Ball").GetComponent<Ball>();
+    Vector3 _target = ball.getExpectedCollisionPositionAtY(AIPlayerHitHeight);
+    Vector3 lookAtVec = ball.transform.position;
+    lookAtVec.y = rb.position.y;
+
+    LOCATION ballBounceLocation = gameManager.getLocationClassification(_target);
+
+    if (Vector3.Distance(rb.position, _target) > 0.01f)
     {
-        _transform = transform;
-        _net = GameObject.Find("TennisNet").transform;
+      Vector3 toTarget = _target - rb.position;
+      rb.velocity = toTarget.normalized * KyleBT.speed;
+      _transform.LookAt(lookAtVec);
+
+      state = NodeState.SUCCESS;
+      return state;
     }
+    // else
+    // {
+    //   rb.velocity = Vector3.zero;
+    //   rb.position = _target;
+    //   _transform.LookAt(lookAtVec);
+    // }
 
-    public override NodeState Evaluate()
-    {
-        Transform target = GameObject.Find("Ball").transform;
-        Vector3 _target = target.position;
-        _target.y = _transform.position.y;
+    state = NodeState.FAILURE;
+    return state;
+  }
 
-        if(Vector3.Distance(_transform.position, _target) > 0.01f)
-        {
-            // if (_transform.position.x > _net.position.x)
-            // {
-            //     _transform.position.x = 0.5f;
-            // }
-            // Debug.Log("Approaching");
-            _transform.position = Vector3.MoveTowards(_transform.position, _target, KyleBT.speed * 2 * Time.deltaTime);
-            _transform.LookAt(_target);
-
-            state = NodeState.SUCCESS;
-            return state;
-        }
-
-        state = NodeState.FAILURE;
-        return state;
-    }
 }
+

@@ -3,6 +3,14 @@ using UnityEngine.XR.Interaction.Toolkit;
 using TMPro;
 using Utility;
 
+public enum LOCATION
+{
+  TEAM_ONE_COURT,
+  TEAM_TWO_COURT,
+  TEAM_ONE_OOB,
+  TEAM_TWO_OOB,
+}
+
 public enum TEAM
 {
   TEAM_ONE,
@@ -19,7 +27,6 @@ enum ROUND_END_REASON
 
 public class GameManager : MonoBehaviour
 {
-
   ////////////////////////
   // INPUT PARAMETERS
   ////////////////////////
@@ -200,6 +207,36 @@ public class GameManager : MonoBehaviour
       teamTwoScoreText.SetText(scoreTeamTwo.ToString());
   }
 
+  public LOCATION getLocationClassification(Vector3 location)
+  {
+
+    location.y = 0;
+
+    Bounds teamOneCourtBounds = teamOneCourt.GetComponent<Collider>().bounds;
+    teamOneCourtBounds = new Bounds(new Vector3(teamOneCourtBounds.center.x, 0, teamOneCourtBounds.center.z), new Vector3(teamOneCourtBounds.size.x, 0, teamOneCourtBounds.size.z));
+    Bounds teamTwoCourtBounds = teamOneCourt.GetComponent<Collider>().bounds;
+    teamTwoCourtBounds = new Bounds(new Vector3(teamTwoCourtBounds.center.x, 0, teamTwoCourtBounds.center.z), new Vector3(teamTwoCourtBounds.size.x, 0, teamTwoCourtBounds.size.z));
+    float distToTeamOneCenter = teamOneCourtBounds.SqrDistance(location);
+    float distToTeamTwoCenter = teamTwoCourtBounds.SqrDistance(location);
+
+    if (teamOneCourtBounds.Contains(location))
+    {
+      return LOCATION.TEAM_ONE_COURT;
+    }
+    else if (teamTwoCourtBounds.Contains(location))
+    {
+      return LOCATION.TEAM_TWO_COURT;
+    }
+    else if (distToTeamOneCenter < distToTeamTwoCenter)
+    {
+      return LOCATION.TEAM_ONE_OOB;
+    }
+    else
+    {
+      return LOCATION.TEAM_TWO_OOB;
+    }
+  }
+
   ////////////////////////
   // EVENT HANDLES
   ////////////////////////
@@ -348,5 +385,9 @@ public class GameManager : MonoBehaviour
   public bool isGameRunning()
   {
     return gameRunning;
+  }
+  public bool getIsBallInPlay()
+  {
+    return isBallInPlay;
   }
 }

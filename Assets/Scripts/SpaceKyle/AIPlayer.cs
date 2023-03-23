@@ -1,7 +1,26 @@
 using UnityEngine;
 using Utility;
+using System.Collections.Generic;
 public class AIPlayer : Player
 {
+
+  public static Dictionary<StateController.AiDifficulty, float> gaussianScaleDifficulties = new Dictionary<StateController.AiDifficulty, float>{
+    {StateController.AiDifficulty.Easy, 0.8f},
+    {StateController.AiDifficulty.Normal, 0.66f},
+    {StateController.AiDifficulty.Hard, 0.33f}
+  };
+
+  public static Dictionary<StateController.AiDifficulty, float> speedDifficulties = new Dictionary<StateController.AiDifficulty, float>{
+    {StateController.AiDifficulty.Easy, 0.5f},
+    {StateController.AiDifficulty.Normal, 1.0f},
+    {StateController.AiDifficulty.Hard, 1.5f}
+  };
+
+  public static Dictionary<StateController.AiDifficulty, float> returnTimeDifficulties = new Dictionary<StateController.AiDifficulty, float>{
+    {StateController.AiDifficulty.Easy, 2.0f},
+    {StateController.AiDifficulty.Normal, 1.5f},
+    {StateController.AiDifficulty.Hard, 1.0f}
+  };
 
   // Start is called before the first frame update
   public override void Start()
@@ -36,8 +55,8 @@ public class AIPlayer : Player
     // Return Ball To Other Side Of Court
 
     // CONFIGURATION
-    float returnTime = 2.0f;
-    float gaussianScale = 0.66f; // Scale width/length of court to one standard deviation. Smaller is tighter gaussian.
+    float returnTime = returnTimeDifficulties[StateController.aiDifficulty];
+    float gaussianScale = gaussianScaleDifficulties[StateController.aiDifficulty]; // Scale width/length of court to one standard deviation. Smaller is tighter gaussian.
 
     Vector3 opposingCourtCenter = opposingCourt.bounds.center;
     float sigmaX = gaussianScale * opposingCourt.bounds.size.x / 2.0f;
