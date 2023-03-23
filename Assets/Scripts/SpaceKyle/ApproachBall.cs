@@ -31,7 +31,7 @@ public class ApproachBall : Node
     if (Vector3.Distance(rb.position, _target) > 0.01f)
     {
       Vector3 toTarget = _target - rb.position;
-      rb.velocity = toTarget.normalized * KyleBT.speed * 2;
+      rb.velocity = toTarget.normalized * KyleBT.speed;
       _transform.LookAt(lookAtVec);
 
       state = NodeState.SUCCESS;
