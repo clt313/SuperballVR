@@ -1,6 +1,15 @@
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 using TMPro;
+using Utility;
+
+public enum LOCATION
+{
+  TEAM_ONE_COURT,
+  TEAM_TWO_COURT,
+  TEAM_ONE_OOB,
+  TEAM_TWO_OOB,
+}
 
 public enum TEAM
 {
@@ -18,7 +27,6 @@ enum ROUND_END_REASON
 
 public class GameManager : MonoBehaviour
 {
-
   ////////////////////////
   // INPUT PARAMETERS
   ////////////////////////
@@ -54,8 +62,7 @@ public class GameManager : MonoBehaviour
   private TEAM currentServer = TEAM.TEAM_ONE;
   private TEAM currentPossession = TEAM.TEAM_ONE;
   private ROUND_END_REASON roundEndReason = ROUND_END_REASON.NONE;
-
-
+  private string ballName = "Ball";
   // Start is called before the first frame update
   void Start()
   {
@@ -192,34 +199,42 @@ public class GameManager : MonoBehaviour
     updateScoreboard();
   }
 
-  // Based on the Box-Muller transform https://towardsdatascience.com/how-to-generate-random-variables-from-scratch-no-library-used-4b71eb3c8dc7
-  float sampleGaussianDistribution(float mu, float sigma)
-  {
-    // create a new instance of the Random class
-    System.Random random = new System.Random();
-
-    // generate two random numbers that are uniformly distributed between 0 and 1
-    float u1 = (float)random.NextDouble();
-    float u2 = (float)random.NextDouble();
-
-    // transform the uniformly distributed numbers to normally distributed numbers
-    float z1 = Mathf.Sqrt(-2f * Mathf.Log(u1)) * Mathf.Cos(2f * Mathf.PI * u2);
-    float z2 = Mathf.Sqrt(-2f * Mathf.Log(u1)) * Mathf.Sin(2f * Mathf.PI * u2);
-
-    // use the first normally distributed number (z1) as the sample from the normal distribution
-    float sample = mu + sigma * z1;
-
-    return sample;
-  }
-
-
-
   void updateScoreboard()
   {
     foreach (TMP_Text teamOneScoreText in teamOneScoreTexts)
       teamOneScoreText.SetText(scoreTeamOne.ToString());
     foreach (TMP_Text teamTwoScoreText in teamTwoScoreTexts)
       teamTwoScoreText.SetText(scoreTeamTwo.ToString());
+  }
+
+  public LOCATION getLocationClassification(Vector3 location)
+  {
+
+    location.y = 0;
+
+    Bounds teamOneCourtBounds = teamOneCourt.GetComponent<Collider>().bounds;
+    teamOneCourtBounds = new Bounds(new Vector3(teamOneCourtBounds.center.x, 0, teamOneCourtBounds.center.z), new Vector3(teamOneCourtBounds.size.x, 0, teamOneCourtBounds.size.z));
+    Bounds teamTwoCourtBounds = teamOneCourt.GetComponent<Collider>().bounds;
+    teamTwoCourtBounds = new Bounds(new Vector3(teamTwoCourtBounds.center.x, 0, teamTwoCourtBounds.center.z), new Vector3(teamTwoCourtBounds.size.x, 0, teamTwoCourtBounds.size.z));
+    float distToTeamOneCenter = teamOneCourtBounds.SqrDistance(location);
+    float distToTeamTwoCenter = teamTwoCourtBounds.SqrDistance(location);
+
+    if (teamOneCourtBounds.Contains(location))
+    {
+      return LOCATION.TEAM_ONE_COURT;
+    }
+    else if (teamTwoCourtBounds.Contains(location))
+    {
+      return LOCATION.TEAM_TWO_COURT;
+    }
+    else if (distToTeamOneCenter < distToTeamTwoCenter)
+    {
+      return LOCATION.TEAM_ONE_OOB;
+    }
+    else
+    {
+      return LOCATION.TEAM_TWO_OOB;
+    }
   }
 
   ////////////////////////
@@ -255,7 +270,8 @@ public class GameManager : MonoBehaviour
 
     GameObject ball = (GameObject)Instantiate(BallPrefab, ballSpawnLocation, player.gameObject.transform.rotation);
     ball.GetComponent<Rigidbody>().velocity = new Vector3(0.0f, 10.0f, 0.0f);
-    ball.name = "Ball";
+    ball.name = ballName;
+    ball.GetComponent<Ball>().floorPosition = teamOneCourt.GetComponent<Rigidbody>().position.y + 0.03f;
     Debug.Log($"Spawning Ball At: {ball.transform.position.x}, {ball.transform.position.y}, {ball.transform.position.z}");
     AudioManager.instance.Play("BallServe");
   }
@@ -273,43 +289,17 @@ public class GameManager : MonoBehaviour
       bool isNetCollision = collidedID == net.GetInstanceID();
       Player player = listenedCollidedObject.transform.root.GetComponentInChildren<Player>();
 
+
       if (player)
       {
         TEAM playerTeam = player.team;
-        //Debug.Log("Detected hit by " + player.name + "(" + playerTeam + ")");
-
-        // Check if this was an AI.
-        if (player.GetComponent<AIPlayer>() != null)
-        {
-
-          // Return Ball To Other Side Of Court
-
-          // TODO: Move into function
-          // CONFIGURATION
-          float returnTime = 2.0f;
-          float gaussianScale = 0.66f; // Scale width/length of court to one standard deviation. Smaller is tighter gaussian.
-
-          Collider opposingCourt =
-            player.team == TEAM.TEAM_ONE ?
+        Collider opposingCourt =
+            playerTeam == TEAM.TEAM_ONE ?
               teamTwoCourt.GetComponent<Collider>() :
               teamOneCourt.GetComponent<Collider>();
 
-          Vector3 opposingCourtCenter = opposingCourt.bounds.center;
-          float sigmaX = gaussianScale * opposingCourt.bounds.size.x / 2.0f;
-          float sigmaZ = gaussianScale * opposingCourt.bounds.size.z / 2.0f;
-          float xTarget = sampleGaussianDistribution(opposingCourtCenter.x, sigmaX);
-          float zTarget = sampleGaussianDistribution(opposingCourtCenter.z, sigmaZ);
-          Vector3 target = new Vector3(xTarget, opposingCourtCenter.y, zTarget);
-
-          float gravity = Physics.gravity.y;
-          Vector3 currentPosition = player.GetComponent<Rigidbody>().position;
-          Vector3 returnVelocity = new Vector3(
-            (target.x - currentPosition.x) / returnTime,
-            ((target.y - currentPosition.y) / returnTime) - (gravity * returnTime) / 2.0f,
-            (target.z - currentPosition.z) / returnTime
-          );
-          listenedBall.GetComponent<Rigidbody>().velocity = returnVelocity;
-        }
+        // get player or AI to hit ball
+        player.hitBall(listenedBall, opposingCourt);
 
         // Switch possession or increment passes
         if (currentPossession != player.team)
@@ -395,5 +385,9 @@ public class GameManager : MonoBehaviour
   public bool isGameRunning()
   {
     return gameRunning;
+  }
+  public bool getIsBallInPlay()
+  {
+    return isBallInPlay;
   }
 }

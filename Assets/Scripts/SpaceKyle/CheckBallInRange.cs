@@ -5,36 +5,36 @@ using BehaviorTree;
 
 public class CheckBallInRange : Node
 {
-    private Transform _transform;
-    private Animator _animator;
+  private Transform _transform;
+  private Animator _animator;
 
-    public CheckBallInRange(Transform transform)
+  public CheckBallInRange(Transform transform)
+  {
+    _transform = transform;
+    _animator = transform.GetComponent<Animator>();
+  }
+
+  public override NodeState Evaluate()
+  {
+    GameObject t = GameObject.Find("Ball");
+    if (t == null)
     {
-        _transform = transform;
-        _animator = transform.GetComponent<Animator>();
+      state = NodeState.FAILURE;
+      return state;
     }
 
-    public override NodeState Evaluate()
+    Transform target = t.transform;
+    if (Vector3.Distance(_transform.position, target.position) <= KyleBT.hitRange)
     {
-        GameObject t = GameObject.Find("Ball");
-        if(t == null)
-        {
-            state = NodeState.FAILURE;
-            return state;
-        }
+      Debug.Log("In Range");
+      _animator.SetBool("HittingBall", true);
+      _animator.SetBool("Walking", false);
 
-        Transform target = t.transform;
-        if(Vector3.Distance(_transform.position, target.position) <= KyleBT.hitRange)
-        {
-            Debug.Log("In Range");
-            _animator.SetBool("HittingBall", true);
-            _animator.SetBool("Walking", false);
-
-            state = NodeState.SUCCESS;
-            return state;
-        }
-
-        state = NodeState.FAILURE;
-        return state;
+      state = NodeState.SUCCESS;
+      return state;
     }
+
+    state = NodeState.FAILURE;
+    return state;
+  }
 }
