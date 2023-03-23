@@ -10,6 +10,12 @@ public class AIPlayer : Player
     {StateController.AiDifficulty.Hard, 0.33f}
   };
 
+  public static Dictionary<StateController.AiDifficulty, float> speedDifficulties = new Dictionary<StateController.AiDifficulty, float>{
+    {StateController.AiDifficulty.Easy, 0.5f},
+    {StateController.AiDifficulty.Normal, 1.0f},
+    {StateController.AiDifficulty.Hard, 1.5f}
+  };
+
   public static Dictionary<StateController.AiDifficulty, float> returnTimeDifficulties = new Dictionary<StateController.AiDifficulty, float>{
     {StateController.AiDifficulty.Easy, 2.0f},
     {StateController.AiDifficulty.Normal, 1.5f},
