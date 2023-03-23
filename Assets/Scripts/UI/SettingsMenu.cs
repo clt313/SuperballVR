@@ -27,6 +27,8 @@ public class SettingsMenu : MonoBehaviour {
         qualityDropdown.value = PlayerPrefs.GetInt(PrefQuality, 3);
         SetQuality(qualityDropdown.value);
         AudioManager.instance.Play("MainTheme");
+        AudioManager.instance.Play("Campfire");
+        AudioManager.instance.Play("Birds");
     }
 
     public void SetMasterVolume (float volume) {
