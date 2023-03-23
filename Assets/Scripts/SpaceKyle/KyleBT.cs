@@ -24,7 +24,7 @@ public class KyleBT : Tree
                 // new CheckBall(transform),
                 new ApproachBall(transform),
             }),
-            new PatrolCourt(transform, waypoints),
+            // new PatrolCourt(transform, waypoints),
         });
 
     return root;
