@@ -4,16 +4,16 @@ using System.Collections.Generic;
 public class AIPlayer : Player
 {
 
-  public static Dictionary<DIFFICULTY, float> gaussianScaleDifficulties = new Dictionary<DIFFICULTY, float>{
-    {DIFFICULTY.EASY, 0.8f},
-    {DIFFICULTY.MEDIUM, 0.66f},
-    {DIFFICULTY.HARD, 0.33f}
+  public static Dictionary<StateController.AiDifficulty, float> gaussianScaleDifficulties = new Dictionary<StateController.AiDifficulty, float>{
+    {StateController.AiDifficulty.Easy, 0.8f},
+    {StateController.AiDifficulty.Normal, 0.66f},
+    {StateController.AiDifficulty.Hard, 0.33f}
   };
 
-  public static Dictionary<DIFFICULTY, float> returnTimeDifficulties = new Dictionary<DIFFICULTY, float>{
-    {DIFFICULTY.EASY, 2.0f},
-    {DIFFICULTY.MEDIUM, 1.5f},
-    {DIFFICULTY.HARD, 1.0f}
+  public static Dictionary<StateController.AiDifficulty, float> returnTimeDifficulties = new Dictionary<StateController.AiDifficulty, float>{
+    {StateController.AiDifficulty.Easy, 2.0f},
+    {StateController.AiDifficulty.Normal, 1.5f},
+    {StateController.AiDifficulty.Hard, 1.0f}
   };
 
   // Start is called before the first frame update
@@ -49,8 +49,8 @@ public class AIPlayer : Player
     // Return Ball To Other Side Of Court
 
     // CONFIGURATION
-    float returnTime = returnTimeDifficulties[GameManager.gameDifficulty];
-    float gaussianScale = gaussianScaleDifficulties[GameManager.gameDifficulty]; // Scale width/length of court to one standard deviation. Smaller is tighter gaussian.
+    float returnTime = returnTimeDifficulties[StateController.aiDifficulty];
+    float gaussianScale = gaussianScaleDifficulties[StateController.aiDifficulty]; // Scale width/length of court to one standard deviation. Smaller is tighter gaussian.
 
     Vector3 opposingCourtCenter = opposingCourt.bounds.center;
     float sigmaX = gaussianScale * opposingCourt.bounds.size.x / 2.0f;
