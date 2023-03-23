@@ -9403,6 +9403,11 @@ PrefabInstance:
       propertyPath: m_StopLineAtFirstRaycastHit
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2183002542682781524, guid: 8593d4afb35590340acf0698b2d8d1d3,
+        type: 3}
+      propertyPath: m_TrackingOriginMode
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2183002542682781525, guid: 8593d4afb35590340acf0698b2d8d1d3,
         type: 3}
       propertyPath: m_RootOrder
