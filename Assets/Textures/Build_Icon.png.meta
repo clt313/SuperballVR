@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Textures/Build_Icon.png.meta
 guid: d23b3ce8753958048a907107e11a7d84
+========
+guid: e1aaaa33065cb9d4ba324cdfa9055fe8
+>>>>>>>> 780245b9185efaf80595194676ac520aa557df43:Assets/Resources/Landing_Indicator_Img.png.meta
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}

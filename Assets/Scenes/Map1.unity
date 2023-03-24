@@ -5396,6 +5396,11 @@ PrefabInstance:
       propertyPath: m_IsKinematic
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1354242289218167845, guid: b61ee656507c68d4cb42bfd0a69be6e4,
+        type: 3}
+      propertyPath: m_IsKinematic
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1519320446650237750, guid: b61ee656507c68d4cb42bfd0a69be6e4,
         type: 3}
       propertyPath: m_IsActive
@@ -5445,6 +5450,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_CameraType
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4532031807317144587, guid: b61ee656507c68d4cb42bfd0a69be6e4,
+        type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4532031807317144587, guid: b61ee656507c68d4cb42bfd0a69be6e4,
         type: 3}
@@ -5521,6 +5531,11 @@ PrefabInstance:
       propertyPath: m_Cameras.Array.data[0]
       value: 
       objectReference: {fileID: 1721360407}
+    - target: {fileID: 7829431799784842761, guid: b61ee656507c68d4cb42bfd0a69be6e4,
+        type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7829431799784842761, guid: b61ee656507c68d4cb42bfd0a69be6e4,
         type: 3}
       propertyPath: m_PresetInfoIsWorld
