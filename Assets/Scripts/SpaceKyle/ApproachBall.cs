@@ -28,7 +28,7 @@ public class ApproachBall : Node
 
     LOCATION ballBounceLocation = gameManager.getLocationClassification(_target);
 
-    if (Vector3.Distance(rb.position, _target) > 0.01f)
+    if (Vector3.Distance(rb.position, _target) > KyleBT.speed * Time.deltaTime)
     {
       _animator.SetBool("Walking", true);
       Vector3 toTarget = _target - rb.position;
@@ -38,12 +38,12 @@ public class ApproachBall : Node
       state = NodeState.SUCCESS;
       return state;
     }
-    // else
-    // {
-    //   rb.velocity = Vector3.zero;
-    //   rb.position = _target;
-    //   _transform.LookAt(lookAtVec);
-    // }
+    else
+    {
+      rb.velocity = Vector3.zero;
+      rb.position = _target;
+      // _transform.LookAt(lookAtVec);
+    }
 
     state = NodeState.FAILURE;
     return state;

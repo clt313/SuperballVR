@@ -43,7 +43,7 @@ public class PatrolCourt : Node
     Rigidbody rb = _transform.root.GetComponent<Rigidbody>();
     // _wp.y = 0f;
 
-    if (Vector3.Distance(rb.position, _wp) < 0.01f)
+    if (Vector3.Distance(rb.position, _wp) < KyleBT.speed * Time.deltaTime)
     {
       rb.position = _wp;
       rb.velocity = Vector3.zero;
@@ -62,7 +62,7 @@ public class PatrolCourt : Node
     else
     {
       Vector3 toWayPoint = _wp - rb.position;
-      rb.velocity = toWayPoint.normalized * KyleBT.speed;
+      rb.velocity = toWayPoint.normalized * KyleBT.speed / 2;
       _transform.LookAt(Vector3.left);
     }
     //}
