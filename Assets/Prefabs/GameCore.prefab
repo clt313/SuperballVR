@@ -8604,6 +8604,37 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 5.5215607, z: 24.662868}
   m_Center: {x: 0, y: -1.1279302, z: 2.9777355}
+--- !u!1 &7479628347086871248
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4864205214819830400}
+  m_Layer: 0
+  m_Name: Waypoint3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4864205214819830400
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7479628347086871248}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.15, y: 0, z: -3.04}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4000448743942773387}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8544135802716111406
 GameObject:
   m_ObjectHideFlags: 0
@@ -8633,6 +8664,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5984226809323958267}
+  - {fileID: 4864205214819830400}
   m_Father: {fileID: 4874482072974449048}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -9402,6 +9434,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_StopLineAtFirstRaycastHit
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2183002542682781524, guid: 8593d4afb35590340acf0698b2d8d1d3,
+        type: 3}
+      propertyPath: m_TrackingOriginMode
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2183002542682781525, guid: 8593d4afb35590340acf0698b2d8d1d3,
         type: 3}
