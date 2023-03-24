@@ -55,6 +55,9 @@ public class VolumetricFire : MonoBehaviour
 
     private void RenderFlames(ScriptableRenderContext context, Camera camera)
     {
+        if (!boundaryCollider)
+            return;
+            
         bool isVisible = IsVisible(camera, boundaryCollider.bounds);
 
         // Internal Count = 
@@ -100,7 +103,7 @@ public class VolumetricFire : MonoBehaviour
         Vector3 position = Vector3.zero;
         if (billboard)
         {
-            newRot *= camera.transform.rotation;
+            // newRot *= camera.transform.rotation;
             Vector3 direction = (transform.position - camera.transform.position).normalized;
             position = transform.position - (direction * item * spacing);
         }
