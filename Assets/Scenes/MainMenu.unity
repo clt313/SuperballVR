@@ -5757,7 +5757,8 @@ MonoBehaviour:
 
     <b>RJoystick</b>    Turn
 
-    <b>Trigger</b> Select
+    <b>Trigger</b>
+    Select
 
     <b>B/Y/Menu</b> Pause
 
@@ -9800,10 +9801,12 @@ MonoBehaviour:
   m_text: '<#00DAFF><i>Superball combines <#0D0>tennis<#00DAFF> and <#DDD>volleyball<#00DAFF>.</i>
 
 
-    <#DDD>Hit the ball like a volleyball <#0D0>but play it like tennis.
+    <#DDD>Hit
+    the ball like a volleyball <#0D0>but play it like tennis.
 
 
-    <#00DAFF>Scores are kept volleyball-style. First to the match length wins!'
+    <#00DAFF>Scores
+    are kept volleyball-style. First to the match length wins!'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -17213,22 +17216,22 @@ PrefabInstance:
     - target: {fileID: 4199273467187437211, guid: e268b8025a1a7d145a7bcca7bfa4e7f0,
         type: 3}
       propertyPath: m_Size.x
-      value: 10
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4199273467187437211, guid: e268b8025a1a7d145a7bcca7bfa4e7f0,
         type: 3}
       propertyPath: m_Size.y
-      value: 10
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4199273467187437211, guid: e268b8025a1a7d145a7bcca7bfa4e7f0,
         type: 3}
       propertyPath: m_Size.z
-      value: 10
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4199273467187437211, guid: e268b8025a1a7d145a7bcca7bfa4e7f0,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5352601780688892538, guid: e268b8025a1a7d145a7bcca7bfa4e7f0,
         type: 3}
