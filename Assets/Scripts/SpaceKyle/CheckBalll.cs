@@ -28,6 +28,7 @@ public class CheckBall : Node
       {
         _animator.SetBool("StrafeLeft", false);
         _animator.SetBool("StrafeRight", false);
+        _animator.SetBool("HittingBall", false);
         _animator.SetBool("Walking", true);
 
         state = NodeState.SUCCESS;
