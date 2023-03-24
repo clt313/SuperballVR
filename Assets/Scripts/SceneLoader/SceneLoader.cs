@@ -17,8 +17,10 @@ public class SceneLoader : MonoBehaviour {
 
     void Start() {
         // Only initialize once
-         if (instance == null)
+        if (instance == null) {
             instance = this;
+            loaderUI.SetActive(false);
+        }
         else {
             Destroy(gameObject);
             return;
@@ -27,9 +29,10 @@ public class SceneLoader : MonoBehaviour {
 
         // Flip sphere mesh inside out (so player sees from inside it)
         // With help from https://answers.unity.com/questions/476810/flip-a-mesh-inside-out.html
-        GameObject sphere = loaderUI.transform.Find("Sphere").gameObject;
-        Mesh mesh = sphere.GetComponent<MeshFilter>().mesh;
-        mesh.triangles = mesh.triangles.Reverse().ToArray();
+        // *** Currently don't need these because of Universal Render Pipeline/Unlit shader on Sphere
+        // GameObject sphere = loaderUI.transform.Find("Sphere").gameObject;
+        // Mesh mesh = sphere.GetComponent<MeshFilter>().mesh;
+        // mesh.triangles = mesh.triangles.Reverse().ToArray();
     }
 
     // Reloads the current scene

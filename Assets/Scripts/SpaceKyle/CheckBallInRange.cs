@@ -17,10 +17,10 @@ public class CheckBallInRange : Node
   public override NodeState Evaluate()
   {
     GameObject t = GameObject.Find("Ball");
-    if(t == null)
+    if (t == null)
     {
-        state = NodeState.FAILURE;
-        return state;
+      state = NodeState.FAILURE;
+      return state;
     }
 
     Transform target = t.transform;

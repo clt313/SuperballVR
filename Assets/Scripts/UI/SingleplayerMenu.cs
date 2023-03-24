@@ -66,6 +66,8 @@ public class SingleplayerMenu : MonoBehaviour {
             return;
         }
         AudioManager.instance.Stop("MainTheme");
+        AudioManager.instance.Stop("Campfire");
+        AudioManager.instance.Stop("Birds");
         StateController.matchLength = matchLength;
         StateController.aiDifficulty = aiDifficulty;
         SceneLoader.instance.LoadScene(map.ToString());
