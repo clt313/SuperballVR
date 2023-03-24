@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Models/OccaSoftware/Enflame/Scenes.meta
 guid: 7bbf1f4a4fd5a94449aef1f9fe6c2bb8
+========
+guid: d0bae77f0fc225e4ebe2b8ec9d25f240
+>>>>>>>> 780245b9185efaf80595194676ac520aa557df43:Assets/Scripts/Util.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

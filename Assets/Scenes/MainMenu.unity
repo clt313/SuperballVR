@@ -5757,7 +5757,7 @@ MonoBehaviour:
 
     <b>RJoystick</b>    Turn
 
-    <b>Trigger</b>     
+    <b>Trigger</b>
     Select
 
     <b>B/Y/Menu</b> Pause
@@ -17487,6 +17487,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4698724494682224972, guid: bfafec44c2310fc4f9e36f0f70b17273,
+        type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4698724494742892768, guid: bfafec44c2310fc4f9e36f0f70b17273,
         type: 3}

@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Models/OccaSoftware.meta
 guid: 14a4b0c33f72f4a46ad5570bdfe90ef0
+========
+guid: 3eb2f57e8b903a848a5a848d4d118319
+>>>>>>>> 780245b9185efaf80595194676ac520aa557df43:Assets/Resources.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}
