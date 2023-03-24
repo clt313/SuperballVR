@@ -29,7 +29,7 @@ public class CheckBallInRange : Node
 
     if(Vector3.Distance(_transform.position, _target) <= KyleBT.hitRange)
     {
-        Debug.Log("In Range");
+        //Debug.Log("In Range");
         _animator.SetBool("StrafeRight", false);
         _animator.SetBool("StrafeLeft", false);
         _animator.SetBool("HittingBall", false);

@@ -31,7 +31,7 @@ public class GameManager : MonoBehaviour
   // INPUT PARAMETERS
   ////////////////////////
   public int maxBounces = 1;
-  public int maxPasses = 2;
+  public int maxPasses = 3; // prefab var also must be changed
   public int maxGameTimeSeconds = 10 * 60;
   public int maxScore = 5;
   public GameObject teamOneCourt;
@@ -134,6 +134,7 @@ public class GameManager : MonoBehaviour
     currentServer = TEAM.TEAM_ONE;
     currentPossession = TEAM.TEAM_ONE;
     roundEndReason = ROUND_END_REASON.NONE;
+    KyleBT.speed = AIPlayer.speedDifficulties[StateController.aiDifficulty];
     updateScoreboard();
     foreach (TMP_Text maxScoreText in maxScoreTexts)
       maxScoreText.SetText(maxScore.ToString());
@@ -305,7 +306,7 @@ public class GameManager : MonoBehaviour
         if (currentPossession != player.team)
         {
           currentBounces = 0;
-          currentPasses = 0;
+          currentPasses = 1;
           currentPossession = player.team;
         }
         else
