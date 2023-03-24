@@ -43,17 +43,6 @@ public class PatrolCourt : Node
     Rigidbody rb = _transform.root.GetComponent<Rigidbody>();
     // _wp.y = 0f;
 
-    if (_currentWaypointIndex == 0)
-    {
-      _animator.SetBool("StrafeRight", true);
-      _animator.SetBool("StrafeLeft", false);
-    }
-    else
-    {
-      _animator.SetBool("StrafeRight", false);
-      _animator.SetBool("StrafeLeft", true);
-    }
-
     if (Vector3.Distance(rb.position, _wp) < 0.01f)
     {
       rb.position = _wp;
@@ -77,6 +66,17 @@ public class PatrolCourt : Node
       _transform.LookAt(Vector3.left);
     }
     //}
+    
+    if (_currentWaypointIndex == 0)
+    {
+      _animator.SetBool("StrafeRight", true);
+      _animator.SetBool("StrafeLeft", false);
+    }
+    else
+    {
+      _animator.SetBool("StrafeRight", false);
+      _animator.SetBool("StrafeLeft", true);
+    }
 
     state = NodeState.RUNNING;
     return state;

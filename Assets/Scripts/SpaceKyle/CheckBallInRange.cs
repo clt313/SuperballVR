@@ -24,14 +24,22 @@ public class CheckBallInRange : Node
     }
 
     Transform target = t.transform;
-    if (Vector3.Distance(_transform.position, target.position) <= KyleBT.hitRange)
-    {
-      Debug.Log("In Range");
-      _animator.SetBool("HittingBall", true);
-      _animator.SetBool("Walking", false);
+    Vector3 _target = target.position;
+    _target.y = _transform.position.y;
 
-      state = NodeState.SUCCESS;
-      return state;
+    if(Vector3.Distance(_transform.position, _target) <= KyleBT.hitRange)
+    {
+        Debug.Log("In Range");
+        _animator.SetBool("StrafeRight", false);
+        _animator.SetBool("StrafeLeft", false);
+        _animator.SetBool("HittingBall", false);
+        _animator.SetBool("Walking", true);
+
+        //_transform.position = Vector3.MoveTowards(_transform.position, _target, KyleBT.speed * 2 * Time.deltaTime);
+        _transform.LookAt(Vector3.left);
+
+        state = NodeState.SUCCESS;
+        return state;
     }
 
     state = NodeState.FAILURE;

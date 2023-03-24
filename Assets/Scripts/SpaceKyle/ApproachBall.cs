@@ -30,6 +30,7 @@ public class ApproachBall : Node
 
     if (Vector3.Distance(rb.position, _target) > 0.01f)
     {
+      _animator.SetBool("Walking", true);
       Vector3 toTarget = _target - rb.position;
       rb.velocity = toTarget.normalized * KyleBT.speed;
       _transform.LookAt(lookAtVec);
