@@ -20,10 +20,13 @@ public class SingleplayerMenu : MonoBehaviour {
     public Button map2;
     public Button map3;
 
+    const string PrefDifficulty = "AIDifficulty";
+    const string PrefMatchLength = "MatchLength";
+
     // Set default variables on start
     void Start() {
-        SetAiDifficulty((float)StateController.AiDifficulty.Normal);
-        SetMatchLength(11);
+        SetAiDifficulty(PlayerPrefs.GetFloat(PrefDifficulty, (float)StateController.aiDifficulty));
+        SetMatchLength(PlayerPrefs.GetInt(PrefMatchLength, StateController.matchLength));
         SetMap((int)MapType.Map1);
     }
 
@@ -60,6 +63,11 @@ public class SingleplayerMenu : MonoBehaviour {
 
     // Starts the game and moves to the game scene
     public void StartGame() {
+        // Save player preferences
+        PlayerPrefs.SetFloat(PrefDifficulty, (float)aiDifficulty);
+        PlayerPrefs.SetInt(PrefMatchLength, matchLength);
+
+        // Validate scene and prep to switch scenes
         int buildIndex = SceneUtility.GetBuildIndexByScenePath(map.ToString());
         if (buildIndex == -1) {
             Debug.LogWarning("Could not find scene with name " + map.ToString() + "! Is it in the build? (File > Build Settings > Scenes in Build)");
