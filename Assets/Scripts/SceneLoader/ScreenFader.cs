@@ -18,6 +18,8 @@ public class ScreenFader : MonoBehaviour {
         images = new List<Image>();
 
         foreach (GameObject gameObject in objectsToFade) {
+            if (gameObject == null)
+                continue;
             Renderer[] renderers = gameObject?.GetComponentsInChildren<Renderer>();
             foreach (Renderer renderer in renderers)
                 materials.Add(renderer?.material);
