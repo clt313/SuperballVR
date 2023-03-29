@@ -7834,6 +7834,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameplayButton
       objectReference: {fileID: 0}
+    - target: {fileID: 7604568254160345375, guid: 320c7db85a327e442aab5ceea779dea3,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 320c7db85a327e442aab5ceea779dea3, type: 3}
 --- !u!224 &886764533 stripped
