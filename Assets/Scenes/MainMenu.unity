@@ -16738,11 +16738,6 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 2183002543522132148, guid: 8593d4afb35590340acf0698b2d8d1d3,
-        type: 3}
-      propertyPath: m_StopLineAtFirstRaycastHit
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2183002543522132149, guid: 8593d4afb35590340acf0698b2d8d1d3,
         type: 3}
       propertyPath: m_Enabled
