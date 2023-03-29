@@ -7834,6 +7834,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameplayButton
       objectReference: {fileID: 0}
+    - target: {fileID: 7604568254160345375, guid: 320c7db85a327e442aab5ceea779dea3,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 320c7db85a327e442aab5ceea779dea3, type: 3}
 --- !u!224 &886764533 stripped
@@ -16653,11 +16658,6 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 2183002542512132367, guid: 8593d4afb35590340acf0698b2d8d1d3,
-        type: 3}
-      propertyPath: m_StopLineAtFirstRaycastHit
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2183002542682781524, guid: 8593d4afb35590340acf0698b2d8d1d3,
         type: 3}
       propertyPath: m_Enabled
@@ -16737,11 +16737,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Enabled
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2183002543522132148, guid: 8593d4afb35590340acf0698b2d8d1d3,
-        type: 3}
-      propertyPath: m_StopLineAtFirstRaycastHit
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2183002543522132149, guid: 8593d4afb35590340acf0698b2d8d1d3,
         type: 3}

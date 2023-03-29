@@ -103,7 +103,8 @@ public class VolumetricFire : MonoBehaviour
         Vector3 position = Vector3.zero;
         if (billboard)
         {
-            // newRot *= camera.transform.rotation;
+            newRot *= camera.transform.rotation;
+            newRot.eulerAngles = new Vector3(newRot.eulerAngles.x, newRot.eulerAngles.y, 0f);
             Vector3 direction = (transform.position - camera.transform.position).normalized;
             position = transform.position - (direction * item * spacing);
         }
