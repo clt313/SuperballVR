@@ -8359,7 +8359,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10308, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: e823cd5b5d27c0f4b8256e7c12ee3e6d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -9802,27 +9802,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1519320448253446035}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &819128307168833743 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2183002542682781532, guid: 8593d4afb35590340acf0698b2d8d1d3,
-    type: 3}
-  m_PrefabInstance: {fileID: 1519320448253446035}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &3884483003393782162
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 819128307168833743}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7cb2425289008bd428cf38a1e32c4266, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetFrameRate: 90
-  minQualityLevel: 0
-  maxQualityLevel: 5
 --- !u!1001 &1519320448459207275
 PrefabInstance:
   m_ObjectHideFlags: 0

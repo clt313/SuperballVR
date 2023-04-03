@@ -55,9 +55,6 @@ public class VolumetricFire : MonoBehaviour
 
     private void RenderFlames(ScriptableRenderContext context, Camera camera)
     {
-        if (!boundaryCollider)
-            return;
-            
         bool isVisible = IsVisible(camera, boundaryCollider.bounds);
 
         // Internal Count = 
@@ -98,24 +95,24 @@ public class VolumetricFire : MonoBehaviour
     }
 
     void CreateItem(float spacing, float item, Camera camera)
-{
-    Quaternion newRot = Quaternion.identity;
-    Vector3 position = Vector3.zero;
-    if (billboard)
     {
-        // Set new position
-        Vector3 direction = (transform.position - camera.transform.position).normalized;
-        position = transform.position - (direction * item * spacing);
-    }
-    else
-    {
-        // Set new position and rotation
-        newRot = transform.rotation;
-        position = transform.position - (transform.forward * item * spacing);
-    }
+        Quaternion newRot = Quaternion.identity;
+        Vector3 position = Vector3.zero;
+        if (billboard)
+        {
+            newRot *= camera.transform.rotation;
+            newRot.eulerAngles = new Vector3(newRot.eulerAngles.x, newRot.eulerAngles.y, 0f);
+            Vector3 direction = (transform.position - camera.transform.position).normalized;
+            position = transform.position - (direction * item * spacing);
+        }
+        else
+        {
+            newRot = transform.rotation;
+            position = transform.position - (transform.forward * item * spacing);
+        }
+        
 
-    Matrix4x4 matrix = Matrix4x4.TRS(position, newRot, transform.localScale);
-    Graphics.DrawMesh(mesh, matrix, material, 0, camera, 0, materialPropertyBlock, false, false, false);
-}
-
+        Matrix4x4 matrix = Matrix4x4.TRS(position, newRot, transform.localScale);
+        Graphics.DrawMesh(mesh, matrix, material, 0, camera, 0, materialPropertyBlock, false, false, false);
+    }
 }
