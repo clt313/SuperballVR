@@ -12,11 +12,16 @@ public class SettingsMenu : MonoBehaviour {
     public Slider musicSlider;
     public Slider soundSlider;
     public TMPro.TMP_Dropdown qualityDropdown;
+    public Toggle ballTrajectory;
+
+    public Toggle ballTrail;
 
     const string PrefQuality = "QualityValue";
     const string PrefMaster = "MasterVolume";
     const string PrefMusic = "MusicVolume";
     const string PrefSound = "SoundVolume";
+    const string PrefTrajectory = "BallTrajectory";
+    const string PrefTrail = "BallTrail";
 
     void Start() {
         // Master must be set after other two sliders due to conversion timing
@@ -26,6 +31,8 @@ public class SettingsMenu : MonoBehaviour {
         SetMasterVolume(masterSlider.value);
         qualityDropdown.value = PlayerPrefs.GetInt(PrefQuality, 3);
         SetQuality(qualityDropdown.value);
+        ballTrajectory.isOn = PlayerPrefs.GetInt(PrefTrajectory, 1) != 0;
+        ballTrail.isOn = PlayerPrefs.GetInt(PrefTrail, 1) != 0;
         AudioManager.instance.Play("MainTheme");
         AudioManager.instance.Play("Campfire");
         AudioManager.instance.Play("Birds");
@@ -53,5 +60,15 @@ public class SettingsMenu : MonoBehaviour {
     public void SetQuality(int qualityIndex) {
         QualitySettings.SetQualityLevel(qualityIndex);
         PlayerPrefs.SetInt(PrefQuality, qualityDropdown.value);
+    }
+
+    public void SetBallTrajectoryAssist(bool enabled) {
+        StateController.ballTrajectory = enabled;
+        PlayerPrefs.SetInt(PrefTrajectory, ballTrajectory.isOn ? 1 : 0);
+    }
+
+    public void SetBallTrail(bool enabled) {
+        StateController.ballTrail = enabled;
+        PlayerPrefs.SetInt(PrefTrail, ballTrail.isOn ? 1 : 0);
     }
 }

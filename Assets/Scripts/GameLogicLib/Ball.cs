@@ -27,16 +27,21 @@ public class Ball : MonoBehaviour
       gameObject.GetComponent<Light>().enabled = true;
     }
 
+    gameObject.GetComponent<TrailRenderer>().enabled = StateController.ballTrail;
+
     // Delete self on round end
     GameEvents.roundEndEvent.AddListener(deleteSelf);
-
-    createLandingIndicator();
+    if (StateController.ballTrajectory) {
+      createLandingIndicator();
+    }
   }
 
   // Update is called once per frame
   void Update()
   {
-    updateLandingIndicator();
+    if (StateController.ballTrajectory) {
+      updateLandingIndicator();
+    }
   }
 
   void createLandingIndicator()

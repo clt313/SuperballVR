@@ -8,4 +8,6 @@ public class StateController : MonoBehaviour {
     public static AiDifficulty aiDifficulty = AiDifficulty.Normal;
     public static int matchLength = 11;
     public static bool inputEnabled = true;
+    public static bool ballTrajectory = true;
+    public static bool ballTrail = true;
 }
