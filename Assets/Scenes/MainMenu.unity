@@ -4851,6 +4851,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8265206808135288012}
     m_Modifications:
+    - target: {fileID: 522459008930783863, guid: 23bd600a3424d9e44ac451d447977c93,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 522459008932552855, guid: 23bd600a3424d9e44ac451d447977c93,
         type: 3}
       propertyPath: m_RootOrder
@@ -6944,6 +6949,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8265206808135288012}
     m_Modifications:
+    - target: {fileID: 522459008930783863, guid: 23bd600a3424d9e44ac451d447977c93,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 522459008932552855, guid: 23bd600a3424d9e44ac451d447977c93,
         type: 3}
       propertyPath: m_RootOrder
@@ -7420,6 +7430,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8265206808135288012}
     m_Modifications:
+    - target: {fileID: 522459008930783863, guid: 23bd600a3424d9e44ac451d447977c93,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 522459008932552855, guid: 23bd600a3424d9e44ac451d447977c93,
         type: 3}
       propertyPath: m_RootOrder
@@ -10277,6 +10292,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8265206808135288012}
     m_Modifications:
+    - target: {fileID: 522459008930783863, guid: 23bd600a3424d9e44ac451d447977c93,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 522459008932552855, guid: 23bd600a3424d9e44ac451d447977c93,
         type: 3}
       propertyPath: m_RootOrder
@@ -11531,6 +11551,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8265206808135288012}
     m_Modifications:
+    - target: {fileID: 522459008930783863, guid: 23bd600a3424d9e44ac451d447977c93,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 522459008932552855, guid: 23bd600a3424d9e44ac451d447977c93,
         type: 3}
       propertyPath: m_RootOrder
@@ -11626,6 +11651,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8265206808135288012}
     m_Modifications:
+    - target: {fileID: 522459008930783863, guid: 23bd600a3424d9e44ac451d447977c93,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 522459008932552855, guid: 23bd600a3424d9e44ac451d447977c93,
         type: 3}
       propertyPath: m_RootOrder
@@ -13518,6 +13548,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8265206808135288012}
     m_Modifications:
+    - target: {fileID: 522459008930783863, guid: 23bd600a3424d9e44ac451d447977c93,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 522459008932552855, guid: 23bd600a3424d9e44ac451d447977c93,
         type: 3}
       propertyPath: m_RootOrder
@@ -14568,6 +14603,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8265206808135288012}
     m_Modifications:
+    - target: {fileID: 522459008930783863, guid: 23bd600a3424d9e44ac451d447977c93,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 522459008932552855, guid: 23bd600a3424d9e44ac451d447977c93,
         type: 3}
       propertyPath: m_RootOrder
@@ -17246,6 +17286,11 @@ PrefabInstance:
     - target: {fileID: 5352601780688892540, guid: e268b8025a1a7d145a7bcca7bfa4e7f0,
         type: 3}
       propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5352601780688892540, guid: e268b8025a1a7d145a7bcca7bfa4e7f0,
+        type: 3}
+      propertyPath: m_CastShadows
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5352601780688892541, guid: e268b8025a1a7d145a7bcca7bfa4e7f0,

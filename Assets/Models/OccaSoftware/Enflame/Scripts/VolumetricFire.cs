@@ -55,9 +55,6 @@ public class VolumetricFire : MonoBehaviour
 
     private void RenderFlames(ScriptableRenderContext context, Camera camera)
     {
-        if (!boundaryCollider)
-            return;
-            
         bool isVisible = IsVisible(camera, boundaryCollider.bounds);
 
         // Internal Count = 

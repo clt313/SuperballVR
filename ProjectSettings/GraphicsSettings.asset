@@ -44,7 +44,7 @@ GraphicsSettings:
   m_PreloadShadersBatchTimeLimit: -1
   m_SpritesDefaultMaterial: {fileID: 10754, guid: 0000000000000000f000000000000000,
     type: 0}
-  m_CustomRenderPipeline: {fileID: 11400000, guid: 6063e98f9cdb9584dbc6c83a61c147b8,
+  m_CustomRenderPipeline: {fileID: 11400000, guid: f2581513a5a958c499e493103c559881,
     type: 2}
   m_TransparencySortMode: 0
   m_TransparencySortAxis: {x: 0, y: 0, z: 1}

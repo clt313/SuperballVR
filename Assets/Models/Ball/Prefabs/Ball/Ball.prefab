@@ -132,6 +132,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   glowMaterial: {fileID: 2100000, guid: 01478a1914b480e4cbcec2c11e16761f, type: 2}
+  floorPosition: 0
 --- !u!114 &-6599856010379611374
 MonoBehaviour:
   m_ObjectHideFlags: 0
