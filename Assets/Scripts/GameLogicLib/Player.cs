@@ -37,6 +37,7 @@ public class Player : MonoBehaviour
   {
     const float toCenterCoeff = 0.7f;
     const float playerHitCoeff = 0.3f;
+    const float momentumDampeningCoeff = 0.8f;
     float returnTime = 2.0f;
 
     Vector3 target = opposingCourt.bounds.center;
@@ -60,7 +61,14 @@ public class Player : MonoBehaviour
     Vector3 finalReturnForward = toCenterCoeff * returnVelocityToCenter + playerHitCoeff * playerHitDirection;
     finalReturnForward.Normalize();
 
+    // Loosely based on conservation of momentum
+    // m1v1 + m2v2 = m1v1' + m2v2'
+    // Masses stay constant, and the velocity of human hand is player controlled
+    // So unfortunately this by nature breaks conservation of momentum
+    // So a small hack is to just min new velocity with current ball velocity * 0.5 (say dampening to stop non-stop increase)
+    float currBallSpeed = listenedBall.GetComponent<Rigidbody>().velocity.magnitude;
     float returnSpeed = getHandVelocityClosestToPoint(ballPosition).magnitude * 1.5f;
+    returnSpeed = Mathf.Max(currBallSpeed * momentumDampeningCoeff, returnSpeed);
     Vector3 returnVelocity = finalReturnForward * returnSpeed;
     listenedBall.GetComponent<Rigidbody>().velocity = returnVelocity;
   }
