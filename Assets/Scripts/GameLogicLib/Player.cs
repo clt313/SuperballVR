@@ -4,6 +4,8 @@ public class Player : MonoBehaviour
 {
 
   public TEAM team;
+
+  // Sum of 1/2^n from n=1 to infinity quickly converges to 1. So it can be used to estimate velocity.
   private Vector3 prevRightHandPosition;
   private Vector3 prevLeftHandPosition;
   private Vector3 rightHandVelocity;
