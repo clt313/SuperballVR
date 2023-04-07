@@ -1,15 +1,16 @@
 using UnityEngine;
-using Utility;
+using System.Collections.Generic;
 public class Player : MonoBehaviour
 {
 
   public TEAM team;
 
   // Sum of 1/2^n from n=1 to infinity quickly converges to 1. So it can be used to estimate velocity.
+  private int numberOfFramesToAverageOver = 5; // Converges to 0.96875 (close enough to 1.0f)
   private Vector3 prevRightHandPosition;
   private Vector3 prevLeftHandPosition;
-  private Vector3 rightHandVelocity;
-  private Vector3 leftHandVelocity;
+  private LinkedList<Vector3> rightHandVelocity;
+  private LinkedList<Vector3> leftHandVelocity;
 
   // Start is called before the first frame update
   public virtual void Start()
@@ -106,10 +107,19 @@ public class Player : MonoBehaviour
   {
     Vector3 newRightHandPosition = Utility.FindUtil.RecursiveFindChild(transform, "HandColliderRight").GetComponent<Rigidbody>().position;
     Vector3 newLeftHandPosition = Utility.FindUtil.RecursiveFindChild(transform, "HandColliderLeft").GetComponent<Rigidbody>().position;
-    rightHandVelocity = (newRightHandPosition - prevRightHandPosition) / Time.deltaTime;
-    leftHandVelocity = (newLeftHandPosition - prevLeftHandPosition) / Time.deltaTime;
+    
+    Vector3 thisFrameRightVelocity = (newRightHandPosition - prevRightHandPosition) / Time.deltaTime;
+    Vector3 thisFrameLeftVelocity = (newLeftHandPosition - prevLeftHandPosition) / Time.deltaTime;
     prevRightHandPosition = newRightHandPosition;
     prevLeftHandPosition = newLeftHandPosition;
+
+    // Add the new velocities to the linked list and remove the old one once you reach max number to average over
+    rightHandVelocity.AddLast(thisFrameRightVelocity);
+    leftHandVelocity.AddLast(thisFrameLeftVelocity);
+    if(rightHandVelocity.Count == numberOfFramesToAverageOver) {
+      rightHandVelocity.RemoveFirst();
+      leftHandVelocity.RemoveFirst();
+    }
   }
 
   Vector3 getClosestHandPosition(Vector3 position)
@@ -126,14 +136,24 @@ public class Player : MonoBehaviour
 
   Vector3 getHandVelocityClosestToPoint(Vector3 position)
   {
+    // Return weighted average according to series sum(1/2^n) 
+    Vector3 resultingVelocity = Vector3.zero;
+    int currNodeIndex = 1;
     if (Vector3.Distance(prevRightHandPosition, position) < Vector3.Distance(prevLeftHandPosition, position))
     {
-      return rightHandVelocity;
+      foreach(Vector3 velocity in rightHandVelocity) {
+        resultingVelocity += velocity * (1/Mathf.Pow(2, currNodeIndex));
+        currNodeIndex++;
+      }
     }
     else
     {
-      return leftHandVelocity;
+      foreach(Vector3 velocity in leftHandVelocity) {
+        resultingVelocity += velocity * (1/Mathf.Pow(2, currNodeIndex));
+        currNodeIndex++;
+      }
     }
+    return resultingVelocity;
   }
 
 }
