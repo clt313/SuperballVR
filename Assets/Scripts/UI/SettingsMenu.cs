@@ -33,9 +33,12 @@ public class SettingsMenu : MonoBehaviour {
         SetQuality(qualityDropdown.value);
         ballTrajectory.isOn = PlayerPrefs.GetInt(PrefTrajectory, 1) != 0;
         ballTrail.isOn = PlayerPrefs.GetInt(PrefTrail, 1) != 0;
-        AudioManager.instance.Play("MainTheme");
-        AudioManager.instance.Play("Campfire");
-        AudioManager.instance.Play("Birds");
+
+        if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "MainMenu") {
+            AudioManager.instance.Play("MainTheme");
+            AudioManager.instance.Play("Campfire");
+            AudioManager.instance.Play("Birds");
+        }
     }
 
     public void SetMasterVolume (float volume) {

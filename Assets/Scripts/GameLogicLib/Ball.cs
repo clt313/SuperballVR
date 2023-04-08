@@ -39,9 +39,8 @@ public class Ball : MonoBehaviour
   // Update is called once per frame
   void Update()
   {
-    if (StateController.ballTrajectory) {
+    if (landingIndicator)
       updateLandingIndicator();
-    }
   }
 
   void createLandingIndicator()
