@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 // Global manager for audio sources
 // Inspired by: https://www.youtube.com/watch?v=6OT43pvUyfY&ab_channel=Brackeys
@@ -9,6 +10,12 @@ public class AudioManager : MonoBehaviour {
 
     // Singleton object
     public static AudioManager instance;
+
+    // Game audio mixer
+    public AudioMixer audioMixer;
+
+    // Saved volume to use during mute/unmute
+    private float savedVolume;
 
     // Array for easy use in inspector
     public SoundGroup[] soundGroups;
@@ -88,6 +95,15 @@ public class AudioManager : MonoBehaviour {
         Sound s = FindSound(name);
         if (s != null)
             s.source.UnPause();
+    }
+
+    public void Mute() {
+        audioMixer.GetFloat("MasterVolume", out savedVolume);
+        audioMixer.SetFloat("MasterVolume", -80);
+    }
+
+    public void Unmute() {
+        audioMixer.SetFloat("MasterVolume", savedVolume);
     }
 
     // Attempts to find sound by name. Returns null if not found.

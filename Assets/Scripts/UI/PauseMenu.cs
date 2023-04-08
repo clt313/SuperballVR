@@ -6,6 +6,8 @@ public class PauseMenu : MonoBehaviour
 {
     public static bool GamePaused = false;
     public GameObject pauseUI;
+    public GameObject pauseButtonGroup;
+    public GameObject settingsMenu;
     public GameObject player;
 
     public GameObject leftController; 
@@ -57,6 +59,10 @@ public class PauseMenu : MonoBehaviour
         pauseUI.transform.position = pos;
         Vector3 angle = new Vector3(player.transform.forward.x, 0, player.transform.forward.z);
         pauseUI.transform.forward = angle;
+
+        pauseButtonGroup.SetActive(true);
+        settingsMenu.SetActive(false);
+
         Time.timeScale = 0f;
         GamePaused = true;
     }

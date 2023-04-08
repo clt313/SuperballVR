@@ -55,6 +55,9 @@ public class SceneLoader : MonoBehaviour {
         // Temporarily disable player input
         SetPlayerInput(false);
 
+        // Temporarily disable audio
+        AudioManager.instance.Mute();
+
         // Bring UI to player and wait for fadeout
         progressSlider.value = 0;
         player = GameObject.Find("XRRig/Camera Offset/Main Camera");
@@ -83,6 +86,9 @@ public class SceneLoader : MonoBehaviour {
         SummonUI(loaderUI, player);
         yield return screenFader.FadeOutCoroutine();
         loaderUI.SetActive(false);
+
+        // Re-enable audio
+        AudioManager.instance.Unmute();
 
         // Re-enable player input
         SetPlayerInput(true);
