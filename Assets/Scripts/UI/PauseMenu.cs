@@ -54,8 +54,8 @@ public class PauseMenu : MonoBehaviour
         // Summon pause menu in front of player camera
         pauseUI.SetActive(true);
         Vector3 pos = player.transform.position;
-        pos.x += player.transform.forward.x * 2;
-        pos.z += player.transform.forward.z * 2;
+        pos.x += player.transform.forward.x * 3;
+        pos.z += player.transform.forward.z * 3;
         pauseUI.transform.position = pos;
         Vector3 angle = new Vector3(player.transform.forward.x, 0, player.transform.forward.z);
         pauseUI.transform.forward = angle;
