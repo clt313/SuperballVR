@@ -7,7 +7,6 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class SettingsMenu : MonoBehaviour {
-    public AudioMixer audioMixer;
     public Slider masterSlider;
     public Slider musicSlider;
     public Slider soundSlider;
@@ -43,7 +42,7 @@ public class SettingsMenu : MonoBehaviour {
 
     public void SetMasterVolume (float volume) {
         PlayerPrefs.SetFloat(PrefMaster,volume);
-        audioMixer.SetFloat(PrefMaster, Mathf.Log10(volume) * 20);
+        AudioManager.instance.audioMixer.SetFloat(PrefMaster, Mathf.Log10(volume) * 20);
         SetMusicVolume(musicSlider.value);
         SetSoundVolume(soundSlider.value);
     }
@@ -51,13 +50,13 @@ public class SettingsMenu : MonoBehaviour {
     public void SetMusicVolume (float volume) {
         PlayerPrefs.SetFloat(PrefMusic, volume);
         volume = volume*masterSlider.value;
-        audioMixer.SetFloat(PrefMusic, Mathf.Log10(volume) * 20);
+        AudioManager.instance.audioMixer.SetFloat(PrefMusic, Mathf.Log10(volume) * 20);
     }
 
     public void SetSoundVolume (float volume) {
         PlayerPrefs.SetFloat(PrefSound, volume);
         volume = volume*masterSlider.value;
-        audioMixer.SetFloat(PrefSound, Mathf.Log10(volume) * 20);
+        AudioManager.instance.audioMixer.SetFloat(PrefSound, Mathf.Log10(volume) * 20);
     }
 
     public void SetQuality(int qualityIndex) {
