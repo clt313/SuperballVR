@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using Utility;
 public class Player : MonoBehaviour
@@ -8,6 +9,9 @@ public class Player : MonoBehaviour
   private Vector3 prevLeftHandPosition;
   private Vector3 rightHandVelocity;
   private Vector3 leftHandVelocity;
+
+  public bool isOnHitCooldown = false;
+  public float hitCooldownTime = 0.5f;
 
   // Start is called before the first frame update
   public virtual void Start()
@@ -134,4 +138,9 @@ public class Player : MonoBehaviour
     }
   }
 
+  public IEnumerator StartHitCooldown() {
+    isOnHitCooldown = true;
+    yield return new WaitForSeconds(hitCooldownTime);
+    isOnHitCooldown = false;
+  }
 }

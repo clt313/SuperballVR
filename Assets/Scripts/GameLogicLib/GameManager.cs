@@ -302,6 +302,11 @@ public class GameManager : MonoBehaviour
         // get player or AI to hit ball
         player.hitBall(listenedBall, opposingCourt);
 
+        // Stop processing after applying force if on cooldown
+        if (player.isOnHitCooldown)
+          return;
+        StartCoroutine(player.StartHitCooldown());
+
         // Switch possession or increment passes
         if (currentPossession != player.team)
         {
