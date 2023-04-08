@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62ea560f09780544bab263fad62d5320, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioMixer: {fileID: 24100000, guid: 0c728bf6cf4cb8647b71257d32287d28, type: 2}
   soundGroups:
   - name: Main Menu
     sounds:
