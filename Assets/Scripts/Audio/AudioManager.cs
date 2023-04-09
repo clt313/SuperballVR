@@ -14,9 +14,6 @@ public class AudioManager : MonoBehaviour {
     // Game audio mixer
     public AudioMixer audioMixer;
 
-    // Saved volume to use during mute/unmute
-    private float savedVolume;
-
     // Array for easy use in inspector
     public SoundGroup[] soundGroups;
 
@@ -98,12 +95,11 @@ public class AudioManager : MonoBehaviour {
     }
 
     public void Mute() {
-        audioMixer.GetFloat("MasterVolume", out savedVolume);
         audioMixer.SetFloat("MasterVolume", -80);
     }
 
     public void Unmute() {
-        audioMixer.SetFloat("MasterVolume", savedVolume);
+        audioMixer.SetFloat("MasterVolume", PlayerPrefs.GetFloat("MasterVolume", 1f));
     }
 
     // Attempts to find sound by name. Returns null if not found.
