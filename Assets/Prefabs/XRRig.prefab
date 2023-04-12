@@ -856,6 +856,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   team: 0
+  isOnHitCooldown: 0
+  hitCooldownTime: 0.5
 --- !u!54 &2183002542682781533
 Rigidbody:
   m_ObjectHideFlags: 0
